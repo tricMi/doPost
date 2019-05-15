@@ -450,15 +450,43 @@ public class MainService {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/folders/edit")
-	
 	public void editFolder(String params) {
 		System.out.println(params);
 		String[] strSplit = params.split(",");
+		
 		int id;
 		String name;
-		System.out.println(strSplit);
-		id = Integer.parseInt(strSplit[0]);
-		name = strSplit[1];
+		
+		id = Integer.parseInt(strSplit[0].substring(1));
+		name = strSplit[1].substring(0, strSplit[1].length() - 1);
+		
+		System.out.println(id);
+		System.out.println(name);
+		
+		for(Folder f: allfolders) {
+			
+			if(f.getId() == id) {
+				f.setName(name);
+			}
+		}
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/contacts/edit")
+	public void editContact(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+		
+		int id;
+		String name;
+		
+		id = Integer.parseInt(strSplit[0].substring(1));
+		name = strSplit[1].substring(0, strSplit[1].length() - 1);
+		
+		System.out.println(id);
+		System.out.println(name);
+		
 		for(Folder f: allfolders) {
 			
 			if(f.getId() == id) {

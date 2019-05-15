@@ -80,18 +80,18 @@ public class Contact {
     }
 
     
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/contacts/update")
-    public Contact updateContact(Contact con) {
-    	this.firstName = con.getFirstName();
-    	this.lastName = con.getLastName();
-    	this.display = con.getDisplay();
-    	this.email = con.getEmail();
-    	this.format = con.getFormat();
-    	return this;
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/contacts/update")
+//    public Contact updateContact(Contact con) {
+//    	this.firstName = con.getFirstName();
+//    	this.lastName = con.getLastName();
+//    	this.display = con.getDisplay();
+//    	this.email = con.getEmail();
+//    	this.format = con.getFormat();
+//    	return this;
+//    }
     @GET
 	@Path("/photo")
     public Response getPhoto() {
