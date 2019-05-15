@@ -1,9 +1,12 @@
 package service;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.ejb.Singleton;
+import javax.imageio.ImageIO;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -69,6 +72,10 @@ public class MainService {
 	    ArrayList<Attachment> attachments3 = new ArrayList<>();
 
 	    Photo photo = new Photo();
+	    photo.setPath("pikachu.png");
+	    
+//	    String imagePath = "path/to/your/image.jpg";
+//	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
 	    
 	    Contact conTemp = new Contact(1, "Pera", "Peric", "Pex", "pera123@gmail.com", Format.PLAIN, photo);
 	    Contact conTemp2 = new Contact(2, "Aleksandar", "Aleksic", "Acoo", "aco123@gmail.com", Format.HTML, photo);
@@ -173,6 +180,21 @@ public class MainService {
 //		
 //		
 //		return allMessages;
+//	}
+	
+//	@Path("/photo/{path}")
+//	public BufferedImage findPhoto(@PathParam("path")int path) {
+//		
+////	    String imagePath = "path/to/your/image.jpg";
+////	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
+//		
+//		Photo photo = new Photo();
+//		
+//		String fullPath = "Img/" + path;
+//		BufferedImage myPicture = ImageIO.read(new File(fullPath));
+//		
+//		return myPicture;
+//		
 //	}
 	
 	@GET
@@ -343,15 +365,7 @@ public class MainService {
 	
 	
 
-	@POST
-	@Path("/contacts/add")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Contact addContact(Contact contact) {
-		contact.setId(hashCode());
-		contacts.add(contact);
-		return contact;
-	}
+	
 	
 	@DELETE
 	@Path("/contacts/{id}")
@@ -422,15 +436,15 @@ public class MainService {
 		return Response.status(404).build();
 	}
 	
-	@POST
-	@Path("/folders/add")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Folder addFolder(Folder folder) {
-		//contact.setId(hashCode());
-		allfolders.add(folder);
-		return folder;
-	}
+//	@POST
+//	@Path("/folders/add")
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Folder addFolder(Folder folder) {
+//		//contact.setId(hashCode());
+//		allfolders.add(folder);
+//		return folder;
+//	}
 	
 //	@PUT
 //	@Consumes(MediaType.APPLICATION_JSON)
@@ -513,7 +527,100 @@ public class MainService {
 		}
 	}
 	
+	@POST
+	@Path("/folders/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Folder addFolder(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+		
+		int id;
+		String name;
+		Condition condition = Condition.TO;
+		Operation operation = Operation.MOVE;
+		
+		System.out.println("String je " + strSplit[0]);
+		
+		name = strSplit[0].substring(1, strSplit[0].length());
+//		name = name.substring(0, name.length()-1);
+		String operationString = strSplit[1];
+		String conditionString = strSplit[2].substring(0, strSplit[2].length()-1);
+		
+		if(conditionString.equals("TO")) {
+			condition = Condition.TO;
+		}else if(conditionString.equals("FROM")){
+			condition = Condition.FROM;
+		}else if(conditionString.equals("CC")){
+			condition = Condition.CC;
+		}else if(conditionString.equals("SUBJECT")){
+			condition = Condition.SUBJECT;
+		}
+		
+		if(operationString.equals("MOVE")) {
+			operation = Operation.MOVE;
+		}else if(operationString.equals("COPY")){
+			operation = Operation.COPY;
+		}else if(operationString.equals("DELETE")){
+			operation = Operation.DELETE;
+		}
+		Rule rule = new Rule(hashCode(), condition, operation);
+		
+		id = hashCode();
+		
+		System.out.println(id);
+		System.out.println(name);
+		System.out.println(conditionString);
+		
+		Folder newFolder = new Folder();
+		newFolder.setId(id);
+		newFolder.setName(name);
+		newFolder.setRule(rule);
+		
+		allfolders.add(newFolder);
+		return newFolder;
+	}
 	
+	@POST
+	@Path("/contacts/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Contact addContact(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+		
+		int id;
+		String firstName;
+		String lastName;
+		String display;
+		String email;
+		String formatStr;
+		
+		id = hashCode();
+		firstName = strSplit[0].substring(1);
+		lastName = strSplit[1];
+		display = strSplit[2];
+		email = strSplit[3];
+		formatStr = strSplit[4].substring(0, strSplit[1].length() - 1);;
+		Format format;
+		
+		if(formatStr.equals("HTML")) {
+			format = Format.HTML;
+		}else {
+			format = Format.PLAIN;
+		}
+		
+		Contact newContact = new Contact();
+		newContact.setId(id);
+		newContact.setFirstName(firstName);
+		newContact.setFirstName(lastName);
+		newContact.setDisplay(display);
+		newContact.setEmail(email);
+		newContact.setFormat(format);
+		
+		contacts.add(newContact);
+		return newContact;
+	}
 	
 
 }
