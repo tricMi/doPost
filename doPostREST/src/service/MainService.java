@@ -479,18 +479,36 @@ public class MainService {
 		String[] strSplit = params.split(",");
 		
 		int id;
-		String name;
+		String firstName;
+		String lastName;
+		String display;
+		String email;
+		String formatStr;
 		
 		id = Integer.parseInt(strSplit[0].substring(1));
-		name = strSplit[1].substring(0, strSplit[1].length() - 1);
+		firstName = strSplit[1];
+		lastName = strSplit[2];
+		display = strSplit[3];
+		email = strSplit[4];
+		formatStr = strSplit[1].substring(0, strSplit[1].length() - 1);
+		Format format;
+		if(formatStr.equals("HTML")) {
+			format = Format.HTML;
+		}else {
+			format = Format.PLAIN;
+		}
 		
-		System.out.println(id);
-		System.out.println(name);
+//		System.out.println(id);
+//		System.out.println(name);
 		
-		for(Folder f: allfolders) {
+		for(Contact c: contacts) {
 			
-			if(f.getId() == id) {
-				f.setName(name);
+			if(c.getId() == id) {
+				c.setFirstName(firstName);
+				c.setLastName(lastName);
+				c.setDisplay(display);
+				c.setEmail(email);
+				c.setFormat(format);
 			}
 		}
 	}
