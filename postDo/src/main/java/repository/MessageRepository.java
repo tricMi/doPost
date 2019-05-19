@@ -7,4 +7,6 @@ import entity.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Integer>{
 
+	Message findOne(Integer id);
+
 }

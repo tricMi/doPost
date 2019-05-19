@@ -7,4 +7,6 @@ import entity.Photo;
 
 public interface PhotoRepository extends JpaRepository<Photo, Integer>{
 
+	Photo findOne(Integer id);
+
 }

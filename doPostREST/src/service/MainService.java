@@ -2,6 +2,7 @@ package service;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -43,7 +44,7 @@ public class MainService {
 	ArrayList<Account> accounts = new ArrayList<>();
 	ArrayList<Contact> contacts = new ArrayList<>();
 	ArrayList<Folder> allfolders = new ArrayList<>();
-	
+	Photo photo = new Photo();
 	
 	
 	public MainService() {
@@ -71,7 +72,8 @@ public class MainService {
 	    ArrayList<Attachment> attachments2 = new ArrayList<>();
 	    ArrayList<Attachment> attachments3 = new ArrayList<>();
 
-	    Photo photo = new Photo();
+	  
+	    
 	    photo.setPath("pikachu.png");
 	    
 //	    String imagePath = "path/to/your/image.jpg";
@@ -181,19 +183,56 @@ public class MainService {
 //		
 //		return allMessages;
 //	}
-	
+//	@GET
 //	@Path("/photo/{path}")
-//	public BufferedImage findPhoto(@PathParam("path")int path) {
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response findPhoto(@PathParam("path") String path) {
+//		
+////		if(photo.getPath().equals(path)) {
+////			return photo.getPath();
+////		}else {
+////			return null;
+////		}
+////		
+//		if(photo.getPath().equals(path)) {
+//		  File folderInput = new File("C:\\Users\\mitra\\doPost\\dopostserver\\doPostREST\\Img\\pikachu.png");
+//		  System.out.println("FOOLDER" + folderInput);
+//		  BufferedImage folderImage = null;
+//	        try {
+//				folderImage = ImageIO.read(folderInput);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//	        Gson json = new Gson();
+//		       
+//	        String response;
+//	       
+//	        try {
+//	        	response = json.toJson(fo);
+//	        } catch (Exception ex) {
+//	            ex.printStackTrace();
+//	            return Response.status(500).build();
+//	        }
+//	       
+//	        System.out.println(json);
+//	       
+//	        return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
+//		}
+//		else {
+//			return null;
+//		}
+//		
 //		
 ////	    String imagePath = "path/to/your/image.jpg";
 ////	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
 //		
-//		Photo photo = new Photo();
-//		
-//		String fullPath = "Img/" + path;
-//		BufferedImage myPicture = ImageIO.read(new File(fullPath));
-//		
-//		return myPicture;
+////		Photo photo = new Photo();
+////		
+////		String fullPath = "Img/" + path;
+////		BufferedImage myPicture = ImageIO.read(new File(fullPath));
+////		
+////		return myPicture;
 //		
 //	}
 	
@@ -613,7 +652,7 @@ public class MainService {
 		Contact newContact = new Contact();
 		newContact.setId(id);
 		newContact.setFirstName(firstName);
-		newContact.setFirstName(lastName);
+		newContact.setLastName(lastName);
 		newContact.setDisplay(display);
 		newContact.setEmail(email);
 		newContact.setFormat(format);

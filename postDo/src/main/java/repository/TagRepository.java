@@ -7,4 +7,6 @@ import entity.Tag;
 
 public interface TagRepository extends JpaRepository<Tag, Integer>{
 
+	Tag findOne(Integer id);
+
 }

@@ -7,4 +7,6 @@ import entity.Rule;
 
 public interface RuleRepository extends JpaRepository<Rule, Integer>{
 
+	Rule findOne(Integer id);
+
 }
