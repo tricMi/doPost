@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Contact;
+import com.example.postDo.entity.Contact;
 
 public interface ContactServiceInterface {
 	

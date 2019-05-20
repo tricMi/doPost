@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Tag;
-import repository.TagRepository;
+import com.example.postDo.entity.Tag;
+import com.example.postDo.repository.TagRepository;
 
 @Service
 public class TagService implements TagServiceInterface {

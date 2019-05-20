@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Attachment;
+import com.example.postDo.entity.Attachment;
 
 public interface AttachmentServiceInterface {
 	

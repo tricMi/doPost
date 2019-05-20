@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Photo;
-import repository.PhotoRepository;
+import com.example.postDo.entity.Photo;
+import com.example.postDo.repository.PhotoRepository;
 
 @Service
 public class PhotoService implements PhotoServiceInterface{

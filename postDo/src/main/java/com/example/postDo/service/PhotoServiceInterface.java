@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Photo;
+import com.example.postDo.entity.Photo;
 
 public interface PhotoServiceInterface {
 

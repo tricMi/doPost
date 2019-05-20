@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Contact;
-import repository.ContactRepository;
+import com.example.postDo.entity.Contact;
+import com.example.postDo.repository.ContactRepository;
 
 @Service
 public class ContactService implements ContactServiceInterface {

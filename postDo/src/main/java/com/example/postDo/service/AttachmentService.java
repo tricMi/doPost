@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Attachment;
-import repository.AttachmentRepository;
+import com.example.postDo.entity.Attachment;
+import com.example.postDo.repository.AttachmentRepository;
 
 @Service
 public class AttachmentService implements AttachmentServiceInterface{

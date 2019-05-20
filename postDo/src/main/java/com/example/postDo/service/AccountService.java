@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Account;
-import repository.AccountRepository;
+import com.example.postDo.entity.Account;
+import com.example.postDo.repository.AccountRepository;
 
 @Service
 public class AccountService implements AccountServiceInterface {

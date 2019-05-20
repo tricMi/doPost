@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Message;
-import repository.MessageRepository;
+import com.example.postDo.entity.Message;
+import com.example.postDo.repository.MessageRepository;
 
 @Service
 public class MessageService implements MessageServiceInterface{

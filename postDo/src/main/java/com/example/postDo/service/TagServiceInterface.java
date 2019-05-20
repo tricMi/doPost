@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Tag;
+import com.example.postDo.entity.Tag;
 
 public interface TagServiceInterface {
 	

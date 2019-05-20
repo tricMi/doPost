@@ -36,7 +36,7 @@ public class Account {
     	super();
     }
     
-    public Account(entity.Account account) {
+    public Account(com.example.postDo.entity.Account account) {
     	this(account.getId(), account.getSmtp(), account.getPop3_imap(), account.getUsername(), account.getPassword(), new ArrayList<Message>());
     }
 

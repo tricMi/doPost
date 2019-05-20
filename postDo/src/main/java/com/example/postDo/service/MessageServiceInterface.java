@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Message;
+import com.example.postDo.entity.Message;
 
 public interface MessageServiceInterface {
 	

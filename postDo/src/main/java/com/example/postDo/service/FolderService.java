@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Folder;
-import repository.FolderRepository;
+import com.example.postDo.entity.Folder;
+import com.example.postDo.repository.FolderRepository;
 
 @Service
 public class FolderService implements FolderServiceInterface {

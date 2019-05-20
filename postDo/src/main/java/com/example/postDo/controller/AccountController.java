@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
 import com.example.postDo.service.AccountServiceInterface;
 
-import dto.Account;
+import com.example.postDo.dto.Account;
 
 @RestController
 @RequestMapping(value = "api/accounts")
@@ -25,11 +25,11 @@ public class AccountController {
 	
 	@GetMapping
 	public ResponseEntity<List<Account>> getAccounts(){
-		List<entity.Account> accounts = accountService.findAll();
+		List<com.example.postDo.entity.Account> accounts = accountService.findAll();
 		
 		List<Account> accountDTO = new ArrayList<Account>();
 		
-		for(entity.Account a: accounts) {
+		for(com.example.postDo.entity.Account a: accounts) {
 			accountDTO.add(new Account(a));
 		}
 		

@@ -2,7 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
-import entity.Rule;
+import com.example.postDo.entity.Rule;
 
 public interface RuleServiceInterface {
 

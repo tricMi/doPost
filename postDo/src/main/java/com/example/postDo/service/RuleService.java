@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.Rule;
-import repository.RuleRepository;
+import com.example.postDo.entity.Rule;
+import com.example.postDo.repository.RuleRepository;
 
 @Service
 public class RuleService implements RuleServiceInterface {
