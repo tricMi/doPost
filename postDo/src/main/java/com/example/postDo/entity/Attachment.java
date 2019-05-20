@@ -1,6 +1,8 @@
 package com.example.postDo.entity;
 
 import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "attachments")
-public class Attachment {
+public class Attachment implements Serializable{
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

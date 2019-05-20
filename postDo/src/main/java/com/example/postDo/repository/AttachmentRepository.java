@@ -7,4 +7,6 @@ import com.example.postDo.entity.Attachment;
 
 public interface AttachmentRepository extends JpaRepository<Attachment, Integer>{
 
+	Attachment findOne(Integer id);
+
 }

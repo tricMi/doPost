@@ -7,4 +7,6 @@ import com.example.postDo.entity.Contact;
 
 public interface ContactRepository extends JpaRepository<Contact, Integer>{
 
+	Contact findOne(Integer id);
+
 }

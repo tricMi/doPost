@@ -35,6 +35,10 @@ public class Account {
     public Account() {
     	super();
     }
+    
+    public Account(entity.Account account) {
+    	this(account.getId(), account.getSmtp(), account.getPop3_imap(), account.getUsername(), account.getPassword(), new ArrayList<Message>());
+    }
 
     public int getId() {
         return id;

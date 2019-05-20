@@ -109,6 +109,9 @@ public class Contact {
 	   
 	    return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
     }
+    
+
+    
 
     public void setPhoto(Photo photo) {
         this.photo = photo;

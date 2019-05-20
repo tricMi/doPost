@@ -31,6 +31,7 @@ public class Message {
     private ArrayList<Attachment> attachments;
     private Folder folder;
     private Account account;
+    private boolean messageRead = true;
 
     public Message(int id, String subject, String content) {
         this.id = id;
@@ -39,7 +40,7 @@ public class Message {
     }
 
     public Message(int id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, String dateTime, String subject, String content, ArrayList<Tag> tag,
-                   ArrayList<Attachment> attachments, Folder folder, Account account) {
+                   ArrayList<Attachment> attachments, Folder folder, Account account, boolean messageRead) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -52,9 +53,18 @@ public class Message {
         this.attachments = attachments;
         this.folder = folder;
         this.account = account;
+        this.messageRead = messageRead;
     }
 
-    public Message(Contact from, String subject) {
+    public boolean isMessageRead() {
+		return messageRead;
+	}
+
+	public void setMessageRead(boolean messageRead) {
+		this.messageRead = messageRead;
+	}
+
+	public Message(Contact from, String subject) {
         this.from = from;
         this.subject = subject;
 

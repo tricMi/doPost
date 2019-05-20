@@ -2,6 +2,7 @@ package service;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -43,7 +44,7 @@ public class MainService {
 	ArrayList<Account> accounts = new ArrayList<>();
 	ArrayList<Contact> contacts = new ArrayList<>();
 	ArrayList<Folder> allfolders = new ArrayList<>();
-	
+	Photo photo = new Photo();
 	
 	
 	public MainService() {
@@ -71,7 +72,8 @@ public class MainService {
 	    ArrayList<Attachment> attachments2 = new ArrayList<>();
 	    ArrayList<Attachment> attachments3 = new ArrayList<>();
 
-	    Photo photo = new Photo();
+	  
+	    
 	    photo.setPath("pikachu.png");
 	    
 //	    String imagePath = "path/to/your/image.jpg";
@@ -126,9 +128,9 @@ public class MainService {
 	    accounts.add(account3);
 	    accounts.add(account4);
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, folder, account1 );
-	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, folder2, account2);
-	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3);
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, folder, account1, true );
+	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, folder2, account2, false);
+	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 
 	    //obrisan messageTemp
 	    Attachment attachment = new Attachment(1, "some data", "type1", "attachment1");
@@ -181,19 +183,56 @@ public class MainService {
 //		
 //		return allMessages;
 //	}
-	
+//	@GET
 //	@Path("/photo/{path}")
-//	public BufferedImage findPhoto(@PathParam("path")int path) {
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response findPhoto(@PathParam("path") String path) {
+//		
+////		if(photo.getPath().equals(path)) {
+////			return photo.getPath();
+////		}else {
+////			return null;
+////		}
+////		
+//		if(photo.getPath().equals(path)) {
+//		  File folderInput = new File("C:\\Users\\mitra\\doPost\\dopostserver\\doPostREST\\Img\\pikachu.png");
+//		  System.out.println("FOOLDER" + folderInput);
+//		  BufferedImage folderImage = null;
+//	        try {
+//				folderImage = ImageIO.read(folderInput);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//	        Gson json = new Gson();
+//		       
+//	        String response;
+//	       
+//	        try {
+//	        	response = json.toJson(fo);
+//	        } catch (Exception ex) {
+//	            ex.printStackTrace();
+//	            return Response.status(500).build();
+//	        }
+//	       
+//	        System.out.println(json);
+//	       
+//	        return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
+//		}
+//		else {
+//			return null;
+//		}
+//		
 //		
 ////	    String imagePath = "path/to/your/image.jpg";
 ////	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
 //		
-//		Photo photo = new Photo();
-//		
-//		String fullPath = "Img/" + path;
-//		BufferedImage myPicture = ImageIO.read(new File(fullPath));
-//		
-//		return myPicture;
+////		Photo photo = new Photo();
+////		
+////		String fullPath = "Img/" + path;
+////		BufferedImage myPicture = ImageIO.read(new File(fullPath));
+////		
+////		return myPicture;
 //		
 //	}
 	
@@ -613,7 +652,7 @@ public class MainService {
 		Contact newContact = new Contact();
 		newContact.setId(id);
 		newContact.setFirstName(firstName);
-		newContact.setFirstName(lastName);
+		newContact.setLastName(lastName);
 		newContact.setDisplay(display);
 		newContact.setEmail(email);
 		newContact.setFormat(format);
@@ -623,4 +662,45 @@ public class MainService {
 	}
 	
 
+	@DELETE
+	@Path("/messages/{id}")
+	public Response deleteMessage(@PathParam("id") int id) {
+		
+		for(Message m: allMessages) {
+			if(m.getId() == id) {
+				allMessages.remove(m);
+				System.out.println("Deleted message");
+				return Response.ok().entity("Successful").build();
+			}
+		}
+		return Response.status(404).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/messages/edit")
+	public void editMessage(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+	
+		
+		int id;
+		boolean messageRead;
+		
+		id = Integer.parseInt(strSplit[0].substring(1));
+
+		messageRead = Boolean.parseBoolean(strSplit[1].substring(0, strSplit[1].length() -1));
+		messageRead = true;
+//		System.out.println(id);
+//
+//		System.out.println(messageRead);
+		
+		for(Message m: allMessages) {
+			
+			if(m.getId() == id) {
+				m.setMessageRead(messageRead);
+			}
+		}
+	}
+	
 }
