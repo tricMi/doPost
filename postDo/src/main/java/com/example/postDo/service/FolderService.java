@@ -16,7 +16,7 @@ public class FolderService implements FolderServiceInterface {
 
 	@Override
 	public Folder findOne(Integer id) {
-		return folderRepository.findOne(id);
+		return folderRepository.findById(id).orElse(null);
 	}
 
 	@Override

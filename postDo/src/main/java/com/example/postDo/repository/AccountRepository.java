@@ -10,6 +10,6 @@ import com.example.postDo.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 
-	Account findOne(Integer id);
+//	Account findOne(Integer id);
 
 }

@@ -7,6 +7,6 @@ import com.example.postDo.entity.Folder;
 
 public interface FolderRepository extends JpaRepository<Folder, Integer>{
 
-	Folder findOne(Integer id);
+//	Folder findOne(Integer id);
 
 }

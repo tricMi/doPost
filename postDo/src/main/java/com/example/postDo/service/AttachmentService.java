@@ -16,7 +16,7 @@ public class AttachmentService implements AttachmentServiceInterface{
 
 	@Override
 	public Attachment findOne(Integer id) {
-		return attachmentRepository.findOne(id);
+		return attachmentRepository.findById(id).orElse(null);
 	}
 
 	@Override

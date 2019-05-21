@@ -7,6 +7,6 @@ import com.example.postDo.entity.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Integer>{
 
-	Message findOne(Integer id);
+//	Message findOne(Integer id);
 
 }

@@ -16,7 +16,7 @@ public class ContactService implements ContactServiceInterface {
 
 	@Override
 	public Contact findOne(Integer id) {
-		return contactRepository.findOne(id);
+		return contactRepository.findById(id).orElse(null);
 	}
 
 	@Override

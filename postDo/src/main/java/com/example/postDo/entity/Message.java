@@ -28,6 +28,29 @@ public class Message {
 	@Column(name = "message_id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "message_content", unique = false, nullable = false)
+	private String content;
+	
+	@Column(name = "message_date_time", unique = false, nullable = false)
+    private String dateTime;
+	
+	@Column(name = "message_subject", unique = false, nullable = false)
+    private String subject;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "message_account", referencedColumnName = "account_id")
+	private Account account;
+	
+//  @ManyToOne
+//	@JoinColumn(name="message_folder", referencedColumnName="folder_id", nullable=true)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "message_folder", referencedColumnName = "folder_id")
+	private Folder folder;
+  
+//  @ManyToOne
+//	@JoinColumn(name="message_account", referencedColumnName="account_id", nullable=true)
+	  
+	
 	@ManyToOne
 	@JoinColumn(name="contact_id", referencedColumnName="contact_id", nullable=true)
 	private Contact from;
@@ -39,8 +62,14 @@ public class Message {
 //	@ManyToOne
 //	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
 //	private Message message;
-	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
+
+    
+    
+    
+    
+   
+    
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
 	private Set<Contact> to = new HashSet<Contact>();
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
@@ -49,32 +78,13 @@ public class Message {
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
     private Set<Contact> bcc = new HashSet<Contact>();
     
-    @Column(name = "message_dateTime", unique = false, nullable = false)
-    private String dateTime;
-    
-    @Column(name = "message_subject", unique = false, nullable = false)
-    private String subject;
-    
-    @Column(name = "message_content", unique = false, nullable = false)
-    private String content;
-    
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
     private Set<Tag> tags = new HashSet<Tag>();
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
     private Set<Attachment> attachments = new HashSet<Attachment>();
     
-//    @ManyToOne
-//	@JoinColumn(name="message_folder", referencedColumnName="folder_id", nullable=true)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "message_folder", referencedColumnName = "folder_id")
-    private Folder folder;
-    
-//    @ManyToOne
-//	@JoinColumn(name="message_account", referencedColumnName="account_id", nullable=true)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "message_account", referencedColumnName = "account_id")
-    private Account account;
+
 
 	public Message(int id, Contact from, Set<Contact> to, Set<Contact> cc, Set<Contact> bcc, String dateTime,
 			String subject, String content, Set<Tag> tags, Set<Attachment> attachments, Folder folder,

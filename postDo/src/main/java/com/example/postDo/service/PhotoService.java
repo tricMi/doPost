@@ -16,7 +16,7 @@ public class PhotoService implements PhotoServiceInterface{
 
 	@Override
 	public Photo findOne(Integer id) {
-		return photoRepository.findOne(id);
+		return photoRepository.findById(id).orElse(null);
 	}
 
 	@Override

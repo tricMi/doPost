@@ -16,7 +16,7 @@ public class RuleService implements RuleServiceInterface {
 
 	@Override
 	public Rule findOne(Integer id) {
-		return ruleRepository.findOne(id);
+		return ruleRepository.findById(id).orElse(null);
 	}
 
 	@Override

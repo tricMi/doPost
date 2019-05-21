@@ -16,7 +16,7 @@ public class TagService implements TagServiceInterface {
 
 	@Override
 	public Tag findOne(Integer id) {
-		return tagRespository.findOne(id);
+		return tagRespository.findById(id).orElse(null);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class AccountService implements AccountServiceInterface {
 	
 	@Override
 	public Account findOne(Integer id) {
-		return accountServiceInterface.findOne(id);
+		return accountServiceInterface.findById(id).orElse(null);
 	}
 
 	@Override
