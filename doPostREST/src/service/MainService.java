@@ -214,7 +214,7 @@ public class MainService {
             return Response.status(500).build();
         }
        
-        System.out.println(json);
+//        System.out.println(json);
        
         return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
 		
@@ -234,7 +234,7 @@ public class MainService {
             return Response.status(500).build();
         }
        
-        System.out.println(json);
+//        System.out.println(json);
        
         return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
 		
@@ -270,7 +270,7 @@ public class MainService {
             return Response.status(500).build();
         }
        
-        System.out.println(json);
+
        
         return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
 		
@@ -307,7 +307,7 @@ public class MainService {
 		            return Response.status(500).build();
 		        }
 		       
-		        System.out.println(json);
+
 		       
 		        return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
 			}
@@ -331,7 +331,7 @@ public class MainService {
             return Response.status(500).build();
         }
        
-        System.out.println(json);
+
        
         return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
 		
@@ -431,7 +431,6 @@ public class MainService {
 		for(Folder f: allfolders) {
 			if(f.getId() == id) {
 				allfolders.remove(f);
-				System.out.println("Deleted folder");
 				return Response.ok().entity("Successful").build();
 			}
 		}
@@ -476,8 +475,7 @@ public class MainService {
 		id = Integer.parseInt(strSplit[0].substring(1));
 		name = strSplit[1].substring(0, strSplit[1].length() - 1);
 		
-		System.out.println(id);
-		System.out.println(name);
+
 		
 		for(Folder f: allfolders) {
 			
@@ -514,8 +512,7 @@ public class MainService {
 			format = Format.PLAIN;
 		}
 		
-//		System.out.println(id);
-//		System.out.println(name);
+
 		
 		for(Contact c: contacts) {
 			
@@ -542,10 +539,10 @@ public class MainService {
 		Condition condition = Condition.TO;
 		Operation operation = Operation.MOVE;
 		
-		System.out.println("String je " + strSplit[0]);
+
 		
 		name = strSplit[0].substring(1, strSplit[0].length());
-//		name = name.substring(0, name.length()-1);
+
 		String operationString = strSplit[1];
 		String conditionString = strSplit[2].substring(0, strSplit[2].length()-1);
 		
@@ -570,9 +567,7 @@ public class MainService {
 		
 		id = hashCode();
 		
-		System.out.println(id);
-		System.out.println(name);
-		System.out.println(conditionString);
+
 		
 		Folder newFolder = new Folder();
 		newFolder.setId(id);
@@ -654,9 +649,7 @@ public class MainService {
 
 		messageRead = Boolean.parseBoolean(strSplit[1].substring(0, strSplit[1].length() -1));
 		messageRead = true;
-//		System.out.println(id);
-//
-//		System.out.println(messageRead);
+
 		
 		for(Message m: allMessages) {
 			
@@ -702,14 +695,11 @@ public class MainService {
 				
 		//------------------
 				try {
-					String[] toSplit = strSplit[1].split(".");
-					ArrayList<Integer> toIdList = new ArrayList<>();
-					for(String str : toSplit) {
-						toIdList.add(Integer.parseInt(str));
-					}
-					for(int conId : toIdList) {
+					String[] toSplit = strSplit[1].split("|");
+					for(String conId : toSplit) {
 						for(Contact con : contacts) {
-							if(con.getId() == id) {
+							if(con.getId() == Integer.parseInt(conId)) {
+//								System.out.println(con.getId() + " " + conId);
 								to.add(con);
 							}
 						}
@@ -720,32 +710,28 @@ public class MainService {
 				
 		//--------------------------
 				try {
-					String[] ccSplit = strSplit[2].split(".");
-					ArrayList<Integer> ccIdList = new ArrayList<>();
-					for(String str : ccSplit) {
-						ccIdList.add(Integer.parseInt(str));
-					}
-					for(int conId : ccIdList) {
+					String[] ccSplit = strSplit[2].split("|");
+					for(String conId : ccSplit) {
 						for(Contact con : contacts) {
-							if(con.getId() == id) {
+							if(con.getId() == Integer.parseInt(conId)) {
+//								System.out.println(con.getId() + " " + conId);
 								cc.add(con);
 							}
 						}
 					}
+					
+					
 				}catch(Exception ex) {
 					
 				}
 				
 		//----------------------------
 				try {
-					String[] bccSplit = strSplit[3].split(".");
-					ArrayList<Integer> bccIdList = new ArrayList<>();
-					for(String str : bccSplit) {
-						bccIdList.add(Integer.parseInt(str));
-					}
-					for(int conId : bccIdList) {
+					String[] bccSplit = strSplit[3].split("|");
+					for(String conId : bccSplit) {
 						for(Contact con : contacts) {
-							if(con.getId() == id) {
+							if(con.getId() == Integer.parseInt(conId)) {
+//								System.out.println(con.getId() + " " + conId);
 								bcc.add(con);
 							}
 						}
@@ -892,14 +878,11 @@ public class MainService {
 		
 //------------------
 		try {
-			String[] toSplit = strSplit[1].split(".");
-			ArrayList<Integer> toIdList = new ArrayList<>();
-			for(String str : toSplit) {
-				toIdList.add(Integer.parseInt(str));
-			}
-			for(int conId : toIdList) {
+			String[] toSplit = strSplit[1].split("|");
+			for(String conId : toSplit) {
 				for(Contact con : contacts) {
-					if(con.getId() == id) {
+					if(con.getId() == Integer.parseInt(conId)) {
+//						System.out.println(con.getId() + " " + conId);
 						to.add(con);
 					}
 				}
@@ -907,36 +890,31 @@ public class MainService {
 		}catch(Exception ex) {
 			
 		}
-
 		
 //--------------------------
 		try {
-			String[] ccSplit = strSplit[2].split(".");
-			ArrayList<Integer> ccIdList = new ArrayList<>();
-			for(String str : ccSplit) {
-				ccIdList.add(Integer.parseInt(str));
-			}
-			for(int conId : ccIdList) {
+			String[] ccSplit = strSplit[2].split("|");
+			for(String conId : ccSplit) {
 				for(Contact con : contacts) {
-					if(con.getId() == id) {
+					if(con.getId() == Integer.parseInt(conId)) {
+//						System.out.println(con.getId() + " " + conId);
 						cc.add(con);
 					}
 				}
 			}
+			
+			
 		}catch(Exception ex) {
 			
 		}
 		
 //----------------------------
 		try {
-			String[] bccSplit = strSplit[3].split(".");
-			ArrayList<Integer> bccIdList = new ArrayList<>();
-			for(String str : bccSplit) {
-				bccIdList.add(Integer.parseInt(str));
-			}
-			for(int conId : bccIdList) {
+			String[] bccSplit = strSplit[3].split("|");
+			for(String conId : bccSplit) {
 				for(Contact con : contacts) {
-					if(con.getId() == id) {
+					if(con.getId() == Integer.parseInt(conId)) {
+//						System.out.println(con.getId() + " " + conId);
 						bcc.add(con);
 					}
 				}
