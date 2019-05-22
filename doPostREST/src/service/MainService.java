@@ -137,10 +137,11 @@ public class MainService {
 	    accounts.add(account4);
 	    accounts.add(account5);
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
-	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, folder2, account2, false);
-	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
+	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
+	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
+	    
 	    //obrisan messageTemp
 	    Attachment attachment = new Attachment(1, "some data", "type1", "attachment1");
 	    Attachment attachment2 = new Attachment(2, "some data", "type2", "attachment2");
@@ -767,6 +768,7 @@ public class MainService {
 					
 				}
 		//------------------------
+
 				try {
 					String[] tagsSplit = strSplit[7].split(".");
 					for(String tagString : tagsSplit) {
@@ -905,6 +907,7 @@ public class MainService {
 		}catch(Exception ex) {
 			
 		}
+
 		
 //--------------------------
 		try {
@@ -953,8 +956,9 @@ public class MainService {
 			dateTime = "";
 			subject = "";
 			content = "";
-			
 		}
+
+		
 //------------------------
 		try {
 			String[] tagsSplit = strSplit[7].split(".");
