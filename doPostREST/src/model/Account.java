@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.google.gson.Gson;
 
 @XmlRootElement(name = "account")
-public class Account  {
+public class Account implements Cloneable{
 
     private int id;
     private String smtp;
@@ -127,4 +127,7 @@ public class Account  {
 //    public void setMessage(ArrayList<Message> message) {
 //        this.messages = message;
 //    }
+    public Object clone()throws CloneNotSupportedException{  
+    	return super.clone();  
+    } 
 }
