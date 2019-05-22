@@ -4,12 +4,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.ejb.Singleton;
 import javax.imageio.ImageIO;
@@ -60,6 +62,27 @@ public class MainService {
 	public MainService() {
 		init();
 	}
+	
+	public static String toUTC(Date date) {
+		  TimeZone tz = TimeZone.getTimeZone("UTC");
+		  DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+		  df.setTimeZone(tz);
+		  return df.format(date);
+		}
+
+		public static Date fromUTC(String dateStr) {
+		  TimeZone tz = TimeZone.getTimeZone("UTC");
+		  DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+		  df.setTimeZone(tz);
+		  
+		  try {
+		    return df.parse(dateStr);
+		  } catch (ParseException e) {
+		    e.printStackTrace();
+		  }
+		  
+		  return null;
+		}
 	
 	private void init() {
 		
@@ -144,6 +167,7 @@ public class MainService {
 
 	   
 		Date newDate = new Date();
+		String dateString = toUTC(newDate);
 	     
 //	    System.out.println(formatter.format(date));  
 	    
@@ -152,9 +176,9 @@ public class MainService {
 //        String dateString = format.format( new Date()   );
 //        Date   date       = format.parse ( "2009-12-31" );
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  newDate, "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
-	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, newDate,  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
-	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(), newDate, "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  dateString, "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
+	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, dateString,  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
+	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(), dateString, "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 	    
 	    //obrisan messageTemp
 	    Attachment attachment = new Attachment(1, "some data", "type1", "attachment1");
@@ -841,7 +865,7 @@ public class MainService {
 		}catch(Exception ex) {
 			
 		}
-		
+		String dateString = toUTC(date);
 		
 //	    Date dateTimeTrue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime);  
 		
@@ -851,7 +875,7 @@ public class MainService {
 		newMessage.setTo(to);
 		newMessage.setCc(cc);
 		newMessage.setBcc(bcc);
-		newMessage.setDateTime(date);
+		newMessage.setDateTime(dateString);
 		newMessage.setSubject(subject);
 		newMessage.setContent(content);
 		newMessage.setTag(tags);
@@ -1039,13 +1063,15 @@ public class MainService {
 			
 		}
 		
+		String dateString = toUTC(date);
+		
 		Message newMessage = new Message();
 		newMessage.setId(id);
 		newMessage.setFrom(from);
 		newMessage.setTo(to);
 		newMessage.setCc(cc);
 		newMessage.setBcc(bcc);
-		newMessage.setDateTime(date);
+		newMessage.setDateTime(dateString);
 		newMessage.setSubject(subject);
 		newMessage.setContent(content);
 		newMessage.setTag(tags);
