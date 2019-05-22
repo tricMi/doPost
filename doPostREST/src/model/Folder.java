@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.google.gson.Gson;
 
 @XmlRootElement(name = "folder")
-public class Folder  {
+public class Folder implements Cloneable{
 
     private int id;
     private String name;
@@ -181,6 +181,8 @@ public class Folder  {
 		}
 		return null;
 	}
-    
+    public Object clone()throws CloneNotSupportedException{  
+    	return super.clone();  
+    } 
     
 }

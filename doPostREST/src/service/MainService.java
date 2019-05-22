@@ -44,6 +44,8 @@ public class MainService {
 	ArrayList<Account> accounts = new ArrayList<>();
 	ArrayList<Contact> contacts = new ArrayList<>();
 	ArrayList<Folder> allfolders = new ArrayList<>();
+	ArrayList<Tag> allTags = new ArrayList<>();
+	ArrayList<Attachment> allAttachments = new ArrayList<>();
 	Photo photo = new Photo();
 	
 	
@@ -152,6 +154,11 @@ public class MainService {
         tags2.add(tagTemp4);
         tags3.add(tagTemp3);
         tags3.add(tagTemp5);
+        allTags.add(tagTemp5);
+        allTags.add(tagTemp4);
+        allTags.add(tagTemp3);
+        allTags.add(tagTemp2);
+        allTags.add(tagTemp);
 
         to.add(conTemp4);
         to2.add(conTemp4);
@@ -173,68 +180,16 @@ public class MainService {
         attachments2.add(attachment2);
         attachments3.add(attachment3);
         attachments3.add(attachment5);
+        allAttachments.add(attachment);
+        allAttachments.add(attachment2);
+        allAttachments.add(attachment3);
+        allAttachments.add(attachment4);
+        allAttachments.add(attachment5);
 		
 	}
 	
-//	@GET
-//	@Path("/messages")
-//	public ArrayList<Message> getMessages(){
-//		
-//		
-//		return allMessages;
-//	}
-//	@GET
-//	@Path("/photo/{path}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response findPhoto(@PathParam("path") String path) {
-//		
-////		if(photo.getPath().equals(path)) {
-////			return photo.getPath();
-////		}else {
-////			return null;
-////		}
-////		
-//		if(photo.getPath().equals(path)) {
-//		  File folderInput = new File("C:\\Users\\mitra\\doPost\\dopostserver\\doPostREST\\Img\\pikachu.png");
-//		  System.out.println("FOOLDER" + folderInput);
-//		  BufferedImage folderImage = null;
-//	        try {
-//				folderImage = ImageIO.read(folderInput);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//	        Gson json = new Gson();
-//		       
-//	        String response;
-//	       
-//	        try {
-//	        	response = json.toJson(fo);
-//	        } catch (Exception ex) {
-//	            ex.printStackTrace();
-//	            return Response.status(500).build();
-//	        }
-//	       
-//	        System.out.println(json);
-//	       
-//	        return Response.status(200).entity(response).type(MediaType.APPLICATION_JSON).build();
-//		}
-//		else {
-//			return null;
-//		}
-//		
-//		
-////	    String imagePath = "path/to/your/image.jpg";
-////	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
-//		
-////		Photo photo = new Photo();
-////		
-////		String fullPath = "Img/" + path;
-////		BufferedImage myPicture = ImageIO.read(new File(fullPath));
-////		
-////		return myPicture;
-//		
-//	}
+
+
 	
 	@GET
 	@Path("/accounts")
@@ -701,6 +656,155 @@ public class MainService {
 				m.setMessageRead(messageRead);
 			}
 		}
+	}
+	
+	@POST
+	@Path("/messages/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Contact addMessage(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+		
+		int id;
+		Contact from;
+		ArrayList<Contact> to;
+		ArrayList<Contact> cc;
+		ArrayList<Contact> bcc;
+		String dateTime;
+		String subject;
+		String content;
+		ArrayList<Tag> tags;
+		ArrayList<Attachment> attachments;
+		Folder folder;
+		Account account;
+		boolean read;
+		
+		String fromStr, folderStr, accountStr, readStr;
+		String toStr, ccStr, bccStr, tagsStr, attachmentsStr;
+		
+		id = hashCode();
+		fromStr = strSplit[0].substring(1);
+		toStr = strSplit[1];
+		ccStr = strSplit[2];
+		bccStr = strSplit[3];
+		dateTime = strSplit[4];
+		subject = strSplit[5];
+		content = strSplit[6];
+		tagsStr = strSplit[7];
+		content = strSplit[8];
+		tagsStr = strSplit[9];
+		attachmentsStr = strSplit[10];
+		folderStr = strSplit[11];
+		accountStr = strSplit[12];
+		readStr = strSplit[13].substring(0, strSplit[1].length() - 1);
+		
+		String[] toSplit = toStr.split(".");
+		String[] ccSplit = ccStr.split(".");
+		String[] bccSplit = bccStr.split(".");
+		String[] tagsSplit = tagsStr.split(".");
+		String[] attachmentsSplit = attachmentsStr.split(".");
+		ArrayList<Integer> toIdList = new ArrayList<>();
+		ArrayList<Integer> ccIdList = new ArrayList<>();
+		ArrayList<Integer> bccIdList = new ArrayList<>();
+		ArrayList<Integer> tagsIdList = new ArrayList<>();
+		ArrayList<Integer> attachmentsIdList = new ArrayList<>();
+		
+		for(String str : toSplit) {
+			toIdList.add(Integer.parseInt(str));
+		}
+		for(String str : ccSplit) {
+			ccIdList.add(Integer.parseInt(str));
+		}
+		for(String str : bccSplit) {
+			bccIdList.add(Integer.parseInt(str));
+		}
+		for(String str : tagsSplit) {
+			tagsIdList.add(Integer.parseInt(str));
+		}
+		for(String str : attachmentsSplit) {
+			attachmentsIdList.add(Integer.parseInt(str));
+		}
+		
+		for(int conId : toIdList) {
+			for(Contact con : contacts) {
+				if(con.getId() == id) {
+					to.add(con);
+				}
+			}
+		}
+		for(int conId : ccIdList) {
+			for(Contact con : contacts) {
+				if(con.getId() == id) {
+					cc.add(con);
+				}
+			}
+		}
+		for(int conId : bccIdList) {
+			for(Contact con : contacts) {
+				if(con.getId() == id) {
+					bcc.add(con);
+				}
+			}
+		}
+		
+		for(int attId : attachmentsIdList) {
+			for(Attachment att : attachments) {
+				if(att.getId() == id) {
+					attachments.add(att);
+				}
+			}
+		}
+		
+		int conId = Integer.parseInt(fromStr);
+		int folderId = Integer.parseInt(folderStr);
+		int accountId = Integer.parseInt(accountStr);
+		
+		for(Contact con : contacts) {
+			if(con.getId() == conId) {
+				try {
+					from = (Contact)con.clone();
+				}catch(CloneNotSupportedException c){} 
+				
+			}
+		}
+		for(Folder fol : allfolders) {
+			if(fol.getId() == folderId) {
+				try {
+					folder = (Folder)fol.clone();
+				}catch(CloneNotSupportedException c){} 
+				
+			}
+		}
+		for(Account acc : accounts) {
+			if(acc.getId() == accountId) {
+				try {
+					account = (Account)acc.clone();
+				}catch(CloneNotSupportedException c){} 
+				
+			}
+		}
+		//!!! true ili TRUE???   <<-------------------------
+		if(readStr.equals("true")) {
+			read = true;
+		}else {
+			read = false;
+		}
+		
+		
+		
+		
+		
+		Contact newContact = new Contact();
+		newContact.setId(id);
+		newContact.setFirstName(firstName);
+		newContact.setLastName(lastName);
+		newContact.setDisplay(display);
+		newContact.setEmail(email);
+		newContact.setFormat(format);
+		
+		contacts.add(newContact);
+		return newContact;
 	}
 	
 }
