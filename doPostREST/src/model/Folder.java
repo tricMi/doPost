@@ -98,6 +98,9 @@ public class Folder implements Cloneable{
     	return rule;
 	}
 
+	public void addMessage(Message message) {
+		messages.add(message);
+	}
 	
     
     @GET

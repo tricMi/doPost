@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 import javax.ejb.Singleton;
 import javax.imageio.ImageIO;
+import javax.swing.plaf.metal.MetalIconFactory.FolderIcon16;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -47,6 +48,7 @@ public class MainService {
 	ArrayList<Tag> allTags = new ArrayList<>();
 	ArrayList<Attachment> allAttachments = new ArrayList<>();
 	Photo photo = new Photo();
+	Folder sent;
 	
 	
 	public MainService() {
@@ -110,9 +112,11 @@ public class MainService {
 	    Folder folder3 = new Folder(3, "Trash", 1, new ArrayList<Message>(),rule2);
 	    Folder folder4 = new Folder(4, "Electronics", 1, new ArrayList<Message>(),rule2);
 	    Folder folder5 = new Folder(5, "Recent promotions", 2, new ArrayList<Message>(),rule2);
+	    sent = new Folder(6, "Sent", 2, new ArrayList<Message>(),rule2);
 
 	    //komentar
 	    
+	    allfolders.add(sent);
 	    allfolders.add(folder);
 	    allfolders.add(folder2);
 	    allfolders.add(folder3);
@@ -798,6 +802,8 @@ public class MainService {
 		
 		
 		allMessages.add(newMessage);
+		sent.addMessage(newMessage);
+		
 		return newMessage;
 	}
 	
