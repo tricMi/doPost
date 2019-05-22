@@ -24,7 +24,7 @@ public class Message {
     private ArrayList<Contact> to;
     private ArrayList<Contact> cc;
     private ArrayList<Contact> bcc;
-    private String dateTime;
+    private Date dateTime;
     private String subject;
     private String content;
     private ArrayList<Tag> tag;
@@ -39,7 +39,7 @@ public class Message {
         this.content = content;
     }
 
-    public Message(int id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, String dateTime, String subject, String content, ArrayList<Tag> tag,
+    public Message(int id, Contact from, ArrayList<Contact> to, ArrayList<Contact> cc, ArrayList<Contact> bcc, Date dateTime, String subject, String content, ArrayList<Tag> tag,
                    ArrayList<Attachment> attachments, Folder folder, Account account, boolean messageRead) {
         this.id = id;
         this.from = from;
@@ -217,11 +217,11 @@ public class Message {
         this.bcc = bcc;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

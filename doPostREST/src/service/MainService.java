@@ -3,8 +3,13 @@ package service;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 import javax.ejb.Singleton;
 import javax.imageio.ImageIO;
@@ -137,10 +142,19 @@ public class MainService {
 	    accounts.add(account4);
 	    accounts.add(account5);
 
+	   
+		Date newDate = new Date();
+	     
+//	    System.out.println(formatter.format(date));  
+	    
+        
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String dateString = format.format( new Date()   );
+//        Date   date       = format.parse ( "2009-12-31" );
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
-	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
-	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  newDate, "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
+	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, newDate,  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
+	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(), newDate, "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 	    
 	    //obrisan messageTemp
 	    Attachment attachment = new Attachment(1, "some data", "type1", "attachment1");
@@ -819,14 +833,25 @@ public class MainService {
 					account = new Account();
 				}
 		read = false;
-				
+			
+		Date date = new Date();
+		try {
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			date = formatter.parse(dateTime);
+		}catch(Exception ex) {
+			
+		}
+		
+		
+//	    Date dateTimeTrue = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime);  
+		
 		Message newMessage = new Message();
 		newMessage.setId(id);
 		newMessage.setFrom(from);
 		newMessage.setTo(to);
 		newMessage.setCc(cc);
 		newMessage.setBcc(bcc);
-		newMessage.setDateTime(dateTime);
+		newMessage.setDateTime(date);
 		newMessage.setSubject(subject);
 		newMessage.setContent(content);
 		newMessage.setTag(tags);
@@ -1006,13 +1031,21 @@ public class MainService {
 
 		read = false;
 				
+		Date date = new Date();
+		try {
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			date = formatter.parse(dateTime);
+		}catch(Exception ex) {
+			
+		}
+		
 		Message newMessage = new Message();
 		newMessage.setId(id);
 		newMessage.setFrom(from);
 		newMessage.setTo(to);
 		newMessage.setCc(cc);
 		newMessage.setBcc(bcc);
-		newMessage.setDateTime(dateTime);
+		newMessage.setDateTime(date);
 		newMessage.setSubject(subject);
 		newMessage.setContent(content);
 		newMessage.setTag(tags);
