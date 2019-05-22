@@ -49,6 +49,7 @@ public class MainService {
 	ArrayList<Attachment> allAttachments = new ArrayList<>();
 	Photo photo = new Photo();
 	Folder sent;
+	Folder drafts;
 	
 	
 	public MainService() {
@@ -107,7 +108,7 @@ public class MainService {
 	    Rule rule2 = new Rule(2, Condition.FROM, Operation.DELETE);
 	    Rule rule3 = new Rule(3, Condition.SUBJECT, Operation.COPY);
 
-	    Folder folder = new Folder(1, "Drafts", 1,new ArrayList<Message>(),rule3);
+	    drafts = new Folder(1, "Drafts", 1,new ArrayList<Message>(),rule3);
 	    Folder folder2 = new Folder(2, "Promotions", 2, new ArrayList<Message>(),rule);
 	    Folder folder3 = new Folder(3, "Trash", 1, new ArrayList<Message>(),rule2);
 	    Folder folder4 = new Folder(4, "Electronics", 1, new ArrayList<Message>(),rule2);
@@ -117,7 +118,7 @@ public class MainService {
 	    //komentar
 	    
 	    allfolders.add(sent);
-	    allfolders.add(folder);
+	    allfolders.add(drafts);
 	    allfolders.add(folder2);
 	    allfolders.add(folder3);
 	    allfolders.add(folder4);
@@ -136,7 +137,7 @@ public class MainService {
 	    accounts.add(account4);
 	    accounts.add(account5);
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, folder, account1, true );
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
 	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, folder2, account2, false);
 	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(),"2019-03-19 22:22", "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 
@@ -683,106 +684,152 @@ public class MainService {
 		boolean read;
 		
 		int id = hashCode();
-//-----------
-		int fromId = Integer.parseInt(strSplit[0].substring(1));
-		for(Contact con : contacts) {
-			if(con.getId() == fromId) {
+		//-----------
 				try {
-					from = (Contact)con.clone();
-				}catch(CloneNotSupportedException c){} 
+					int fromId = Integer.parseInt(strSplit[0].substring(1));
+					for(Contact con : contacts) {
+						if(con.getId() == fromId) {
+							try {
+								from = (Contact)con.clone();
+							}catch(CloneNotSupportedException c){} 
+							
+						}
+					}
+				}catch(Exception ex) {
+					from = new Contact();
+				}
 				
-			}
-		}
-//------------------
-		String[] toSplit = strSplit[1].split(".");
-		ArrayList<Integer> toIdList = new ArrayList<>();
-		for(String str : toSplit) {
-			toIdList.add(Integer.parseInt(str));
-		}
-		for(int conId : toIdList) {
-			for(Contact con : contacts) {
-				if(con.getId() == id) {
-					to.add(con);
-				}
-			}
-		}
-//--------------------------
-		String[] ccSplit = strSplit[2].split(".");
-		ArrayList<Integer> ccIdList = new ArrayList<>();
-		for(String str : ccSplit) {
-			ccIdList.add(Integer.parseInt(str));
-		}
-		for(int conId : ccIdList) {
-			for(Contact con : contacts) {
-				if(con.getId() == id) {
-					cc.add(con);
-				}
-			}
-		}
-//----------------------------
-		String[] bccSplit = strSplit[3].split(".");
-		ArrayList<Integer> bccIdList = new ArrayList<>();
-		for(String str : bccSplit) {
-			bccIdList.add(Integer.parseInt(str));
-		}
-		for(int conId : bccIdList) {
-			for(Contact con : contacts) {
-				if(con.getId() == id) {
-					bcc.add(con);
-				}
-			}
-		}
-//-------------------
-		String dateTime = strSplit[4];
-		String subject = strSplit[5];
-		String content = strSplit[6];
-		
-		String[] tagsSplit = strSplit[7].split(".");
-//---------------------
-		String[] attachmentsSplit = strSplit[8].split(".");
-		ArrayList<Integer> attachmentsIdList = new ArrayList<>();
-		for(String str : attachmentsSplit) {
-			attachmentsIdList.add(Integer.parseInt(str));
-		}
-		for(String attString : attachmentsSplit) {
-			String[] attSplit = attString.split("|");
-			
-			Attachment att = new Attachment();
-			att.setId(hashCode());
-			att.setData(attachmentsSplit[0]);
-			att.setType(attachmentsSplit[1]);
-			att.setName(attachmentsSplit[2]);
-			attachments.add(att);
-		}
-//-------------------------
-		
-		int folderId = Integer.parseInt(strSplit[9]);
-		for(Folder fol : allfolders) {
-			if(fol.getId() == folderId) {
+		//------------------
 				try {
-					folder = (Folder)fol.clone();
-				}catch(CloneNotSupportedException c){} 
+					String[] toSplit = strSplit[1].split(".");
+					ArrayList<Integer> toIdList = new ArrayList<>();
+					for(String str : toSplit) {
+						toIdList.add(Integer.parseInt(str));
+					}
+					for(int conId : toIdList) {
+						for(Contact con : contacts) {
+							if(con.getId() == id) {
+								to.add(con);
+							}
+						}
+					}
+				}catch(Exception ex) {
+					
+				}
 				
-			}
-		}
-//----------------------
-		int accountId = Integer.parseInt(strSplit[10].substring(0, strSplit[10].length() - 1));
-		for(Account acc : accounts) {
-			if(acc.getId() == accountId) {
+		//--------------------------
 				try {
-					account = (Account)acc.clone();
-				}catch(CloneNotSupportedException c){} 
+					String[] ccSplit = strSplit[2].split(".");
+					ArrayList<Integer> ccIdList = new ArrayList<>();
+					for(String str : ccSplit) {
+						ccIdList.add(Integer.parseInt(str));
+					}
+					for(int conId : ccIdList) {
+						for(Contact con : contacts) {
+							if(con.getId() == id) {
+								cc.add(con);
+							}
+						}
+					}
+				}catch(Exception ex) {
+					
+				}
 				
-			}
-		}
-//--------------------------
-//		String readStr = strSplit[11].substring(0, strSplit[11].length() - 1);
-		//!!! true ili TRUE???   <<-------------------------
-//		if(readStr.equals("true")) {
-//			read = true;
-//		}else {
-//			read = false;
-//		}
+		//----------------------------
+				try {
+					String[] bccSplit = strSplit[3].split(".");
+					ArrayList<Integer> bccIdList = new ArrayList<>();
+					for(String str : bccSplit) {
+						bccIdList.add(Integer.parseInt(str));
+					}
+					for(int conId : bccIdList) {
+						for(Contact con : contacts) {
+							if(con.getId() == id) {
+								bcc.add(con);
+							}
+						}
+					}
+				}catch(Exception ex) {
+					
+				}
+				
+		//-------------------
+				String dateTime="", subject="", content="";
+				try {
+					dateTime = strSplit[4];
+					subject = strSplit[5];
+					content = strSplit[6];
+					
+				}catch(Exception ex) {
+					dateTime = "";
+					subject = "";
+					content = "";
+					
+				}
+		//------------------------
+				try {
+					String[] tagsSplit = strSplit[7].split(".");
+					for(String tagString : tagsSplit) {
+						Tag newTag = new Tag();
+						newTag.setId(hashCode());
+						newTag.setName(tagString);
+						tags.add(newTag);
+					}
+				}catch(Exception ex) {
+					
+				}
+				
+				
+		//---------------------
+				try {
+					String[] attachmentsSplit = strSplit[8].split(".");
+					ArrayList<Integer> attachmentsIdList = new ArrayList<>();
+					for(String str : attachmentsSplit) {
+						attachmentsIdList.add(Integer.parseInt(str));
+					}
+					for(String attString : attachmentsSplit) {
+						String[] attSplit = attString.split("|");
+						
+						Attachment att = new Attachment();
+						att.setId(hashCode());
+						att.setData(attachmentsSplit[0]);
+						att.setType(attachmentsSplit[1]);
+						att.setName(attachmentsSplit[2]);
+						attachments.add(att);
+					}
+				}catch(Exception ex) {
+					
+				}
+				
+		//-------------------------
+				try {
+					int folderId = Integer.parseInt(strSplit[9]);
+					for(Folder fol : allfolders) {
+						if(fol.getId() == folderId) {
+							try {
+								folder = (Folder)fol.clone();
+							}catch(CloneNotSupportedException c){} 
+							
+						}
+					}
+				}catch(Exception ex) {
+					folder = new Folder();
+				}
+				
+		//----------------------
+				try {
+					int accountId = Integer.parseInt(strSplit[10].substring(0, strSplit[10].length() - 1));
+					for(Account acc : accounts) {
+						if(acc.getId() == accountId) {
+							try {
+								account = (Account)acc.clone();
+							}catch(CloneNotSupportedException c){} 
+							
+						}
+					}
+				}catch(Exception ex) {
+					account = new Account();
+				}
 		read = false;
 				
 		Message newMessage = new Message();
@@ -807,4 +854,195 @@ public class MainService {
 		return newMessage;
 	}
 	
+	@POST
+	@Path("/messages/draft")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Message draftMessage(String params) {
+		System.out.println(params);
+		String[] strSplit = params.split(",");
+		
+		Contact from = new Contact();
+		ArrayList<Contact> to = new ArrayList<>();
+		ArrayList<Contact> cc = new ArrayList<>();
+		ArrayList<Contact> bcc = new ArrayList<>();
+		ArrayList<Tag> tags = new ArrayList<>();
+		ArrayList<Attachment> attachments = new ArrayList<>();
+		Folder folder = new Folder();
+		Account account = new Account();
+		boolean read;
+		
+		int id = hashCode();
+//-----------
+		try {
+			int fromId = Integer.parseInt(strSplit[0].substring(1));
+			for(Contact con : contacts) {
+				if(con.getId() == fromId) {
+					try {
+						from = (Contact)con.clone();
+					}catch(CloneNotSupportedException c){} 
+					
+				}
+			}
+		}catch(Exception ex) {
+			from = new Contact();
+		}
+		
+//------------------
+		try {
+			String[] toSplit = strSplit[1].split(".");
+			ArrayList<Integer> toIdList = new ArrayList<>();
+			for(String str : toSplit) {
+				toIdList.add(Integer.parseInt(str));
+			}
+			for(int conId : toIdList) {
+				for(Contact con : contacts) {
+					if(con.getId() == id) {
+						to.add(con);
+					}
+				}
+			}
+		}catch(Exception ex) {
+			
+		}
+		
+//--------------------------
+		try {
+			String[] ccSplit = strSplit[2].split(".");
+			ArrayList<Integer> ccIdList = new ArrayList<>();
+			for(String str : ccSplit) {
+				ccIdList.add(Integer.parseInt(str));
+			}
+			for(int conId : ccIdList) {
+				for(Contact con : contacts) {
+					if(con.getId() == id) {
+						cc.add(con);
+					}
+				}
+			}
+		}catch(Exception ex) {
+			
+		}
+		
+//----------------------------
+		try {
+			String[] bccSplit = strSplit[3].split(".");
+			ArrayList<Integer> bccIdList = new ArrayList<>();
+			for(String str : bccSplit) {
+				bccIdList.add(Integer.parseInt(str));
+			}
+			for(int conId : bccIdList) {
+				for(Contact con : contacts) {
+					if(con.getId() == id) {
+						bcc.add(con);
+					}
+				}
+			}
+		}catch(Exception ex) {
+			
+		}
+		
+//-------------------
+		String dateTime="", subject="", content="";
+		try {
+			dateTime = strSplit[4];
+			subject = strSplit[5];
+			content = strSplit[6];
+			
+		}catch(Exception ex) {
+			dateTime = "";
+			subject = "";
+			content = "";
+			
+		}
+//------------------------
+		try {
+			String[] tagsSplit = strSplit[7].split(".");
+			for(String tagString : tagsSplit) {
+				Tag newTag = new Tag();
+				newTag.setId(hashCode());
+				newTag.setName(tagString);
+				tags.add(newTag);
+			}
+		}catch(Exception ex) {
+			
+		}
+		
+		
+//---------------------
+		try {
+			String[] attachmentsSplit = strSplit[8].split(".");
+			ArrayList<Integer> attachmentsIdList = new ArrayList<>();
+			for(String str : attachmentsSplit) {
+				attachmentsIdList.add(Integer.parseInt(str));
+			}
+			for(String attString : attachmentsSplit) {
+				String[] attSplit = attString.split("|");
+				
+				Attachment att = new Attachment();
+				att.setId(hashCode());
+				att.setData(attachmentsSplit[0]);
+				att.setType(attachmentsSplit[1]);
+				att.setName(attachmentsSplit[2]);
+				attachments.add(att);
+			}
+		}catch(Exception ex) {
+			
+		}
+		
+//-------------------------
+		try {
+			int folderId = Integer.parseInt(strSplit[9]);
+			for(Folder fol : allfolders) {
+				if(fol.getId() == folderId) {
+					try {
+						folder = (Folder)fol.clone();
+					}catch(CloneNotSupportedException c){} 
+					
+				}
+			}
+		}catch(Exception ex) {
+			folder = new Folder();
+		}
+		
+//----------------------
+		try {
+			int accountId = Integer.parseInt(strSplit[10].substring(0, strSplit[10].length() - 1));
+			for(Account acc : accounts) {
+				if(acc.getId() == accountId) {
+					try {
+						account = (Account)acc.clone();
+					}catch(CloneNotSupportedException c){} 
+					
+				}
+			}
+		}catch(Exception ex) {
+			account = new Account();
+		}
+		
+//--------------------------
+
+		read = false;
+				
+		Message newMessage = new Message();
+		newMessage.setId(id);
+		newMessage.setFrom(from);
+		newMessage.setTo(to);
+		newMessage.setCc(cc);
+		newMessage.setBcc(bcc);
+		newMessage.setDateTime(dateTime);
+		newMessage.setSubject(subject);
+		newMessage.setContent(content);
+		newMessage.setTag(tags);
+		newMessage.setAttachments(attachments);
+		newMessage.setFolder(folder);
+		newMessage.setAccount(account);
+		newMessage.setMessageRead(read);
+		
+		
+		
+		drafts.addMessage(newMessage);
+		
+		return newMessage;
+	}
 }
