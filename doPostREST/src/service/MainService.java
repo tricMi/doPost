@@ -81,7 +81,7 @@ public class MainService {
 //	    String imagePath = "path/to/your/image.jpg";
 //	    BufferedImage myPicture = ImageIO.read(new File(imagePath));
 	    
-	    Contact conTemp = new Contact(1, "Pera", "Peric", "Pex", "pera123@gmail.com", Format.PLAIN, photo);
+	    Contact conTemp = new Contact(1, "Pera", "Peric", "Pex", "user@gmail.com", Format.PLAIN, photo);
 	    Contact conTemp2 = new Contact(2, "Aleksandar", "Aleksic", "Acoo", "aco123@gmail.com", Format.HTML, photo);
 	    Contact conTemp3 = new Contact(3, "Maja", "Maric", "Maki", "maki123@gmail.com", Format.HTML, photo);
 	    Contact conTemp4 = new Contact(4, "me", "Stevic", "Stefi", "stefi123@gmail.com", Format.HTML, photo);
@@ -120,15 +120,17 @@ public class MainService {
 	    allfolders.add(folder5);
 	    
 	    //obrisano m iz konstruktora
-	    Account account1 = new Account(1, "smtp1", "pop3", "user", "user");
+	    Account account1 = new Account(1, "smtp1", "pop3", "user@gmail.com", "user");
 	    Account account2 = new Account(2, "smtp2", "pop3", "youremail@gmail.com", "1232");
 	    Account account3 = new Account(3, "smtp3", "pop3", "theiremail@gmail.com", "1233");
 	    Account account4 = new Account(4, "smtp4", "pop3", "ouremail@gmail.com", "1234");
+	    Account account5 = new Account(5, "smtp1", "pop3", "person@gmail.com", "user");
 
 	    accounts.add(account1);
 	    accounts.add(account2);
 	    accounts.add(account3);
 	    accounts.add(account4);
+	    accounts.add(account5);
 
 	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  "2019-02-13 09:50", "Matematika 1" , "This is some message", tags, attachments, folder, account1, true );
 	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, "2019-01-29 13:24",  "Osnove programiranja", "Just a dumb message",tags2, attachments2, folder2, account2, false);
@@ -662,76 +664,49 @@ public class MainService {
 	@Path("/messages/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Contact addMessage(String params) {
+	public Message addMessage(String params) {
 		System.out.println(params);
 		String[] strSplit = params.split(",");
 		
-		int id;
-		Contact from;
-		ArrayList<Contact> to;
-		ArrayList<Contact> cc;
-		ArrayList<Contact> bcc;
-		String dateTime;
-		String subject;
-		String content;
-		ArrayList<Tag> tags;
-		ArrayList<Attachment> attachments;
-		Folder folder;
-		Account account;
+		Contact from = new Contact();
+		ArrayList<Contact> to = new ArrayList<>();
+		ArrayList<Contact> cc = new ArrayList<>();
+		ArrayList<Contact> bcc = new ArrayList<>();
+		ArrayList<Tag> tags = new ArrayList<>();
+		ArrayList<Attachment> attachments = new ArrayList<>();
+		Folder folder = new Folder();
+		Account account = new Account();
 		boolean read;
 		
-		String fromStr, folderStr, accountStr, readStr;
-		String toStr, ccStr, bccStr, tagsStr, attachmentsStr;
-		
-		id = hashCode();
-		fromStr = strSplit[0].substring(1);
-		toStr = strSplit[1];
-		ccStr = strSplit[2];
-		bccStr = strSplit[3];
-		dateTime = strSplit[4];
-		subject = strSplit[5];
-		content = strSplit[6];
-		tagsStr = strSplit[7];
-		content = strSplit[8];
-		tagsStr = strSplit[9];
-		attachmentsStr = strSplit[10];
-		folderStr = strSplit[11];
-		accountStr = strSplit[12];
-		readStr = strSplit[13].substring(0, strSplit[1].length() - 1);
-		
-		String[] toSplit = toStr.split(".");
-		String[] ccSplit = ccStr.split(".");
-		String[] bccSplit = bccStr.split(".");
-		String[] tagsSplit = tagsStr.split(".");
-		String[] attachmentsSplit = attachmentsStr.split(".");
+		int id = hashCode();
+//-----------
+		int fromId = Integer.parseInt(strSplit[0].substring(1));
+		for(Contact con : contacts) {
+			if(con.getId() == fromId) {
+				try {
+					from = (Contact)con.clone();
+				}catch(CloneNotSupportedException c){} 
+				
+			}
+		}
+//------------------
+		String[] toSplit = strSplit[1].split(".");
 		ArrayList<Integer> toIdList = new ArrayList<>();
-		ArrayList<Integer> ccIdList = new ArrayList<>();
-		ArrayList<Integer> bccIdList = new ArrayList<>();
-		ArrayList<Integer> tagsIdList = new ArrayList<>();
-		ArrayList<Integer> attachmentsIdList = new ArrayList<>();
-		
 		for(String str : toSplit) {
 			toIdList.add(Integer.parseInt(str));
 		}
-		for(String str : ccSplit) {
-			ccIdList.add(Integer.parseInt(str));
-		}
-		for(String str : bccSplit) {
-			bccIdList.add(Integer.parseInt(str));
-		}
-		for(String str : tagsSplit) {
-			tagsIdList.add(Integer.parseInt(str));
-		}
-		for(String str : attachmentsSplit) {
-			attachmentsIdList.add(Integer.parseInt(str));
-		}
-		
 		for(int conId : toIdList) {
 			for(Contact con : contacts) {
 				if(con.getId() == id) {
 					to.add(con);
 				}
 			}
+		}
+//--------------------------
+		String[] ccSplit = strSplit[2].split(".");
+		ArrayList<Integer> ccIdList = new ArrayList<>();
+		for(String str : ccSplit) {
+			ccIdList.add(Integer.parseInt(str));
 		}
 		for(int conId : ccIdList) {
 			for(Contact con : contacts) {
@@ -740,6 +715,12 @@ public class MainService {
 				}
 			}
 		}
+//----------------------------
+		String[] bccSplit = strSplit[3].split(".");
+		ArrayList<Integer> bccIdList = new ArrayList<>();
+		for(String str : bccSplit) {
+			bccIdList.add(Integer.parseInt(str));
+		}
 		for(int conId : bccIdList) {
 			for(Contact con : contacts) {
 				if(con.getId() == id) {
@@ -747,27 +728,31 @@ public class MainService {
 				}
 			}
 		}
+//-------------------
+		String dateTime = strSplit[4];
+		String subject = strSplit[5];
+		String content = strSplit[6];
 		
-		for(int attId : attachmentsIdList) {
-			for(Attachment att : attachments) {
-				if(att.getId() == id) {
-					attachments.add(att);
-				}
-			}
+		String[] tagsSplit = strSplit[7].split(".");
+//---------------------
+		String[] attachmentsSplit = strSplit[8].split(".");
+		ArrayList<Integer> attachmentsIdList = new ArrayList<>();
+		for(String str : attachmentsSplit) {
+			attachmentsIdList.add(Integer.parseInt(str));
 		}
-		
-		int conId = Integer.parseInt(fromStr);
-		int folderId = Integer.parseInt(folderStr);
-		int accountId = Integer.parseInt(accountStr);
-		
-		for(Contact con : contacts) {
-			if(con.getId() == conId) {
-				try {
-					from = (Contact)con.clone();
-				}catch(CloneNotSupportedException c){} 
-				
-			}
+		for(String attString : attachmentsSplit) {
+			String[] attSplit = attString.split("|");
+			
+			Attachment att = new Attachment();
+			att.setId(hashCode());
+			att.setData(attachmentsSplit[0]);
+			att.setType(attachmentsSplit[1]);
+			att.setName(attachmentsSplit[2]);
+			attachments.add(att);
 		}
+//-------------------------
+		
+		int folderId = Integer.parseInt(strSplit[9]);
 		for(Folder fol : allfolders) {
 			if(fol.getId() == folderId) {
 				try {
@@ -776,6 +761,8 @@ public class MainService {
 				
 			}
 		}
+//----------------------
+		int accountId = Integer.parseInt(strSplit[10].substring(0, strSplit[10].length() - 1));
 		for(Account acc : accounts) {
 			if(acc.getId() == accountId) {
 				try {
@@ -784,27 +771,34 @@ public class MainService {
 				
 			}
 		}
+//--------------------------
+//		String readStr = strSplit[11].substring(0, strSplit[11].length() - 1);
 		//!!! true ili TRUE???   <<-------------------------
-		if(readStr.equals("true")) {
-			read = true;
-		}else {
-			read = false;
-		}
+//		if(readStr.equals("true")) {
+//			read = true;
+//		}else {
+//			read = false;
+//		}
+		read = false;
+				
+		Message newMessage = new Message();
+		newMessage.setId(id);
+		newMessage.setFrom(from);
+		newMessage.setTo(to);
+		newMessage.setCc(cc);
+		newMessage.setBcc(bcc);
+		newMessage.setDateTime(dateTime);
+		newMessage.setSubject(subject);
+		newMessage.setContent(content);
+		newMessage.setTag(tags);
+		newMessage.setAttachments(attachments);
+		newMessage.setFolder(folder);
+		newMessage.setAccount(account);
+		newMessage.setMessageRead(read);
 		
 		
-		
-		
-		
-		Contact newContact = new Contact();
-		newContact.setId(id);
-		newContact.setFirstName(firstName);
-		newContact.setLastName(lastName);
-		newContact.setDisplay(display);
-		newContact.setEmail(email);
-		newContact.setFormat(format);
-		
-		contacts.add(newContact);
-		return newContact;
+		allMessages.add(newMessage);
+		return newMessage;
 	}
 	
 }
