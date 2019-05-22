@@ -679,7 +679,7 @@ public class MainService {
 		boolean read;
 		
 		int id = hashCode();
-//-----------
+
 		int fromId = Integer.parseInt(strSplit[0].substring(1));
 		for(Contact con : contacts) {
 			if(con.getId() == fromId) {
@@ -702,7 +702,7 @@ public class MainService {
 				}
 			}
 		}
-//--------------------------
+
 		String[] ccSplit = strSplit[2].split(".");
 		ArrayList<Integer> ccIdList = new ArrayList<>();
 		for(String str : ccSplit) {
@@ -728,13 +728,13 @@ public class MainService {
 				}
 			}
 		}
-//-------------------
+
 		String dateTime = strSplit[4];
 		String subject = strSplit[5];
 		String content = strSplit[6];
 		
 		String[] tagsSplit = strSplit[7].split(".");
-//---------------------
+
 		String[] attachmentsSplit = strSplit[8].split(".");
 		ArrayList<Integer> attachmentsIdList = new ArrayList<>();
 		for(String str : attachmentsSplit) {
