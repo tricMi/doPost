@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
+
 @Entity
 @Table(name = "attachments")
 public class Attachment implements Serializable{

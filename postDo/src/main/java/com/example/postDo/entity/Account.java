@@ -29,17 +29,29 @@ public class Account implements Serializable {
 	@Column(name = "account_id", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name = "acc_smtp", unique = false, nullable = false)
-    private String smtp;
+	@Column(name = "acc_smtp_address", unique = false, nullable = false)
+    private String smtp_address;
 	
-	@Column(name = "acc_pop3_imap", unique = false, nullable = false)
-    private String pop3_imap;
+	@Column(name = "acc_smtp_port", unique = false, nullable = false)
+    private Integer smtp_port;
+	
+	@Column(name = "acc_inserver_type", unique = false, nullable = false)
+    private Short inserver_type;
+	
+	@Column(name = "acc_inserver_address", unique = false, nullable = false)
+    private String inserver_address;
+	
+	@Column(name = "acc_inserver_port", unique = false, nullable = false)
+    private Integer inserver_port;
     
 	@Column(name = "acc_username", unique = false, nullable = false)
     private String username;
     
 	@Column(name = "acc_password", unique = false, nullable = false)
     private String password;
+	
+	@Column(name = "acc_displayname", unique = false, nullable = false)
+    private String displayname;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "acc_user", referencedColumnName = "user_id")
@@ -48,13 +60,21 @@ public class Account implements Serializable {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "account")
 	private Set<Message> messages = new HashSet<Message>();
 
-	public Account(Long id, String smtp, String pop3_imap, String username, String password, Set<Message> messages) {
+
+	public Account(Long id, String smtp_address, Integer smtp_port, Short inserver_type, String inserver_address,
+			Integer inserver_port, String username, String password, String displayname, User user,
+			Set<Message> messages) {
 		super();
 		this.id = id;
-		this.smtp = smtp;
-		this.pop3_imap = pop3_imap;
+		this.smtp_address = smtp_address;
+		this.smtp_port = smtp_port;
+		this.inserver_type = inserver_type;
+		this.inserver_address = inserver_address;
+		this.inserver_port = inserver_port;
 		this.username = username;
 		this.password = password;
+		this.displayname = displayname;
+		this.user = user;
 		this.messages = messages;
 	}
 
@@ -70,21 +90,6 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public String getSmtp() {
-		return smtp;
-	}
-
-	public void setSmtp(String smtp) {
-		this.smtp = smtp;
-	}
-
-	public String getPop3_imap() {
-		return pop3_imap;
-	}
-
-	public void setPop3_imap(String pop3_imap) {
-		this.pop3_imap = pop3_imap;
-	}
 
 	public String getUsername() {
 		return username;
@@ -110,5 +115,66 @@ public class Account implements Serializable {
 		this.messages = messages;
 	}
 
+	public String getSmtp_address() {
+		return smtp_address;
+	}
+
+	public void setSmtp_address(String smtp_address) {
+		this.smtp_address = smtp_address;
+	}
+
+	public Integer getSmtp_port() {
+		return smtp_port;
+	}
+
+	public void setSmtp_port(Integer smtp_port) {
+		this.smtp_port = smtp_port;
+	}
+
+	public Short getInserver_type() {
+		return inserver_type;
+	}
+
+	public void setInserver_type(Short inserver_type) {
+		this.inserver_type = inserver_type;
+	}
+
+	public String getInserver_address() {
+		return inserver_address;
+	}
+
+	public void setInserver_address(String inserver_address) {
+		this.inserver_address = inserver_address;
+	}
+
+	public Integer getInserver_port() {
+		return inserver_port;
+	}
+
+	public void setInserver_port(Integer inserver_port) {
+		this.inserver_port = inserver_port;
+	}
+
+	public String getDisplayname() {
+		return displayname;
+	}
+
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
     
 }
