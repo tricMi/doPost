@@ -3,6 +3,8 @@ package com.example.postDo.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.postDo.entity.Message;
+
 public class MessageDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,11 @@ public class MessageDTO implements Serializable{
         this.account = account;
     }
 
+    public MessageDTO(Message message) {
+    	this(message.getId(), new ContactDTO(message.getFrom()), new ArrayList<ContactDTO>(), new ArrayList<ContactDTO>(), new ArrayList<ContactDTO>()
+    			,message.getDateTime(), message.getSubject(), message.getContent(), new ArrayList<TagDTO>(), new ArrayList<AttachmentDTO>(),
+    			new FolderDTO(message.getFolder()), new AccountDTO(message.getAccount()));
+    }
 
     public MessageDTO() {
     	super();

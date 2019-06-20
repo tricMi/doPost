@@ -49,6 +49,16 @@ public class User implements Serializable {
 		this.lastname = lastname;
 		this.accounts = accounts;
 	}
+	
+//	<dependency>
+//	<groupId>org.springframework.boot</groupId>
+//	<artifactId>spring-boot-starter-security</artifactId>
+//</dependency>
+	
+	public User() {
+		super();
+	}
+
 
 	public Long getId() {
 		return id;

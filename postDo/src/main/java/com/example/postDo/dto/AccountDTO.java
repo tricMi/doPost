@@ -3,8 +3,6 @@ package com.example.postDo.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.persistence.Column;
-
 import com.example.postDo.entity.Account;
 
 public class AccountDTO implements Serializable {
@@ -37,10 +35,12 @@ public class AccountDTO implements Serializable {
 		this.displayname = displayname;
 		this.messages = messages;
 	}
+    
 
 	public AccountDTO() {
     	super();
     }
+	
     
     public AccountDTO(Account account) {
     	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>());

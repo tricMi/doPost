@@ -34,12 +34,12 @@ public class Folder implements Serializable {
 	@Column(name = "folder_name", unique = false, nullable = false)
     private String name;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
-	private Set<Folder> folders = new HashSet<Folder>();
-	
 	@ManyToOne
 	@JoinColumn(name="subfolder_id", referencedColumnName="folder_id", nullable=true)
 	private Folder folder;
+	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
+	private Set<Folder> folders = new HashSet<Folder>();
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
 	private Set<Message> messages = new HashSet<Message>();
@@ -101,5 +101,14 @@ public class Folder implements Serializable {
 		this.rule = rule;
 	}
 
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+
+	
     
 }

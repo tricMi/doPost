@@ -1,6 +1,9 @@
 package com.example.postDo.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import com.example.postDo.entity.User;
 
 public class UserDTO implements Serializable{
 
@@ -11,17 +14,39 @@ public class UserDTO implements Serializable{
 	private String password;
 	private String firstname;
 	private String lastname;
+	private ArrayList<AccountDTO> accounts = new ArrayList<>();
 	
 	public UserDTO() {}
 	
-	public UserDTO(Long id, String username, String password, String firstname, String lastname) {
+	
+	
+	public UserDTO(Long id, String username, String password, String firstname, String lastname,
+			ArrayList<AccountDTO> accounts) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.accounts = accounts;
 	}
+
+
+
+	public UserDTO(User user) {
+		this(user.getId(), user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), new ArrayList<AccountDTO>());
+	}
+	
+	
+	public ArrayList<AccountDTO> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(ArrayList<AccountDTO> accounts) {
+		this.accounts = accounts;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

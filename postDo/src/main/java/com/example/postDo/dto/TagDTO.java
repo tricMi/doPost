@@ -2,6 +2,8 @@ package com.example.postDo.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.postDo.entity.Tag;
+
 public class TagDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -14,6 +16,10 @@ public class TagDTO implements Serializable{
         this.id = id;
         this.name = name;
         this.messages = messages;
+    }
+    
+    public TagDTO(Tag tag) {
+    	this(tag.getId(), tag.getName(), new ArrayList<MessageDTO>());
     }
 
     public TagDTO() {

@@ -3,26 +3,33 @@ package com.example.postDo.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.postDo.entity.Folder;
+
+
 public class FolderDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
     private String name;
-    private ArrayList<FolderDTO> folders;
+    private FolderDTO parentFolder;
     private ArrayList<MessageDTO> messages;
     private RuleDTO rule;
 
-    public FolderDTO(Long id, String name, ArrayList<FolderDTO> folders, ArrayList<MessageDTO> messages, RuleDTO rule) {
-        this.id = id;
-        this.name = name;
-        this.folders = folders;
-        this.messages = messages;
-        this.setRule(rule);
-    }
 
+    public FolderDTO(Long id, String name, FolderDTO parentFolder, ArrayList<MessageDTO> messages, RuleDTO rule) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.parentFolder = parentFolder;
+		this.messages = messages;
+		this.rule = rule;
+	}
 
-    public FolderDTO(){
+    public FolderDTO(Folder folder){
+		this(folder.getId(), folder.getName(), (folder.getFolder() != null && folder.getFolder().getId() != null)?new FolderDTO(folder.getFolder()):new FolderDTO(), new ArrayList<MessageDTO>(), new RuleDTO(folder.getRule()));
+	}
+	public FolderDTO(){
     	super();
 
     }
@@ -51,10 +58,18 @@ public class FolderDTO implements Serializable{
         this.messages = messages;
     }
 
-    public ArrayList<FolderDTO> getFolders() {
-        return folders;
-    }
 
+	public FolderDTO getParentFolder() {
+		return parentFolder;
+	}
+
+	public void setParentFolder(FolderDTO parentFolder) {
+		this.parentFolder = parentFolder;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public RuleDTO getRule() {
 		return rule;

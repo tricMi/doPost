@@ -2,20 +2,30 @@ package com.example.postDo.dto;
 
 import java.io.Serializable;
 
+import com.example.postDo.entity.Condition;
+import com.example.postDo.entity.Operation;
+import com.example.postDo.entity.Rule;
+
+
+
 public class RuleDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-    private ConditionDTO condition;
-    private OperationDTO operation;
+    private Condition condition;
+    private Operation operation;
 
-    public RuleDTO(Long id, ConditionDTO condition, OperationDTO operation) {
+    public RuleDTO(Long id, Condition condition, Operation operation) {
         this.id = id;
         this.condition = condition;
         this.operation = operation;
     }
 
+    public RuleDTO(Rule rule) {
+    	this(rule.getId(), rule.getCondition(), rule.getOperation());
+    }
+    
     public RuleDTO(){
     	super();
     }
@@ -24,23 +34,23 @@ public class RuleDTO implements Serializable {
         return id;
     }
 
-    public ConditionDTO getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 
-    public OperationDTO getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-
-    public void setCondition(ConditionDTO condition) {
+    
+    public void setCondition(Condition condition) {
         this.condition = condition;
     }
 
-    public void setOperation(OperationDTO operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 }
