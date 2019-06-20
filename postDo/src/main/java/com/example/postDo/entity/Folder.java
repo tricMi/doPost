@@ -1,6 +1,7 @@
 package com.example.postDo.entity;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,17 +17,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 
 @Entity
 @Table(name = "folders")
-public class Folder {
+public class Folder implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "folder_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "folder_name", unique = false, nullable = false)
     private String name;
@@ -45,7 +48,7 @@ public class Folder {
     @JoinColumn(name = "folder_rule", referencedColumnName = "rule_id")
     private Rule rule;
 
-	public Folder(int id, String name, Set<Folder> folders, Set<Message> messages, Rule rule) {
+	public Folder(Long id, String name, Set<Folder> folders, Set<Message> messages, Rule rule) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,11 +61,11 @@ public class Folder {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

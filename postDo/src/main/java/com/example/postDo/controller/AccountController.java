@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
 import com.example.postDo.service.AccountServiceInterface;
 
-import com.example.postDo.dto.Account;
+import com.example.postDo.dto.AccountDTO;
+import com.example.postDo.entity.Account;
 
 @RestController
 @RequestMapping(value = "api/accounts")
@@ -24,17 +24,18 @@ public class AccountController {
 	private AccountServiceInterface accountService;
 	
 	@GetMapping
-	public ResponseEntity<List<Account>> getAccounts(){
-		List<com.example.postDo.entity.Account> accounts = accountService.findAll();
+	public ResponseEntity<List<AccountDTO>> getAccounts(){
+		List<Account> accounts = accountService.findAll();
 		
-		List<Account> accountDTO = new ArrayList<Account>();
+		List<AccountDTO> accountDTO = new ArrayList<AccountDTO>();
 		
-		for(com.example.postDo.entity.Account a: accounts) {
-			accountDTO.add(new Account(a));
+		for(Account a: accounts) {
+			accountDTO.add(new AccountDTO(a));
 		}
 		
-		return new ResponseEntity<List<Account>>(accountDTO, HttpStatus.OK);
+		return new ResponseEntity<List<AccountDTO>>(accountDTO, HttpStatus.OK);
 	}
 	
 
 }
+

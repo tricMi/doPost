@@ -1,6 +1,7 @@
 package com.example.postDo.entity;
 
-import java.util.ArrayList;
+
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,17 +17,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name = "contacts")
-public class Contact {
+public class Contact implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "contact_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "contact_firstname", unique = false, nullable = false)
     private String firstName;
@@ -72,7 +74,7 @@ public class Contact {
 //	  @OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="parent")
 //	  private Set<Category> children = new HashSet<Category>();
 
-	public Contact(int id, String firstName, String lastName, String display, String email, Format format, Photo photo,
+	public Contact(Long id, String firstName, String lastName, String display, String email, Format format, Photo photo,
 			Set<Message> from, Set<Message> to, Set<Message> cc, Set<Message> bcc) {
 		super();
 		this.id = id;
@@ -92,11 +94,11 @@ public class Contact {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

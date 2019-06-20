@@ -1,36 +1,30 @@
 package com.example.postDo.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.example.postDo.entity.Contact;
+import com.example.postDo.entity.Format;
 
 
-public class Contact {
+public class ContactDTO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private Long id;
     private String firstName;
     private String lastName;
     private String display;
     private String email;
     private Format format;
-    private Photo photo;
-    private ArrayList<Message> from;
-    private ArrayList<Message> to;
-    private ArrayList<Message> cc;
-    private ArrayList<Message> bcc;
+    private PhotoDTO photo;
+    private ArrayList<MessageDTO> from;
+    private ArrayList<MessageDTO> to;
+    private ArrayList<MessageDTO> cc;
+    private ArrayList<MessageDTO> bcc;
 
 
-    public Contact(int id, String firstName, String lastName, String display, String email, Format format, Photo photo, ArrayList<Message> from, ArrayList<Message> to, ArrayList<Message> cc, ArrayList<Message> bcc) {
+    public ContactDTO(Long id, String firstName, String lastName, String display, String email, Format format, PhotoDTO photo, ArrayList<MessageDTO> from, ArrayList<MessageDTO> to, ArrayList<MessageDTO> cc, ArrayList<MessageDTO> bcc) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,31 +40,34 @@ public class Contact {
     
     
 
-    public Contact() {
+    public ContactDTO() {
 		super();
 	}
 
 
+    public ContactDTO(Contact contact) {
+    	this(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getDisplay(), contact.getEmail(), contact.getFormat(), new PhotoDTO(contact.getPhoto()), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>());
+    }
 
-	public Contact(String firstName){
+	public ContactDTO(String firstName){
         this.firstName = firstName;
     }
 
-    public Photo getPhoto() {
+    public PhotoDTO getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Photo photo) {
+    public void setPhoto(PhotoDTO photo) {
         this.photo = photo;
     }
 
    
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -114,35 +111,35 @@ public class Contact {
         this.format = format;
     }
 
-    public ArrayList<Message> getFrom() {
+    public ArrayList<MessageDTO> getFrom() {
         return from;
     }
 
-    public ArrayList<Message> getTo() {
+    public ArrayList<MessageDTO> getTo() {
         return to;
     }
 
-    public ArrayList<Message> getCc() {
+    public ArrayList<MessageDTO> getCc() {
         return cc;
     }
 
-    public ArrayList<Message> getBcc() {
+    public ArrayList<MessageDTO> getBcc() {
         return bcc;
     }
 
-    public void setFrom(ArrayList<Message> from) {
+    public void setFrom(ArrayList<MessageDTO> from) {
         this.from = from;
     }
 
-    public void setTo(ArrayList<Message> to) {
+    public void setTo(ArrayList<MessageDTO> to) {
         this.to = to;
     }
 
-    public void setCc(ArrayList<Message> cc) {
+    public void setCc(ArrayList<MessageDTO> cc) {
         this.cc = cc;
     }
 
-    public void setBcc(ArrayList<Message> bcc) {
+    public void setBcc(ArrayList<MessageDTO> bcc) {
         this.bcc = bcc;
     }
 }

@@ -15,7 +15,7 @@ public class PhotoService implements PhotoServiceInterface{
 	PhotoRepository photoRepository;
 
 	@Override
-	public Photo findOne(Integer id) {
+	public Photo findOne(Long id) {
 		return photoRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class PhotoService implements PhotoServiceInterface{
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		photoRepository.deleteById(id);
 		
 	}

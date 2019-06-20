@@ -176,7 +176,7 @@ public class MainService {
 //        String dateString = format.format( new Date()   );
 //        Date   date       = format.parse ( "2009-12-31" );
 
-	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  dateString, "Matematika 1" , "This is some message", tags, attachments, sent, account1, true );
+	    Message messageTemp = new Message(1, conTemp, to, cc, bcc,  dateString, "Matematika 1" , "This is some message", tags, attachments, sent, account1, false );
 	    Message messageTemp2 = new Message(2, conTemp2, to2, new ArrayList<Contact>(), bcc2, dateString,  "Osnove programiranja", "Just a dumb message",tags2, attachments2, sent, account2, false);
 	    Message messageTemp3 = new Message(3,  conTemp3, to3, cc2, new ArrayList<Contact>(), dateString, "Sistemski softver", "Another dumb message", tags3, attachments3, folder3, account3, true);
 	    

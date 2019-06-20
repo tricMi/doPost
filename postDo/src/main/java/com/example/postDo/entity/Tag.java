@@ -1,5 +1,5 @@
 package com.example.postDo.entity;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
@@ -24,7 +23,7 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tag_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "tag_name", unique = false, nullable = false)
     private String name;
@@ -36,7 +35,7 @@ public class Tag {
 	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
 	private Message message;
 
-	public Tag(int id, String name, Set<Message> messages) {
+	public Tag(Long id, String name, Set<Message> messages) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,11 +46,11 @@ public class Tag {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

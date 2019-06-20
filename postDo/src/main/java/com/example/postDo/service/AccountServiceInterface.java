@@ -6,12 +6,12 @@ import com.example.postDo.entity.Account;
 
 public interface AccountServiceInterface {
 
-	Account findOne(Integer id);
+	Account findOne(Long id);
 	
 	List<Account> findAll();
 	
 	Account save(Account account);
 	
-	void remove(Integer id);
+	void remove(Long id);
 	
 }

@@ -1,29 +1,20 @@
 package com.example.postDo.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
-public class Account {
+public class AccountDTO implements Serializable {
 	
-	private int id;
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
     private String smtp;
     private String pop3_imap;
     private String username;
     private String password;
-    private ArrayList<Message> messages;
+    private ArrayList<MessageDTO> messages;
 
-    public Account(int id, String smtp, String pop3_imap, String username, String password, ArrayList<Message> message) {
+    public AccountDTO(Long id, String smtp, String pop3_imap, String username, String password, ArrayList<MessageDTO> message) {
         this.id = id;
         this.smtp = smtp;
         this.pop3_imap = pop3_imap;
@@ -32,19 +23,19 @@ public class Account {
         this.messages = message;
     }
 
-    public Account() {
+    public AccountDTO() {
     	super();
     }
     
-    public Account(com.example.postDo.entity.Account account) {
-    	this(account.getId(), account.getSmtp(), account.getPop3_imap(), account.getUsername(), account.getPassword(), new ArrayList<Message>());
+    public AccountDTO(com.example.postDo.entity.Account account) {
+    	this(account.getId(), account.getSmtp(), account.getPop3_imap(), account.getUsername(), account.getPassword(), new ArrayList<MessageDTO>());
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,11 +71,11 @@ public class Account {
         this.password = password;
     }
 
-    public ArrayList<Message> getMessage() {
+    public ArrayList<MessageDTO> getMessage() {
         return messages;
     }
 
-    public void setMessage(ArrayList<Message> message) {
+    public void setMessage(ArrayList<MessageDTO> message) {
         this.messages = message;
     }
 }

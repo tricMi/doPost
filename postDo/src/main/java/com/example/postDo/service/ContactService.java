@@ -15,7 +15,7 @@ public class ContactService implements ContactServiceInterface {
 	ContactRepository contactRepository;
 
 	@Override
-	public Contact findOne(Integer id) {
+	public Contact findOne(Long id) {
 		return contactRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class ContactService implements ContactServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		contactRepository.deleteById(id);
 		
 	}

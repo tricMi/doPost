@@ -1,23 +1,18 @@
 package com.example.postDo.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-
-public class Attachment {
+public class AttachmentDTO implements Serializable{
 	
-	private int id;
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
     private String data;
     private String type;
     private String name;
-    private Message message;
+    private MessageDTO message;
 
-    public Attachment(int id, String data, String type, String name, Message message) {
+    public AttachmentDTO(Long id, String data, String type, String name, MessageDTO message) {
         this.id = id;
         this.data = data;
         this.type = type;
@@ -25,15 +20,15 @@ public class Attachment {
         this.message = message;
     }
 
-    public Attachment() {
+    public AttachmentDTO() {
     	super();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,11 +56,11 @@ public class Attachment {
         this.name = name;
     }
 
-    public Message getMessage() {
+    public MessageDTO getMessage() {
         return message;
     }
 
-    public void setMessage(Message message) {
+    public void setMessage(MessageDTO message) {
         this.message = message;
     }
 }

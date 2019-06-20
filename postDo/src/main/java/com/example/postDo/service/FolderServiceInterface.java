@@ -6,12 +6,12 @@ import com.example.postDo.entity.Folder;
 
 public interface FolderServiceInterface {
 	
-	Folder findOne(Integer id);
+	Folder findOne(Long id);
 	
 	List<Folder> findAll();
 	
 	Folder save(Folder folder);
 	
-	void remove(Integer id);
+	void remove(Long id);
 
 }

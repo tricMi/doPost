@@ -6,12 +6,12 @@ import com.example.postDo.entity.Contact;
 
 public interface ContactServiceInterface {
 	
-	Contact findOne(Integer id);
+	Contact findOne(Long id);
 	
 	List<Contact> findAll();
 	
 	Contact save(Contact contact);
 	
-	void remove(Integer id);
+	void remove(Long id);
 	
 }

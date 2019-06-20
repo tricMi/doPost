@@ -1,12 +1,12 @@
 package com.example.postDo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Contact;
 
-public interface ContactRepository extends JpaRepository<Contact, Integer>{
+@Repository
+public interface ContactRepository extends JpaRepository<Contact, Long>{
 
-//	Contact findOne(Integer id);
 
 }

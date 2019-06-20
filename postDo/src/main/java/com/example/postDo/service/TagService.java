@@ -15,7 +15,7 @@ public class TagService implements TagServiceInterface {
 	TagRepository tagRespository;
 
 	@Override
-	public Tag findOne(Integer id) {
+	public Tag findOne(Long id) {
 		return tagRespository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class TagService implements TagServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		tagRespository.deleteById(id);
 		
 	}

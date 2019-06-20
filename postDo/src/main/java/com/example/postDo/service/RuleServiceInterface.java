@@ -6,11 +6,11 @@ import com.example.postDo.entity.Rule;
 
 public interface RuleServiceInterface {
 
-	Rule findOne(Integer id);
+	Rule findOne(Long id);
 	
 	List<Rule> findAll();
 	
 	Rule save(Rule rule);
 	
-	void remove(Integer id);
+	void remove(Long id);
 }

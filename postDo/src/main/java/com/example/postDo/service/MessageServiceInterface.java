@@ -6,13 +6,13 @@ import com.example.postDo.entity.Message;
 
 public interface MessageServiceInterface {
 	
-	Message findOne(Integer id);
+	Message findOne(Long id);
 	
 	List<Message> findAll();
 	
 	Message save(Message message);
 	
-	void remove(Integer id);
+	void remove(Long id);
 	
 
 }

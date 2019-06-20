@@ -2,6 +2,7 @@ package com.example.postDo.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,26 +13,26 @@ import com.example.postDo.repository.AccountRepository;
 public class AccountService implements AccountServiceInterface {
 	
 	@Autowired
-	AccountRepository accountServiceInterface;
+	AccountRepository accountRepository;
 	
 	@Override
-	public Account findOne(Integer id) {
-		return accountServiceInterface.findById(id).orElse(null);
+	public Account findOne(Long id) {
+		return accountRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Account> findAll() {
-		return accountServiceInterface.findAll();
+		return accountRepository.findAll();
 	}
 
 	@Override
 	public Account save(Account account) {
-		return accountServiceInterface.save(account);
+		return accountRepository.save(account);
 	}
 
 	@Override
-	public void remove(Integer id) {
-		accountServiceInterface.deleteById(id);
+	public void remove(Long id) {
+		accountRepository.deleteById(id);
 		
 	}
 	

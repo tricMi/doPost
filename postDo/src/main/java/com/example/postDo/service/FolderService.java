@@ -15,7 +15,7 @@ public class FolderService implements FolderServiceInterface {
 	FolderRepository folderRepository;
 
 	@Override
-	public Folder findOne(Integer id) {
+	public Folder findOne(Long id) {
 		return folderRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class FolderService implements FolderServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		folderRepository.deleteById(id);
 		
 	}

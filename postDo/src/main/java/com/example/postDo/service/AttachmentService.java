@@ -15,7 +15,7 @@ public class AttachmentService implements AttachmentServiceInterface{
 	AttachmentRepository attachmentRepository;
 
 	@Override
-	public Attachment findOne(Integer id) {
+	public Attachment findOne(Long id) {
 		return attachmentRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class AttachmentService implements AttachmentServiceInterface{
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		attachmentRepository.deleteById(id);
 		
 	}

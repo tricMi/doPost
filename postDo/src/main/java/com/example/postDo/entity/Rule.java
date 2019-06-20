@@ -2,24 +2,25 @@ package com.example.postDo.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name = "rules")
 public class Rule implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rule_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "rule_condition", unique = false, nullable = false)
     private Condition condition;
@@ -27,7 +28,7 @@ public class Rule implements Serializable{
 	@Column(name = "rule_operation", unique = false, nullable = false)
     private Operation operation;
 
-    public Rule(int id, Condition condition, Operation operation) {
+    public Rule(Long id, Condition condition, Operation operation) {
         this.id = id;
         this.condition = condition;
         this.operation = operation;
@@ -37,7 +38,7 @@ public class Rule implements Serializable{
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -49,7 +50,7 @@ public class Rule implements Serializable{
         return operation;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

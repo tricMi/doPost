@@ -1,8 +1,8 @@
 package com.example.postDo.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 
-public enum Operation {
+public enum Operation implements Serializable {
 	MOVE, COPY, DELETE
 }

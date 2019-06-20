@@ -6,12 +6,12 @@ import com.example.postDo.entity.Tag;
 
 public interface TagServiceInterface {
 	
-	Tag findOne(Integer id);
+	Tag findOne(Long id);
 	
 	List<Tag> findAll();
 	
 	Tag save(Tag tag);
 	
-	void remove(Integer id);
+	void remove(Long id);
 
 }

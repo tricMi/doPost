@@ -15,7 +15,7 @@ public class MessageService implements MessageServiceInterface{
 	MessageRepository messageRepository;
 
 	@Override
-	public Message findOne(Integer id) {
+	public Message findOne(Long id) {
 		return messageRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class MessageService implements MessageServiceInterface{
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		messageRepository.deleteById(id);
 		
 	}

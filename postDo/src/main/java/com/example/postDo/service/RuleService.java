@@ -15,7 +15,7 @@ public class RuleService implements RuleServiceInterface {
 	RuleRepository ruleRepository;
 
 	@Override
-	public Rule findOne(Integer id) {
+	public Rule findOne(Long id) {
 		return ruleRepository.findById(id).orElse(null);
 	}
 
@@ -30,7 +30,7 @@ public class RuleService implements RuleServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer id) {
+	public void remove(Long id) {
 		ruleRepository.deleteById(id);
 		
 	}

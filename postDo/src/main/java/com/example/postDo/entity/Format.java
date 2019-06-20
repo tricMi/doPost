@@ -1,8 +1,7 @@
 package com.example.postDo.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-
-public enum Format {
+public enum Format implements Serializable{
 	PLAIN, HTML
 }

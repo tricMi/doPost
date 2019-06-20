@@ -1,6 +1,7 @@
 package com.example.postDo.entity;
 
 import javax.persistence.CascadeType;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -11,18 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name = "attachments")
 public class Attachment implements Serializable{
 
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "attachment_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "attachment_data", unique = false, nullable = false)
     private String data;
@@ -37,7 +38,7 @@ public class Attachment implements Serializable{
     @JoinColumn(name = "attachment_message", referencedColumnName = "message_id")
     private Message message;
 
-    public Attachment(int id, String data, String type, String name, Message message) {
+    public Attachment(Long id, String data, String type, String name, Message message) {
         this.id = id;
         this.data = data;
         this.type = type;
@@ -48,11 +49,11 @@ public class Attachment implements Serializable{
     public Attachment() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

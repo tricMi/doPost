@@ -2,32 +2,32 @@ package com.example.postDo.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 
 @Entity
 @Table(name = "photos")
 public class Photo implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "photo_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "photo_path", unique = false, nullable = false)
-    private int path;
+    private String path;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "photo_contact", referencedColumnName = "contact_id")
@@ -36,30 +36,30 @@ public class Photo implements Serializable{
     public Photo() {
     }
 
-    public Photo(int id, int path, Contact contact) {
+    public Photo(Long id, String path, Contact contact) {
         this.id = id;
         this.path = path;
         this.contact = contact;
     }
 
-    public Photo(int id, int path) {
+    public Photo(Long id, String path) {
         this.id = id;
         this.path = path;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getPath() {
+    public String getPath() {
         return path;
     }
 
-    public void setPath(int path) {
+    public void setPath(String path) {
         this.path = path;
     }
 

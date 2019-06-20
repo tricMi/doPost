@@ -6,11 +6,11 @@ import com.example.postDo.entity.Photo;
 
 public interface PhotoServiceInterface {
 
-	Photo findOne(Integer id);
+	Photo findOne(Long id);
 	
 	List<Photo> findAll();
 	
 	Photo save(Photo photo);
 	
-	void remove(Integer id);
+	void remove(Long id);
 }

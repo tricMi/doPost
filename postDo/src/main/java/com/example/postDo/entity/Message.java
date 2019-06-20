@@ -1,6 +1,7 @@
 package com.example.postDo.entity;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,17 +17,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @Table(name = "messages")
-public class Message {
+public class Message implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "message_id", unique = true, nullable = false)
-	private int id;
+	private Long id;
 	
 	@Column(name = "message_content", unique = false, nullable = false)
 	private String content;
@@ -62,12 +64,6 @@ public class Message {
 //	@ManyToOne
 //	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
 //	private Message message;
-
-    
-    
-    
-    
-   
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
 	private Set<Contact> to = new HashSet<Contact>();
@@ -86,7 +82,7 @@ public class Message {
     
 
 
-	public Message(int id, Contact from, Set<Contact> to, Set<Contact> cc, Set<Contact> bcc, String dateTime,
+	public Message(Long id, Contact from, Set<Contact> to, Set<Contact> cc, Set<Contact> bcc, String dateTime,
 			String subject, String content, Set<Tag> tags, Set<Attachment> attachments, Folder folder,
 			Account account) {
 		super();
@@ -108,11 +104,11 @@ public class Message {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
