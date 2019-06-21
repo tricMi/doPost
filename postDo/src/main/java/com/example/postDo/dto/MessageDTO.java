@@ -93,6 +93,16 @@ public class MessageDTO implements Serializable{
         return from;
     }
 
+    public void addTo(ContactDTO con) {
+    	to.add(con);
+    }
+    public void addCc(ContactDTO con) {
+    	cc.add(con);
+    }
+    public void addBcc(ContactDTO con) {
+    	bcc.add(con);
+    }
+    
     public void setFrom(ContactDTO from) {
         this.from = from;
     }
