@@ -94,7 +94,7 @@ public class FolderController {
 		}
 	
 		folder = folderService.save(folder);
-		return new ResponseEntity<FolderDTO>(new FolderDTO(folder), HttpStatus.CREATED);	
+		return new ResponseEntity<FolderDTO>(new FolderDTO(folder), HttpStatus.OK);	
 	}
 	
 	@DeleteMapping(value="/{id}")

@@ -43,14 +43,9 @@ public class Message implements Serializable {
 	@JoinColumn(name = "message_account", referencedColumnName = "account_id")
 	private Account account;
 	
-//  @ManyToOne
-//	@JoinColumn(name="message_folder", referencedColumnName="folder_id", nullable=true)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_folder", referencedColumnName = "folder_id")
 	private Folder folder;
-  
-//  @ManyToOne
-//	@JoinColumn(name="message_account", referencedColumnName="account_id", nullable=true)
 	  
 	
 	@ManyToOne
@@ -60,10 +55,6 @@ public class Message implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="tag_id", referencedColumnName="tag_id", nullable=true)
 	private Tag tag;
-	
-//	@ManyToOne
-//	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
-//	private Message message;
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
 	private Set<Contact> to = new HashSet<Contact>();
