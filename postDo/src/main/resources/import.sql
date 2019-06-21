@@ -1,7 +1,7 @@
-INSERT INTO photos(photo_path, photo_contact) VALUES ("image.png", 1);
-INSERT INTO photos(photo_path, photo_contact) VALUES ("image.png", 2);
-INSERT INTO photos(photo_path, photo_contact) VALUES ("image.png", 3);
-INSERT INTO photos(photo_path, photo_contact) VALUES ("image.png", 4);
+INSERT INTO photos(photo_path, photo_contact) VALUES ('bart.jpg', 1);
+INSERT INTO photos(photo_path, photo_contact) VALUES ('mickeymouse.jpg', 2);
+INSERT INTO photos(photo_path, photo_contact) VALUES ('pikachu.jpg', 3);
+INSERT INTO photos(photo_path, photo_contact) VALUES ('spongebob.jpg', 4);
 
 INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Pera', 'Peric', 'pex', 'pexpex@gmail.com', 0, 1);
 INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Djura', 'Dobric', 'djux', 'djux@gmail.com', 1, 2);

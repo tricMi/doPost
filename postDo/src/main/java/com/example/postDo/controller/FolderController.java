@@ -103,7 +103,9 @@ public class FolderController {
 		if (folder != null){
 			folderService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} else {		
+		} 
+		else 
+		{		
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}

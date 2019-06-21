@@ -107,7 +107,9 @@ public class ContactController {
 		if (contact != null){
 			contactsService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} else {		
+		} 
+		else 
+		{		
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}

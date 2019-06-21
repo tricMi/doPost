@@ -13,6 +13,11 @@ public class FolderService implements FolderServiceInterface {
 	
 	@Autowired
 	FolderRepository folderRepository;
+	
+	@Override
+	public List<Folder> findByParent(Folder parent) {
+		return folderRepository.findByParent(parent);
+	}
 
 	@Override
 	public Folder findOne(Long id) {

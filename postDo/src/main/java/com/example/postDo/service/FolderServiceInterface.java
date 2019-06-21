@@ -6,6 +6,8 @@ import com.example.postDo.entity.Folder;
 
 public interface FolderServiceInterface {
 	
+	List<Folder> findByParent(Folder parent);
+	
 	Folder findOne(Long id);
 	
 	List<Folder> findAll();
