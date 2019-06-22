@@ -35,8 +35,7 @@ public class JavaMail {
 
 	public Properties propvals = new Properties();
 	public Session emailSessionObj = null;
-	
-	
+
 //	public JavaMail() {
 //		
 //		String hostval = "pop.gmail.com";
@@ -230,6 +229,222 @@ public class JavaMail {
 //	         
 ////	         System.out.println("My message: " + msg.getSubject() + ", " + realContent + ", " + msg.getDateTime() + ", " + msg.getFrom() + ", " + msg.getTo().get(0));
 //	 
+
+//	public JavaMail() {
+//		
+//		String hostval = "pop.gmail.com";
+//	    String mailStrProt = "pop3";
+//	    String host ="smtp.gmail.com" ;
+//		
+////		Properties propvals = new Properties();
+//	    propvals.put("mail.pop3.host", hostval);
+//	    propvals.put("mail.pop3.port", "995");
+//	    propvals.put("mail.pop3.starttls.enable", "true");
+//	    propvals.put("mail.smtp.starttls.enable", "true");
+//	    propvals.put("mail.smtp.host", host);
+//	    propvals.put("mail.smtp.port", "587");
+//	    propvals.put("mail.smtp.auth", "true");
+//	    propvals.put("mail.smtp.starttls.required", "true");
+//	    
+//	    emailSessionObj = Session.getDefaultInstance(propvals);  
+//	}
+//	
+//	
+//	
+////	@RequestMapping(value = "check", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public void check(AccountDTO account) {
+//		
+//			//Set mail properties and configure accordingly
+//		      String hostval = "pop.gmail.com";
+//		      String mailStrProt = "pop3";
+////		      String uname = "dopost123@gmail.com";
+////		      String pwd = "sfdopost2019";
+//		     
+//		      
+//		      String uname = account.getUsername();
+//		      String pwd = account.getPassword();
+//		
+//	     
+//	      
+//	    // Calling checkMail method to check received emails
+//	      checkMail(hostval, mailStrProt, uname, pwd);
+//	   }
+//	
+//		
+//	
+//	   public void checkMail(String hostval, String mailStrProt, String uname,String pwd) 
+//	   {
+//	      try {
+//	      //Set property values
+//	      Properties propvals = new Properties();
+//	      propvals.put("mail.pop3.host", hostval);
+//	      propvals.put("mail.pop3.port", "995");
+//	      propvals.put("mail.pop3.starttls.enable", "true");
+////	      propvals.put("mail.pop3.timeout", 10000);
+//	      
+//	      
+//	      
+////	      Session emailSessionObj = Session.getDefaultInstance(propvals);  
+//	      
+//	      //Create POP3 store object and connect with the server
+//	      Store storeObj = emailSessionObj.getStore("pop3s");
+//	      storeObj.connect(hostval, uname, pwd);
+//	      
+//	      
+//	      //Create folder object and open it in read-only mode
+//	      Folder emailFolderObj = storeObj.getFolder("INBOX");
+//	      emailFolderObj.open(Folder.READ_ONLY);
+//	      //Fetch messages from the folder and print in a loop
+//	      Message[] messageobjs = emailFolderObj.getMessages(); 
+//	      
+//	      
+//	      
+//	 
+//	      
+//	      
+//	      for (int i = 0, n = messageobjs.length; i < n; i++) {
+//	         Message javaMailMsg = messageobjs[i];
+//	         
+//	         MessageDTO msg = new MessageDTO();
+//	         
+//	         String temp = javaMailMsg.getFrom().toString();
+//	         
+//	         for(AccountDTO acc : MessageController.getAccounts()) {
+//	        	 if(javaMailMsg.getFrom().equals(acc.getUsername())) {
+//	        		 msg.setAccount(acc);
+//	        	 }
+//	         }
+//	         
+//	         msg.setId(Long.valueOf(hashCode()));
+//	         if(javaMailMsg.getDescription() != null) {
+//	        	 ArrayList<TagDTO> tempTags = new ArrayList<>();
+//		         
+//		         String tagsString = javaMailMsg.getDescription();
+//		         
+////		         System.out.println("1 " + tagsString.substring(0, tagsString.length()-1));
+//		         
+////		         String[] splitTagsString = tagsString.substring(0, tagsString.length()-1).split("|");
+//		         
+//		         String[] splitTagsString = tagsString.split("\\|");
+//		         
+//		         
+//		         for(String tagString : splitTagsString) {
+//		        	 System.out.println("2 " + tagString);
+//		        	 TagDTO tag = new TagDTO();
+//		        	 tag.setId(Long.valueOf(hashCode()));
+//		        	 tag.setName(tagString);
+//		        	 tempTags.add(tag);
+//		         }
+//		         msg.setTag(tempTags);
+//	         }
+//	         
+//	         
+//	         String wholeFrom = InternetAddress.toString(javaMailMsg.getFrom());
+//	         String realFrom = "";
+//	         try {
+//	        	 String[] splitFrom = wholeFrom.split(" ");
+//		         realFrom = splitFrom[2].substring(1, splitFrom[2].length()-1);
+//	         }catch(Exception ex) {
+//	        	 realFrom = wholeFrom;
+//	         }
+//	         
+//	         ContactDTO contactFrom = new ContactDTO();
+//	         contactFrom.setEmail(realFrom);
+//	         msg.setFrom(contactFrom);
+//	         if(javaMailMsg.getRecipients(Message.RecipientType.TO) != null) {
+//	         		String[] stringAdr = InternetAddress.toString(javaMailMsg.getRecipients(Message.RecipientType.TO)).split(", ");
+//	         		for(String str : stringAdr) {
+////	         			System.out.println(str);
+//	         			ContactDTO contactTo = new ContactDTO();
+//	         			contactTo.setEmail(str);
+//	         			msg.addTo(contactTo);
+//	         		}
+//	         }
+//	         if(javaMailMsg.getRecipients(Message.RecipientType.CC) != null) {
+//	         		String[] stringAdr = InternetAddress.toString(javaMailMsg.getRecipients(Message.RecipientType.CC)).split(", ");
+//	         		for(String str : stringAdr) {
+////	         			System.out.println(str);
+//	         			ContactDTO contactCc = new ContactDTO();
+//	         			contactCc.setEmail(str);
+//	         			msg.addCc(contactCc);
+//	         		}
+//	         }
+//	         if(javaMailMsg.getRecipients(Message.RecipientType.BCC) != null) {
+//	         		String[] stringAdr = InternetAddress.toString(javaMailMsg.getRecipients(Message.RecipientType.BCC)).split(", ");
+//	         		for(String str : stringAdr) {
+//	         			ContactDTO contactBcc = new ContactDTO();
+//	         			contactBcc.setEmail(str);
+//	         			msg.addBcc(contactBcc);
+//	         		}
+//	         }
+//	         String utcDate = MessageController.toUTC(javaMailMsg.getSentDate());
+//	         msg.setDateTime(utcDate);
+//	         msg.setSubject(javaMailMsg.getSubject());
+//	         
+//	         String realContent = "";
+//	         
+//	         Object obj = javaMailMsg.getContent();
+//
+//	         try {
+//	        	 Multipart mp = (Multipart) javaMailMsg.getContent();
+//		         
+//		         for(int j=0;i<mp.getCount();i++) {
+//		        	    BodyPart bodyPart = mp.getBodyPart(j);
+//		        	    if (bodyPart.isMimeType("text/*")) {
+//		        	    	realContent = (String) bodyPart.getContent();
+//		        	    }
+//		        	    
+//		        }
+//		         msg.setContent(realContent);
+//	         }catch(Exception ex) {
+//	        	 realContent = javaMailMsg.getContent().toString();
+//	         }
+//	         if(msg.getContent() == null) {
+//	        	 msg.setContent(javaMailMsg.getContent().toString());
+//	         }
+//	         
+//	         
+//	         boolean alreadyAdded = false;
+//	         for(MessageDTO messy : MessageController.getMessages()) {
+//	        	 if(msg.getSubject().equals(messy.getSubject()) && msg.getFrom().equals(messy.getFrom())) {
+//	        		 alreadyAdded = true;
+//	        	 }
+//	         }
+//	         
+////	         System.out.println(msg.getContent() + " from check");
+//	         
+//	         if(alreadyAdded == false) {
+//	        	 MessageController.addNewMessage(msg);
+//	         }
+//	         
+//	         
+//	         
+//	         
+//	         
+////	         System.out.println("My message: " + msg.getSubject() + ", " + realContent + ", " + msg.getDateTime() + ", " + msg.getFrom() + ", " + msg.getTo().get(0));
+//	 
+//	      }
+////	      emailFolderObj.close(true);
+////	      storeObj.close();
+//	      
+//	      if(emailFolderObj.isOpen()) {
+//	        	 emailFolderObj.close(true);
+//	         }
+//	         if(storeObj.isConnected()) {
+//	        	 storeObj.close();
+//	         }
+//	      //Now close all the objects
+//	      
+//	      } catch (NoSuchProviderException exp) {
+//	         exp.printStackTrace();
+//	      } catch (MessagingException exp) {
+//	         exp.printStackTrace();
+//	      } catch (Exception exp) {
+//	         exp.printStackTrace();
+//	      }
+//	      finally {
+//	    	  return null;
+
 //	      }
 ////	      emailFolderObj.close(true);
 ////	      storeObj.close();

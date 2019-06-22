@@ -133,3 +133,4 @@ public class TokenHelper {
     public String getAuthHeaderFromHeader(HttpServletRequest request) {
         return request.getHeader(AUTH_HEADER);
     }
+}
