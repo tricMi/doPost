@@ -21,10 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.postDo.entity.User;
 import com.example.postDo.security.AuthenticationRequest;
 import com.example.postDo.security.TokenHelper;
+import com.example.postDo.security.UserAuthenticationToken;
 
 @RestController
 @RequestMapping("/authenticate")
-public class AuthenticationController {
+public class AuthentificationController {
  
     @Autowired
     private AuthenticationManager authenticationManager;
