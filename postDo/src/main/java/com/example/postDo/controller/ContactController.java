@@ -69,10 +69,10 @@ public class ContactController {
 		Contact contact = new Contact();
 		
 		contact.setFirstName(contactDTO.getFirstName());
-		contact.setLastName(contact.getLastName());
-		contact.setEmail(contact.getEmail());
-		contact.setDisplay(contact.getDisplay());
-		contact.setPhoto(photoService.findOne(contact.getId()));
+		contact.setLastName(contactDTO.getLastName());
+		contact.setEmail(contactDTO.getEmail());
+		contact.setDisplay(contactDTO.getDisplay());
+		contact.setPhoto(photoService.findOne(contactDTO.getId()));
 	
 		contact = contactsService.save(contact);
 		return new ResponseEntity<ContactDTO>(new ContactDTO(contact), HttpStatus.CREATED);	
@@ -90,10 +90,11 @@ public class ContactController {
 		}
 		
 		contact.setFirstName(contactDTO.getFirstName());
-		contact.setLastName(contact.getLastName());
-		contact.setEmail(contact.getEmail());
-		contact.setDisplay(contact.getDisplay());
-		contact.setPhoto(photoService.findOne(contact.getId()));
+		contact.setLastName(contactDTO.getLastName());
+		contact.setEmail(contactDTO.getEmail());
+		contact.setFormat(contactDTO.getFormat());
+		contact.setDisplay(contactDTO.getDisplay());
+		contact.setPhoto(photoService.findOne(contactDTO.getId()));
 	
 		contact = contactsService.save(contact);
 		

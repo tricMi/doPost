@@ -28,23 +28,32 @@ public class Tag {
 	@Column(name = "tag_name", unique = false, nullable = false)
     private String name;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "tag")
-	private Set<Message> messages = new HashSet<Message>();
+//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "tag")
+//	private Set<Message> messages = new HashSet<Message>();
 	
 	@ManyToOne
-	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
+	@JoinColumn(name="tag_message", referencedColumnName="message_id", nullable=true)
 	private Message message;
 
-	public Tag(Long id, String name, Set<Message> messages) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.messages = messages;
-	}
+//	public Tag(Long id, String name, Set<Message> messages) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.messages = messages;
+//	}
+	
+	
 
 	public Tag() {
 		super();
 	}
+
+	public Tag(Long id, String name, Message message) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.message = message;
+}
 
 	public Long getId() {
 		return id;
@@ -62,13 +71,23 @@ public class Tag {
 		this.name = name;
 	}
 
-	public Set<Message> getMessages() {
-		return messages;
+	public Message getMessage() {
+		return message;
 	}
 
-	public void setMessages(Set<Message> messages) {
-		this.messages = messages;
+	public void setMessage(Message message) {
+		this.message = message;
 	}
+	
+	
+
+//	public Set<Message> getMessages() {
+//		return messages;
+//	}
+//
+//	public void setMessages(Set<Message> messages) {
+//		this.messages = messages;
+//	}
 
     
 }

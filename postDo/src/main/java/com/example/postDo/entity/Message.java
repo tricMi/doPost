@@ -39,6 +39,9 @@ public class Message implements Serializable {
 	@Column(name = "message_subject", unique = false, nullable = false)
     private String subject;
 	
+	@Column(name = "message_read", unique = false, nullable = false)
+    private boolean messageRead;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_account", referencedColumnName = "account_id")
 	private Account account;
@@ -52,9 +55,9 @@ public class Message implements Serializable {
 	@JoinColumn(name="contact_id", referencedColumnName="contact_id", nullable=true)
 	private Contact from;
 	
-	@ManyToOne
-	@JoinColumn(name="tag_id", referencedColumnName="tag_id", nullable=true)
-	private Tag tag;
+//	@ManyToOne
+//	@JoinColumn(name="tag_id", referencedColumnName="tag_id", nullable=true)
+//	private Tag tag;
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
 	private Set<Contact> to = new HashSet<Contact>();
@@ -72,23 +75,24 @@ public class Message implements Serializable {
     private Set<Attachment> attachments = new HashSet<Attachment>();
     
 
-
-	public Message(Long id, Contact from, Set<Contact> to, Set<Contact> cc, Set<Contact> bcc, String dateTime,
-			String subject, String content, Set<Tag> tags, Set<Attachment> attachments, Folder folder,
-			Account account) {
+	public Message(Long id, String content, String dateTime, String subject, boolean messageRead, Account account,
+			Folder folder, Contact from, Set<Contact> to, Set<Contact> cc, Set<Contact> bcc, Set<Tag> tags,
+			Set<Attachment> attachments) {
 		super();
 		this.id = id;
+		this.content = content;
+		this.dateTime = dateTime;
+		this.subject = subject;
+		this.messageRead = messageRead;
+		this.account = account;
+		this.folder = folder;
 		this.from = from;
+		
 		this.to = to;
 		this.cc = cc;
 		this.bcc = bcc;
-		this.dateTime = dateTime;
-		this.subject = subject;
-		this.content = content;
 		this.tags = tags;
 		this.attachments = attachments;
-		this.folder = folder;
-		this.account = account;
 	}
 
 	public Message() {
@@ -191,5 +195,22 @@ public class Message implements Serializable {
 		this.account = account;
 	}
 
+	public boolean isMessageRead() {
+		return messageRead;
+	}
+
+	public void setMessageRead(boolean messageRead) {
+		this.messageRead = messageRead;
+	}
+
+//	public Tag getTag() {
+//		return tag;
+//	}
+//
+//	public void setTag(Tag tag) {
+//		this.tag = tag;
+//	}
+
+	
     
 }

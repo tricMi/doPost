@@ -2,6 +2,7 @@ package com.example.postDo.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.postDo.entity.Message;
 import com.example.postDo.entity.Tag;
 
 public class TagDTO implements Serializable{
@@ -10,19 +11,41 @@ public class TagDTO implements Serializable{
 	
 	private Long id;
     private String name;
-    private ArrayList<MessageDTO> messages;
+    private MessageDTO message;
+  //  private ArrayList<MessageDTO> messages;
 
-    public TagDTO(Long id, String name, ArrayList<MessageDTO> messages) {
-        this.id = id;
-        this.name = name;
-        this.messages = messages;
+//    public TagDTO(Long id, String name, ArrayList<MessageDTO> messages) {
+//        this.id = id;
+//        this.name = name;
+//        this.messages = messages;
+//    }
+    
+    public TagDTO(Long id, String name, MessageDTO message) {
+    	super();
+    	this.id = id;
+    	this.name = name;
+    	this.message = message;
     }
     
+    
     public TagDTO(Tag tag) {
-    	this(tag.getId(), tag.getName(), new ArrayList<MessageDTO>());
+    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()));
     }
 
-    public TagDTO() {
+  
+    
+
+	public MessageDTO getMessage() {
+		return message;
+	}
+
+
+	public void setMessage(MessageDTO message) {
+		this.message = message;
+	}
+
+
+	public TagDTO() {
     	super();
     }
 
@@ -42,11 +65,11 @@ public class TagDTO implements Serializable{
         this.name = name;
     }
 
-    public ArrayList<MessageDTO> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(ArrayList<MessageDTO> messages) {
-        this.messages = messages;
-    }
+//    public ArrayList<MessageDTO> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(ArrayList<MessageDTO> messages) {
+//        this.messages = messages;
+//    }
 }

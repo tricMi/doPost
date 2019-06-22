@@ -63,8 +63,8 @@ public class FolderController {
 		
 		Folder folder = new Folder();
 		
-		folder.setName(folder.getName());
-		folder.setRule(ruleService.findOne(folder.getId()));
+		folder.setName(folderDTO.getName());
+		folder.setRule(ruleService.findOne(folderDTO.getId()));
 		
 		if(folderDTO.getParentFolder() != null && folderDTO.getParentFolder().getId() != null){
 			Folder parentFolder = folderService.findOne(folderDTO.getParentFolder().getId()); 
@@ -85,8 +85,8 @@ public class FolderController {
 			return new ResponseEntity<FolderDTO>(HttpStatus.BAD_REQUEST);
 		}	
 		
-		folder.setName(folder.getName());
-		folder.setRule(ruleService.findOne(folder.getId()));
+		folder.setName(folderDTO.getName());
+		folder.setRule(ruleService.findOne(folderDTO.getId()));
 		
 		if(folderDTO.getParentFolder() != null && folderDTO.getParentFolder().getId() != null){
 			Folder parentFolder = folderService.findOne(folderDTO.getParentFolder().getId()); 

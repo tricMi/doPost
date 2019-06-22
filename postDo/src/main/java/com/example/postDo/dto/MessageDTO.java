@@ -21,10 +21,11 @@ public class MessageDTO implements Serializable{
     private ArrayList<AttachmentDTO> attachments;
     private FolderDTO folder;
     private AccountDTO account;
+    private boolean messageRead = true;
 
 
     public MessageDTO(Long id, ContactDTO from, ArrayList<ContactDTO> to, ArrayList<ContactDTO> cc, ArrayList<ContactDTO> bcc, String dateTime, String subject, String content, ArrayList<TagDTO> tag,
-                   ArrayList<AttachmentDTO> attachments, FolderDTO folder, AccountDTO account) {
+                   ArrayList<AttachmentDTO> attachments, FolderDTO folder, AccountDTO account, boolean messageRead) {
         this.id = id;
         this.from = from;
         this.to = to;
@@ -37,12 +38,21 @@ public class MessageDTO implements Serializable{
         this.attachments = attachments;
         this.folder = folder;
         this.account = account;
+        this.messageRead = messageRead;
     }
 
-    public MessageDTO(Message message) {
+    public boolean isMessageRead() {
+		return messageRead;
+	}
+
+	public void setMessageRead(boolean messageRead) {
+		this.messageRead = messageRead;
+	}
+
+	public MessageDTO(Message message) {
     	this(message.getId(), new ContactDTO(message.getFrom()), new ArrayList<ContactDTO>(), new ArrayList<ContactDTO>(), new ArrayList<ContactDTO>()
     			,message.getDateTime(), message.getSubject(), message.getContent(), new ArrayList<TagDTO>(), new ArrayList<AttachmentDTO>(),
-    			new FolderDTO(message.getFolder()), new AccountDTO(message.getAccount()));
+    			new FolderDTO(message.getFolder()), new AccountDTO(message.getAccount()), message.isMessageRead());
     }
 
     public MessageDTO() {
