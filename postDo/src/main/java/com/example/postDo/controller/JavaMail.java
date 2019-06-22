@@ -37,7 +37,7 @@ public class JavaMail {
 	public Session emailSessionObj = null;
 	
 	
-	public CheckEmail() {
+	public JavaMail() {
 		
 		String hostval = "pop.gmail.com";
 	    String mailStrProt = "pop3";

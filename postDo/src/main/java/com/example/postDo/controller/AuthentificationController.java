@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.entity.User;
+import com.example.postDo.security.AuthenticationRequest;
 import com.example.postDo.security.TokenHelper;
 
 @RestController
