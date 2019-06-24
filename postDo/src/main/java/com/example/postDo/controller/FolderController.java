@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.FolderDTO;
+import com.example.postDo.dto.RuleDTO;
 import com.example.postDo.entity.Folder;
+import com.example.postDo.entity.Rule;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.RuleServiceInterface;
 
@@ -39,9 +41,16 @@ public class FolderController {
 		
 		List<FolderDTO> folderDTO = new ArrayList<FolderDTO>();
 		
+				
 		for(Folder f: folders) {
+//			List<Folder> subFolders = folderService.findByParent(f);
+//			if(f.getFolders() != null) {
+//				fo
+//			}
 			folderDTO.add(new FolderDTO(f));
+			
 		}
+		
 		
 		return new ResponseEntity<List<FolderDTO>>(folderDTO, HttpStatus.OK);
 	}
@@ -64,11 +73,11 @@ public class FolderController {
 		Folder folder = new Folder();
 		
 		folder.setName(folderDTO.getName());
-		folder.setRule(ruleService.findOne(folderDTO.getId()));
+		//folder.setRules(new ArrayList<RuleDTO>());
 		
-		if(folderDTO.getParentFolder() != null && folderDTO.getParentFolder().getId() != null){
-			Folder parentFolder = folderService.findOne(folderDTO.getParentFolder().getId()); 
-			folder.setFolder(parentFolder);
+		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
+			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
+			folder.setParent(parentFolder);
 		}
 	
 		folder = folderService.save(folder);
@@ -86,11 +95,11 @@ public class FolderController {
 		}	
 		
 		folder.setName(folderDTO.getName());
-		folder.setRule(ruleService.findOne(folderDTO.getId()));
+		//folder.setRules(ruleService.findOne(folderDTO.getId()));
 		
-		if(folderDTO.getParentFolder() != null && folderDTO.getParentFolder().getId() != null){
-			Folder parentFolder = folderService.findOne(folderDTO.getParentFolder().getId()); 
-			folder.setFolder(parentFolder);
+		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
+			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
+			folder.setParent(parentFolder);
 		}
 	
 		folder = folderService.save(folder);

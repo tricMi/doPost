@@ -2,12 +2,14 @@ package com.example.postDo.entity;
 
 import java.io.Serializable;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -27,14 +29,21 @@ public class Rule implements Serializable{
 	
 	@Column(name = "rule_operation", unique = false, nullable = false)
     private Operation operation;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "rule_folder", referencedColumnName = "folder_id", nullable = true)
+	private Folder folder;
 
-    public Rule(Long id, Condition condition, Operation operation) {
-        this.id = id;
-        this.condition = condition;
-        this.operation = operation;
-    }
 
-    public Rule(){
+    public Rule(Long id, Condition condition, Operation operation, Folder folder) {
+		super();
+		this.id = id;
+		this.condition = condition;
+		this.operation = operation;
+		this.folder = folder;
+	}
+
+	public Rule(){
 
     }
 
@@ -61,4 +70,18 @@ public class Rule implements Serializable{
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+    
+    
 }

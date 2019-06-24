@@ -36,25 +36,32 @@ public class Folder implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="subfolder_id", referencedColumnName="folder_id", nullable=true)
-	private Folder folder;
+	private Folder parent;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "parent")
 	private Set<Folder> folders = new HashSet<Folder>();
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
 	private Set<Message> messages = new HashSet<Message>();
     
+	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
+	private Set<Rule> rules = new HashSet<Rule>();
+	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "folder_rule", referencedColumnName = "rule_id")
-    private Rule rule;
+    @JoinColumn(name = "folder_account", referencedColumnName = "account_id")
+    private Account account;
 
-	public Folder(Long id, String name, Set<Folder> folders, Set<Message> messages, Rule rule) {
+	public Folder(Long id, String name, Folder folder, Set<Folder> folders, Set<Message> messages, Set<Rule> rules,
+			Account account) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.parent = folder;
 		this.folders = folders;
 		this.messages = messages;
-		this.rule = rule;
+		this.rules = rules;
+		this.account = account;
 	}
 
 	public Folder() {
@@ -93,20 +100,33 @@ public class Folder implements Serializable {
 		this.messages = messages;
 	}
 
-	public Rule getRule() {
-		return rule;
+
+	public Folder getParent() {
+		return parent;
 	}
 
-	public void setRule(Rule rule) {
-		this.rule = rule;
+	public void setParent(Folder parent) {
+		this.parent = parent;
 	}
 
-	public Folder getFolder() {
-		return folder;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setFolder(Folder folder) {
-		this.folder = folder;
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Set<Rule> getRules() {
+		return rules;
+	}
+
+	public void setRules(Set<Rule> rules) {
+		this.rules = rules;
 	}
 
 	

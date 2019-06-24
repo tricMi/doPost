@@ -60,10 +60,14 @@ public class Account implements Serializable {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "account")
 	private Set<Message> messages = new HashSet<Message>();
 
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "account")
+	private Set<Folder> folders = new HashSet<Folder>();
+	
+	
 
 	public Account(Long id, String smtp_address, Integer smtp_port, Short inserver_type, String inserver_address,
 			Integer inserver_port, String username, String password, String displayname, User user,
-			Set<Message> messages) {
+			Set<Message> messages, Set<Folder> folders) {
 		super();
 		this.id = id;
 		this.smtp_address = smtp_address;
@@ -76,6 +80,7 @@ public class Account implements Serializable {
 		this.displayname = displayname;
 		this.user = user;
 		this.messages = messages;
+		this.folders = folders;
 	}
 
 	public Account() {
@@ -174,6 +179,16 @@ public class Account implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Set<Folder> getFolders() {
+		return folders;
+	}
+
+	public void setFolders(Set<Folder> folders) {
+		this.folders = folders;
+	}
+	
+	
 
 	
     

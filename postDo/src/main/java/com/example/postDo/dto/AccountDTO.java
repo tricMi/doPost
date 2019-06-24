@@ -18,11 +18,15 @@ public class AccountDTO implements Serializable {
     private String username;
     private String password;
     private String displayname;
-    private ArrayList<MessageDTO> messages;
+    private ArrayList<MessageDTO> messages = new ArrayList<MessageDTO>();
+    private ArrayList<FolderDTO> folders = new ArrayList<FolderDTO>();
 
-    public AccountDTO(Long id, String smtp_address, Integer smtp_port, Short inserver_type, String inserver_address,
-			Integer inserver_port, String username, String password, String displayname,
-			ArrayList<MessageDTO> messages) {
+   
+    
+
+	public AccountDTO(Long id, String smtp_address, Integer smtp_port, Short inserver_type, String inserver_address,
+			Integer inserver_port, String username, String password, String displayname, ArrayList<MessageDTO> messages,
+			ArrayList<FolderDTO> folders) {
 		super();
 		this.id = id;
 		this.smtp_address = smtp_address;
@@ -34,8 +38,9 @@ public class AccountDTO implements Serializable {
 		this.password = password;
 		this.displayname = displayname;
 		this.messages = messages;
+		this.folders = folders;
 	}
-    
+
 
 	public AccountDTO() {
     	super();
@@ -43,7 +48,7 @@ public class AccountDTO implements Serializable {
 	
     
     public AccountDTO(Account account) {
-    	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>());
+    	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>(), new ArrayList<FolderDTO>());
     }
 
     public Long getId() {
@@ -139,6 +144,17 @@ public class AccountDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	public ArrayList<FolderDTO> getFolders() {
+		return folders;
+	}
+
+
+	public void setFolders(ArrayList<FolderDTO> folders) {
+		this.folders = folders;
+	}
     
+	
     
 }

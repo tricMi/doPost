@@ -12,31 +12,62 @@ public class FolderDTO implements Serializable{
 	
 	private Long id;
     private String name;
-    private FolderDTO parentFolder;
+    private FolderDTO parent;
+    private ArrayList<FolderDTO> folders;
     private ArrayList<MessageDTO> messages;
-    private RuleDTO rule;
-
-
-    public FolderDTO(Long id, String name, FolderDTO parentFolder, ArrayList<MessageDTO> messages, RuleDTO rule) {
+    private ArrayList<RuleDTO> rules = new ArrayList<RuleDTO>();
+    private AccountDTO account;	
+	
+	
+public FolderDTO(Long id, String name, FolderDTO parent, ArrayList<FolderDTO> folders,
+			ArrayList<MessageDTO> messages, ArrayList<RuleDTO> rules, AccountDTO account) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.parentFolder = parentFolder;
+		this.parent = parent;
+		this.folders = folders;
 		this.messages = messages;
-		this.rule = rule;
+		this.rules = rules;
+		this.account = account;
 	}
-
-    public FolderDTO(Folder folder){
-		this(folder.getId(), folder.getName(), (folder.getFolder() != null && folder.getFolder().getId() != null)?new FolderDTO(folder.getFolder()):new FolderDTO(), new ArrayList<MessageDTO>(), new RuleDTO(folder.getRule()));
+//	public FolderDTO(Long id, String name, FolderDTO parent, ArrayList<MessageDTO> messages,
+//			ArrayList<RuleDTO> rules, AccountDTO account) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.parent = parent;
+//		this.messages = messages;
+//		this.rules = rules;
+//		this.account = account;
+//	}
+	public FolderDTO(Folder folder){
+		this(folder.getId(), folder.getName(), (folder.getParent() != null && folder.getParent().getId() != null)?new FolderDTO(folder.getParent()):new FolderDTO(),
+				
+				new ArrayList<FolderDTO>(), new ArrayList<MessageDTO>(), new ArrayList<RuleDTO>(), new AccountDTO(folder.getAccount()));
 	}
 	public FolderDTO(){
     	super();
 
     }
+	
+	
 
-    public Long getId() {
+    public ArrayList<FolderDTO> getFolders() {
+		return folders;
+	}
+	public void setFolders(ArrayList<FolderDTO> folders) {
+		this.folders = folders;
+	}
+	public Long getId() {
         return id;
     }
+    
+    public ArrayList<RuleDTO> getRules() {
+		return rules;
+	}
+	public void setRules(ArrayList<RuleDTO> rules) {
+		this.rules = rules;
+	}
 
     public String getName() {
         return name;
@@ -59,24 +90,27 @@ public class FolderDTO implements Serializable{
     }
 
 
-	public FolderDTO getParentFolder() {
-		return parentFolder;
+	public FolderDTO getParent() {
+		return parent;
 	}
 
-	public void setParentFolder(FolderDTO parentFolder) {
-		this.parentFolder = parentFolder;
+	public void setParent(FolderDTO parentFolder) {
+		this.parent = parentFolder;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public RuleDTO getRule() {
-		return rule;
+	
+
+	public AccountDTO getAccount() {
+		return account;
 	}
 
-
-	public void setRule(RuleDTO rule) {
-		this.rule = rule;
+	public void setAccount(AccountDTO account) {
+		this.account = account;
 	}
+	
+	
 }

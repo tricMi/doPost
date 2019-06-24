@@ -15,22 +15,35 @@ public class RuleDTO implements Serializable {
 	private Long id;
     private Condition condition;
     private Operation operation;
+    private FolderDTO folder;
 
-    public RuleDTO(Long id, Condition condition, Operation operation) {
-        this.id = id;
-        this.condition = condition;
-        this.operation = operation;
-    }
+    public RuleDTO(Long id, Condition condition, Operation operation, FolderDTO folder) {
+		super();
+		this.id = id;
+		this.condition = condition;
+		this.operation = operation;
+		this.folder = folder;
+	}
 
-    public RuleDTO(Rule rule) {
-    	this(rule.getId(), rule.getCondition(), rule.getOperation());
+	public RuleDTO(Rule rule) {
+    	this(rule.getId(), rule.getCondition(), rule.getOperation(), new FolderDTO(rule.getFolder()));
     }
     
     public RuleDTO(){
     	super();
     }
+    
+    
 
-    public Long getId() {
+    public FolderDTO getFolder() {
+		return folder;
+	}
+
+	public void setFolder(FolderDTO folder) {
+		this.folder = folder;
+	}
+
+	public Long getId() {
         return id;
     }
 

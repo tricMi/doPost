@@ -8,5 +8,7 @@ import com.example.postDo.entity.Folder;
 
 public interface FolderRepository extends JpaRepository<Folder, Long>{
 
-//	List<Folder> findByParent(Folder parent);
+//	List<Folder> findAllByAccountAndParentFolderIsNull();
+
+	List<Folder> findByParent(Folder folder);
 }

@@ -14,12 +14,29 @@ public class UserDTO implements Serializable{
 	private String password;
 	private String firstname;
 	private String lastname;
+//	private boolean enabled = true;
+//	private ArrayList<AuthorityDTO> authorities = new ArrayList<>();
 	private ArrayList<AccountDTO> accounts = new ArrayList<>();
 	
 	public UserDTO() {}
 	
 	
 	
+//	public UserDTO(Long id, String username, String password, String firstname, String lastname, boolean enabled,
+//			ArrayList<AuthorityDTO> authorities, ArrayList<AccountDTO> accounts) {
+//		super();
+//		this.id = id;
+//		this.username = username;
+//		this.password = password;
+//		this.firstname = firstname;
+//		this.lastname = lastname;
+//		this.enabled = enabled;
+//		this.authorities = authorities;
+//		this.accounts = accounts;
+//	}
+
+
+
 	public UserDTO(Long id, String username, String password, String firstname, String lastname,
 			ArrayList<AccountDTO> accounts) {
 		super();
@@ -80,6 +97,30 @@ public class UserDTO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+
+//	public boolean isEnabled() {
+//		return enabled;
+//	}
+//
+//
+//
+//	public void setEnabled(boolean enabled) {
+//		this.enabled = enabled;
+//	}
+//
+//
+//
+//	public ArrayList<AuthorityDTO> getAuthorities() {
+//		return authorities;
+//	}
+//
+//
+//
+//	public void setAuthorities(ArrayList<AuthorityDTO> authorities) {
+//		this.authorities = authorities;
+//	}
 	
 	
 
