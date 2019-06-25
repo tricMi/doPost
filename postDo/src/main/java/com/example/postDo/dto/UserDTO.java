@@ -52,7 +52,10 @@ public class UserDTO implements Serializable{
 		this.accounts = accounts;
 	}
 
-
+	public void addAccount(AccountDTO acc) {
+		accounts.add(acc);
+	}
+	
 	public Long getId() {
 		return id;
 	}

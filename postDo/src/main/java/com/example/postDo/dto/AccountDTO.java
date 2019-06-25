@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.postDo.entity.Account;
+import com.example.postDo.entity.User;
 
 public class AccountDTO implements Serializable {
 	
@@ -20,13 +21,13 @@ public class AccountDTO implements Serializable {
     private String displayname;
     private ArrayList<MessageDTO> messages = new ArrayList<MessageDTO>();
     private ArrayList<FolderDTO> folders = new ArrayList<FolderDTO>();
-
+    private UserDTO user;
    
     
 
 	public AccountDTO(Long id, String smtp_address, Integer smtp_port, Short inserver_type, String inserver_address,
 			Integer inserver_port, String username, String password, String displayname, ArrayList<MessageDTO> messages,
-			ArrayList<FolderDTO> folders) {
+			ArrayList<FolderDTO> folders, UserDTO user) {
 		super();
 		this.id = id;
 		this.smtp_address = smtp_address;
@@ -39,6 +40,7 @@ public class AccountDTO implements Serializable {
 		this.displayname = displayname;
 		this.messages = messages;
 		this.folders = folders;
+		this.user = user;
 	}
 
 
@@ -48,7 +50,7 @@ public class AccountDTO implements Serializable {
 	
     
     public AccountDTO(Account account) {
-    	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>(), new ArrayList<FolderDTO>());
+    	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>(), new ArrayList<FolderDTO>(), new UserDTO(account.getUser()));
     }
 
     public Long getId() {
@@ -154,6 +156,17 @@ public class AccountDTO implements Serializable {
 	public void setFolders(ArrayList<FolderDTO> folders) {
 		this.folders = folders;
 	}
+
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+	
     
 	
     

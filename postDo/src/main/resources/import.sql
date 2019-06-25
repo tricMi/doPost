@@ -21,7 +21,7 @@ INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Recent 
 
 INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8080, 3, 'pop3', 3306, 'user', 'user', 'userWho', 1);
 INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8083, 7, 'pop3', 3307, 'u', 'u', 'tarzan', 2);
-INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8086, 2, 'pop3', 3308, 'macak', 'dzeri', 'dzeriTheMacak', 3);
+INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8086, 2, 'pop3', 3308, 'macak', 'dzeri', 'dzeriTheMacak', 1);
 INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8089, 3, 'pop3', 3309, 'vafl', 'dog', 'dogVafl', 3);
 
 
@@ -30,9 +30,9 @@ INSERT INTO attachments (attachment_data, attachment_type, attachment_name, atta
 INSERT INTO attachments (attachment_data, attachment_type, attachment_name, attachment_message) VALUES ('data3', 'base64', 'attachment3', 2);
 INSERT INTO attachments (attachment_data, attachment_type, attachment_name, attachment_message) VALUES ('data4', 'base64', 'attachment4', 3);
 
-INSERT INTO users(username, password, firstname,lastname) VALUES ('miki', 'm', 'miki', 'maus');
+INSERT INTO users(username, password, firstname,lastname) VALUES ('user', 'user', 'miki', 'maus');
 INSERT INTO users(username, password, firstname,lastname) VALUES ('aco', 'a', 'aco', 'budic');
-INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu@gmail.com', 'p', 'pikacu', 'pika');
+INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu', 'p', 'pikacu', 'pika');
 
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', 'date', 'Matematika 1', true, 1, 1, 1);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('More content', '2019-02-13 09:50:00', 'Osnove programiranja', false, 3, 2, 2);
