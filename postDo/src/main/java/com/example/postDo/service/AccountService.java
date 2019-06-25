@@ -32,9 +32,14 @@ public class AccountService implements AccountServiceInterface {
 
 	@Override
 	public void remove(Long id) {
+		System.out.println("Removing in Account service...");
 		accountRepository.deleteById(id);
-		
 	}
+	
+//	@Override
+//	public void remove(Account acc) {
+//		accountRepository.delete(acc);
+//	}
 	
 
 }

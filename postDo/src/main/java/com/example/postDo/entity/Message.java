@@ -42,11 +42,13 @@ public class Message implements Serializable {
 	@Column(name = "message_read", unique = false, nullable = false)
     private boolean messageRead;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn(name = "message_account", referencedColumnName = "account_id")
 	private Account account;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn(name = "message_folder", referencedColumnName = "folder_id")
 	private Folder folder;
 	  

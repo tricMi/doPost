@@ -21,12 +21,14 @@ import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.MessageServiceInterface;
+import com.example.postDo.service.UserService;
 import com.example.postDo.dto.AccountDTO;
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Folder;
 import com.example.postDo.entity.Message;
+import com.example.postDo.entity.User;
 
 
 @RestController
@@ -37,6 +39,15 @@ public class AccountController {
 	@Autowired
 	private AccountServiceInterface accountService;
 	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MessageServiceInterface messageService;
+	
+	@Autowired
+	private FolderServiceInterface folderService;
+	
 	
 	
 	@GetMapping
@@ -44,7 +55,7 @@ public class AccountController {
 		List<Account> accounts = accountService.findAll();
 		
 		
-		List<AccountDTO> accountDTO = new ArrayList<AccountDTO>();
+		List<AccountDTO> accountsDTO = new ArrayList<AccountDTO>();
 		
 		for(Account a: accounts) {
 			
@@ -52,10 +63,10 @@ public class AccountController {
 			
 			
 			
-			accountDTO.add(accDTO);
+			accountsDTO.add(accDTO);
 		}
 		
-		return new ResponseEntity<List<AccountDTO>>(accountDTO, HttpStatus.OK);
+		return new ResponseEntity<List<AccountDTO>>(accountsDTO, HttpStatus.OK);
 	}
 	
 
@@ -74,7 +85,7 @@ public class AccountController {
 	}
 	
 	@PostMapping(consumes="application/json")
-	public ResponseEntity<AccountDTO> saveAccount(@RequestBody AccountDTO accountDTO) {
+	public ResponseEntity<AccountDTO> addAccount(@RequestBody AccountDTO accountDTO) {
 		
 		Account account = new Account();
 		
@@ -94,7 +105,7 @@ public class AccountController {
 	
 	
 	@PutMapping(value="/{id}", consumes="application/json")
-	public ResponseEntity<AccountDTO> updateAccount(@RequestBody AccountDTO accountDTO, @PathVariable("id") Long id) {
+	public ResponseEntity<AccountDTO> editAccount(@RequestBody AccountDTO accountDTO, @PathVariable("id") Long id) {
 		
 		Account account = accountService.findOne(id); 
 		
@@ -105,11 +116,11 @@ public class AccountController {
 		account.setDisplayname(accountDTO.getPassword());
 		account.setUsername(accountDTO.getUsername());
 		account.setPassword(accountDTO.getPassword());
-		account.setInserver_address(accountDTO.getInserver_address());
-		account.setInserver_port(accountDTO.getInserver_port());
-		account.setInserver_type(accountDTO.getInserver_type());
-		account.setSmtp_address(accountDTO.getSmtp_address());
-		account.setSmtp_port(accountDTO.getSmtp_port());
+//		account.setInserver_address(accountDTO.getInserver_address());
+//		account.setInserver_port(accountDTO.getInserver_port());
+//		account.setInserver_type(accountDTO.getInserver_type());
+//		account.setSmtp_address(accountDTO.getSmtp_address());
+//		account.setSmtp_port(accountDTO.getSmtp_port());
 		
 		
 		account = accountService.save(account);
@@ -121,14 +132,44 @@ public class AccountController {
 	public ResponseEntity<Void> deleteAccount(@PathVariable("id") Long id) {
 		Account acc = accountService.findOne(id);
 		if (acc != null){
+			System.out.println("acc nije null");
+			List<User> users = userService.findAll();
+			List<Message> messages = messageService.findAll();
+			List<Folder> folders = folderService.findAll();
+			
+//			for(User user : users) {
+//				for(Account account : user.getAccounts()) {
+//					if(id == account.getId()) {
+//						user.getAccounts().remove(account);
+//					}
+//				}
+//			}
+//			for(Message msg : messages) {
+//				if(acc.getId() == msg.getAccount().getId()) {
+//					messages.remove(msg);
+//				}
+//			}
+			
+//			for(Folder fol : folders) {
+//				if(acc.getId() == fol.getAccount().getId()) {
+//					messages.remove(fol);
+//				}
+//			}
+			
+			System.out.println("Id je: " + id);
+			
 			accountService.remove(id);
+			System.out.println("removed");
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} 
 		else 
 		{		
+			System.out.println("Not found");
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 	
 	private Set<Folder> createInitialFolders(Account account) {
 		Set<Folder> folders = new HashSet<Folder>();

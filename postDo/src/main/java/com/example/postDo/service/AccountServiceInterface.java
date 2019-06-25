@@ -14,4 +14,6 @@ public interface AccountServiceInterface {
 	
 	void remove(Long id);
 	
+//	void remove(Account acc);
+	
 }
