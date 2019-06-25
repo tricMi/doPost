@@ -56,6 +56,10 @@ public class UserDTO implements Serializable{
 		accounts.add(acc);
 	}
 	
+	public void addContact(ContactDTO con) {
+		contacts.add(con);
+	}
+	
 	public Long getId() {
 		return id;
 	}

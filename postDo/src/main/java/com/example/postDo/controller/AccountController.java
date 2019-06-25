@@ -18,10 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.service.AccountServiceInterface;
-
+import com.example.postDo.service.ContactServiceInterface;
+import com.example.postDo.service.FolderServiceInterface;
+import com.example.postDo.service.MessageServiceInterface;
 import com.example.postDo.dto.AccountDTO;
+import com.example.postDo.dto.FolderDTO;
+import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Folder;
+import com.example.postDo.entity.Message;
 
 
 @RestController
@@ -32,14 +37,22 @@ public class AccountController {
 	@Autowired
 	private AccountServiceInterface accountService;
 	
+	
+	
 	@GetMapping
 	public ResponseEntity<List<AccountDTO>> getAccounts(){
 		List<Account> accounts = accountService.findAll();
 		
+		
 		List<AccountDTO> accountDTO = new ArrayList<AccountDTO>();
 		
 		for(Account a: accounts) {
-			accountDTO.add(new AccountDTO(a));
+			
+			AccountDTO accDTO = new AccountDTO(a);
+			
+			
+			
+			accountDTO.add(accDTO);
 		}
 		
 		return new ResponseEntity<List<AccountDTO>>(accountDTO, HttpStatus.OK);
@@ -50,6 +63,8 @@ public class AccountController {
 	public ResponseEntity<AccountDTO> getAccount(@PathVariable("id") Long id) {
 		
 		Account account = accountService.findOne(id);
+		
+		
 		
 		if(account == null){
 			return new ResponseEntity<AccountDTO>(HttpStatus.NOT_FOUND);
