@@ -42,7 +42,7 @@ INSERT INTO messages (message_content, message_date_time, message_subject, messa
 INSERT INTO tags (tag_name, tag_user) VALUES ('#urgent', 2);
 INSERT INTO tags (tag_name, tag_user) VALUES ('#important', 3);
 INSERT INTO tags (tag_name, tag_user) VALUES ('#reminder', 1);
-INSERT INTO tags (tag_name, tag_user) VALUES ('#dofast', 1);
+INSERT INTO tags (tag_name, tag_user) VALUES ('#dofast',1);
 
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_USER');
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_ADMIN');

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.ContactDTO;
 import com.example.postDo.entity.Contact;
+import com.example.postDo.entity.Photo;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.PhotoServiceInterface;
 
@@ -72,7 +73,9 @@ public class ContactController {
 		contact.setLastName(contactDTO.getLastName());
 		contact.setEmail(contactDTO.getEmail());
 		contact.setDisplay(contactDTO.getDisplay());
+	//	contact.setPhoto(photoService.findOne(2));
 		contact.setPhoto(photoService.findOne(contactDTO.getId()));
+		contact.setFormat(contactDTO.getFormat());
 	
 		contact = contactsService.save(contact);
 		return new ResponseEntity<ContactDTO>(new ContactDTO(contact), HttpStatus.CREATED);	

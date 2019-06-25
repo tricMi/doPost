@@ -47,7 +47,7 @@ public class Contact implements Serializable {
 	
 //	@Column(name = "contact_photo", unique = false, nullable = false)
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_photo", referencedColumnName = "photo_id")
+    @JoinColumn(name = "contact_photo", referencedColumnName = "photo_id", nullable = true)
     private Photo photo;
 	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "from")
@@ -70,8 +70,9 @@ public class Contact implements Serializable {
     @JoinColumn(name = "contact_user", referencedColumnName = "user_id")
     private User user;
 
+
 	public Contact(Long id, String firstName, String lastName, String display, String email, Format format, Photo photo,
-			Set<Message> from, Set<Message> to, Set<Message> cc, Set<Message> bcc,User user) {
+			Set<Message> from, Set<Message> to, Set<Message> cc, Set<Message> bcc, User user) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -84,7 +85,6 @@ public class Contact implements Serializable {
 		this.to = to;
 		this.cc = cc;
 		this.bcc = bcc;
-
 		this.user = user;
 	}
 

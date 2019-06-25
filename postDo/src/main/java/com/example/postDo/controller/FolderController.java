@@ -21,6 +21,7 @@ import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.RuleDTO;
 import com.example.postDo.entity.Folder;
 import com.example.postDo.entity.Rule;
+import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.RuleServiceInterface;
 
@@ -33,7 +34,9 @@ public class FolderController {
 	private FolderServiceInterface folderService;
 	
 	@Autowired
-	private RuleServiceInterface ruleService;
+	private AccountServiceInterface accountService;
+	
+	
 	
 	@GetMapping
 	public ResponseEntity<List<FolderDTO>> getFolders() {
@@ -85,6 +88,7 @@ public class FolderController {
 		Folder folder = new Folder();
 		
 		folder.setName(folderDTO.getName());
+		folder.setAccount(accountService.findOne(folderDTO.getId()));
 		//folder.setRules(new ArrayList<RuleDTO>());
 		
 		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
@@ -108,12 +112,11 @@ public class FolderController {
 		
 		folder.setName(folderDTO.getName());
 		//folder.setRules(ruleService.findOne(folderDTO.getId()));
-		folder.setParent(new Folder());
 		
-//		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
-//			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
-//			folder.setParent(parentFolder);
-//		}
+		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
+			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
+			folder.setParent(parentFolder);
+		}
 	
 		folder = folderService.save(folder);
 		return new ResponseEntity<FolderDTO>(new FolderDTO(folder), HttpStatus.OK);	

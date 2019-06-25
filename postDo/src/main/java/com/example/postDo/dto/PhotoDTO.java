@@ -12,7 +12,7 @@ public class PhotoDTO implements Serializable{
 	
 	private Long id;
     private String path;
-    private ContactDTO contact;
+  //  private ContactDTO contact;
 
     public PhotoDTO() {
     	super();
@@ -43,11 +43,11 @@ public class PhotoDTO implements Serializable{
         this.path = path;
     }
 
-    public ContactDTO getContact() {
-        return contact;
-    }
-
-    public void setContact(ContactDTO contact) {
-        this.contact = contact;
-    }
+//    public ContactDTO getContact() {
+//        return contact;
+//    }
+//
+//    public void setContact(ContactDTO contact) {
+//        this.contact = contact;
+//    }
 }
