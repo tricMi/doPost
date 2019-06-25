@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.AccountDTO;
 import com.example.postDo.dto.ContactDTO;
+import com.example.postDo.dto.FolderDTO;
+import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.dto.UserDTO;
 import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Contact;
+import com.example.postDo.entity.Folder;
+import com.example.postDo.entity.Message;
 import com.example.postDo.entity.User;
 import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
+import com.example.postDo.service.FolderServiceInterface;
+import com.example.postDo.service.MessageServiceInterface;
 import com.example.postDo.service.UserService;
 
 @RestController
@@ -33,11 +39,19 @@ public class UserController {
 	@Autowired
 	private ContactServiceInterface contactsService;
 	
+	@Autowired
+	private MessageServiceInterface messageService;
+	
+	@Autowired
+	private FolderServiceInterface folderService;
+	
 	@PostMapping(consumes="application/json", produces="application/json")
 	public ResponseEntity<UserDTO> doLogin(@RequestBody UserDTO tempUser) {
 		
 		List<Account> accounts = accountsService.findAll();
 		List<Contact> contacts = contactsService.findAll();
+		List<Message> messages = messageService.findAll();
+		List<Folder> folders = folderService.findAll();
 		
 		boolean pass = false;
 		
@@ -47,16 +61,30 @@ public class UserController {
 		
 		for(Account acc : accounts) {
 			if(userDTO.getId() == acc.getUser().getId()) {
-				userDTO.addAccount(new AccountDTO(acc));
+				
+				AccountDTO accDTO = new AccountDTO(acc);
+				
+				for(Folder fol : folders) {
+					if(fol.getAccount().getId() == accDTO.getId()) {
+						accDTO.addFolder(new FolderDTO(fol));
+					}
+				}
+				
+				for(Message msg : messages) {
+					System.out.println("Running messages...");
+					if(msg.getAccount().getId() == accDTO.getId()) {
+						accDTO.addMessage(new MessageDTO(msg));
+						System.out.println("Added " + new MessageDTO(msg).getContent());
+					}
+				}
+				
+				userDTO.addAccount(accDTO);
 			}
 		}
 		
 		for(Contact con : contacts) {
 			if(userDTO.getId() == con.getUser().getId()) {
 				userDTO.addContact(new ContactDTO(con));
-				for(ContactDTO conDTO : userDTO.getContacts()) {
-					System.out.println(conDTO.getEmail());
-				}
 			}
 		}
 		

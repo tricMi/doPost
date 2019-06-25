@@ -48,7 +48,14 @@ public class AccountDTO implements Serializable {
     	super();
     }
 	
+    public void addMessage(MessageDTO msg) {
+    	messages.add(msg);
+    }
     
+    public void addFolder(FolderDTO folder) {
+    	folders.add(folder);
+    }
+	
     public AccountDTO(Account account) {
     	this(account.getId(), account.getSmtp_address(), account.getSmtp_port(), account.getInserver_type(), account.getInserver_address(), account.getInserver_port(), account.getUsername(), account.getPassword(), account.getDisplayname(), new ArrayList<MessageDTO>(), new ArrayList<FolderDTO>(), new UserDTO(account.getUser()));
     }
