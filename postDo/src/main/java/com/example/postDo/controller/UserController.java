@@ -20,6 +20,7 @@ import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.UserService;
 
+
 @RestController
 @RequestMapping(value = "api/login")
 public class UserController {
@@ -66,6 +67,23 @@ public class UserController {
 		
 		
 			
+	}
+	
+	
+	@PostMapping(value="/register", consumes="application/json")
+	public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
+		
+		User u = new User();
+		
+		u.setUsername(userDTO.getUsername());
+		u.setFirstname(userDTO.getFirstname());
+		u.setLastname(userDTO.getLastname());
+		u.setPassword(userDTO.getPassword());
+		
+		System.out.println(u.getFirstname());
+		
+		u = userService.save(u);
+		return new ResponseEntity<UserDTO>(new UserDTO(u),HttpStatus.OK);
 	}
 	
 }
