@@ -16,7 +16,7 @@ import com.example.postDo.service.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 public class JavaMailApi {
-	 
+	 /*
     private final String TMP_PATH = Objects.requireNonNull(getClass()
             .getClassLoader()
             .getResource(""))
@@ -221,4 +221,5 @@ public class JavaMailApi {
             e.printStackTrace();
         }
     }
+    */
 }
