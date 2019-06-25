@@ -30,12 +30,14 @@ public class UserController {
 	@Autowired
 	private AccountServiceInterface accountsService;
 	
+	@Autowired
+	private ContactServiceInterface contactsService;
+	
 	@PostMapping(consumes="application/json", produces="application/json")
 	public ResponseEntity<UserDTO> doLogin(@RequestBody UserDTO tempUser) {
 		
-		System.out.println("called");
-		
 		List<Account> accounts = accountsService.findAll();
+		List<Contact> contacts = contactsService.findAll();
 		
 		boolean pass = false;
 		
@@ -45,10 +47,15 @@ public class UserController {
 		
 		for(Account acc : accounts) {
 			if(userDTO.getId() == acc.getUser().getId()) {
-				System.out.println("added");
 				userDTO.addAccount(new AccountDTO(acc));
-				for(AccountDTO accDTO : userDTO.getAccounts()) {
-					System.out.println(accDTO.getDisplayname());
+			}
+		}
+		
+		for(Contact con : contacts) {
+			if(userDTO.getId() == con.getUser().getId()) {
+				userDTO.addContact(new ContactDTO(con));
+				for(ContactDTO conDTO : userDTO.getContacts()) {
+					System.out.println(conDTO.getEmail());
 				}
 			}
 		}
