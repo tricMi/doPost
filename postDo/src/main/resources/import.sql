@@ -30,9 +30,9 @@ INSERT INTO attachments (attachment_data, attachment_type, attachment_name, atta
 INSERT INTO attachments (attachment_data, attachment_type, attachment_name, attachment_message) VALUES ('data3', 'base64', 'attachment3', 2);
 INSERT INTO attachments (attachment_data, attachment_type, attachment_name, attachment_message) VALUES ('data4', 'base64', 'attachment4', 3);
 
-INSERT INTO users(username, password, firstname,lastname) VALUES ('miki', 'm', 'miki', 'maus');
+INSERT INTO users(username, password, firstname,lastname) VALUES ('user', 'user', 'miki', 'maus');
 INSERT INTO users(username, password, firstname,lastname) VALUES ('aco', 'a', 'aco', 'budic');
-INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu@gmail.com', 'p', 'pikacu', 'pika');
+INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu', 'p', 'pikacu', 'pika');
 
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', 'date', 'Matematika 1', true, 1, 1, 1);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('More content', '2019-02-13 09:50:00', 'Osnove programiranja', false, 3, 2, 2);
