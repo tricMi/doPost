@@ -62,6 +62,11 @@ public class User implements Serializable {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Account> accounts = new HashSet<Account>();
 	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Contact> contacts = new HashSet<Contact>();
+	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Tag> tags = new HashSet<Tag>();
 	
 
 //	public User(Long id, String username, String password, String firstname, String lastname, boolean enabled,
@@ -76,17 +81,19 @@ public class User implements Serializable {
 //		this.authorities = authorities;
 //		this.accounts = accounts;
 //	}
+	
+	
 
-
-	public User(Long id, String username, String password, String firstname, String lastname, Set<Account> accounts) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.accounts = accounts;
-	}
+//
+//	public User(Long id, String username, String password, String firstname, String lastname, Set<Account> accounts) {
+//		super();
+//		this.id = id;
+//		this.username = username;
+//		this.password = password;
+//		this.firstname = firstname;
+//		this.lastname = lastname;
+//		this.accounts = accounts;
+//	}
 	
 //	<dependency>
 //	<groupId>org.springframework.boot</groupId>
@@ -95,6 +102,20 @@ public class User implements Serializable {
 	
 	public User() {
 		super();
+	}
+
+
+	public User(Long id, String username, String password, String firstname, String lastname, Set<Account> accounts,
+			Set<Contact> contacts, Set<Tag> tags) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.accounts = accounts;
+		this.contacts = contacts;
+		this.tags = tags;
 	}
 
 
@@ -149,6 +170,28 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
+
+
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+	
+	
 
 //	@Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

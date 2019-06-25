@@ -12,6 +12,7 @@ public class TagDTO implements Serializable{
 	private Long id;
     private String name;
     private MessageDTO message;
+    private UserDTO user;
   //  private ArrayList<MessageDTO> messages;
 
 //    public TagDTO(Long id, String name, ArrayList<MessageDTO> messages) {
@@ -20,20 +21,27 @@ public class TagDTO implements Serializable{
 //        this.messages = messages;
 //    }
     
-    public TagDTO(Long id, String name, MessageDTO message) {
-    	super();
-    	this.id = id;
-    	this.name = name;
-    	this.message = message;
-    }
+    
+	public TagDTO(Long id, String name, MessageDTO message, UserDTO user) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.message = message;
+	this.user = user;
+	}
     
     
     public TagDTO(Tag tag) {
-    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()));
+    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()), new UserDTO(tag.getUser()));
     }
 
   
     
+
+
+
+
+
 
 	public MessageDTO getMessage() {
 		return message;
@@ -64,6 +72,23 @@ public class TagDTO implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+    
+    
 
 //    public ArrayList<MessageDTO> getMessages() {
 //        return messages;

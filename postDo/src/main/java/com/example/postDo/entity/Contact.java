@@ -66,16 +66,12 @@ public class Contact implements Serializable {
 	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
 	private Message message;
 	
-	
-//	@ManyToOne
-//	  @JoinColumn(name="parent_cat_id", referencedColumnName="category_id", nullable=true)
-//	  private Category parent;
-//	  
-//	  @OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="parent")
-//	  private Set<Category> children = new HashSet<Category>();
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_user", referencedColumnName = "user_id")
+    private User user;
 
 	public Contact(Long id, String firstName, String lastName, String display, String email, Format format, Photo photo,
-			Set<Message> from, Set<Message> to, Set<Message> cc, Set<Message> bcc) {
+			Set<Message> from, Set<Message> to, Set<Message> cc, Set<Message> bcc,User user) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -88,6 +84,8 @@ public class Contact implements Serializable {
 		this.to = to;
 		this.cc = cc;
 		this.bcc = bcc;
+
+		this.user = user;
 	}
 
 	public Contact() {
@@ -181,6 +179,28 @@ public class Contact implements Serializable {
 	public void setBcc(Set<Message> bcc) {
 		this.bcc = bcc;
 	}
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 	
 //	 private Set<Product> products = new HashSet<Product>();

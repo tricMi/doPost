@@ -3,10 +3,10 @@ INSERT INTO photos(photo_path, photo_contact) VALUES ('mickeymouse.jpg', 2);
 INSERT INTO photos(photo_path, photo_contact) VALUES ('pikachu.jpg', 3);
 INSERT INTO photos(photo_path, photo_contact) VALUES ('spongebob.jpg', 4);
 
-INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Pera', 'Peric', 'pex', 'pexpex@gmail.com', 0, 1);
-INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Djura', 'Dobric', 'djux', 'djux@gmail.com', 1, 2);
-INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Srdjan', 'Nikolic', 'srki123', 'srki123@gmail.com', 1, 3);
-INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo) VALUES ('Milos', 'Dostojic', 'knjaz223', 'knjaz223@gmail.com', 0, 4);
+INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Pera', 'Peric', 'pex', 'pexpex@gmail.com', 0, 1, 1);
+INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Djura', 'Dobric', 'djux', 'djux@gmail.com', 1, 2, 1);
+INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Srdjan', 'Nikolic', 'srki123', 'srki123@gmail.com', 1, 3, 2);
+INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Milos', 'Dostojic', 'knjaz223', 'knjaz223@gmail.com', 0, 4, 3);
 
 
 INSERT INTO rules (rule_condition, rule_operation, rule_folder) VALUES (1, 0, 3);
@@ -39,10 +39,10 @@ INSERT INTO messages (message_content, message_date_time, message_subject, messa
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Stuffs...', '2019-02-13 09:50:00', 'Sistemski softver', false, 2, 3, 2);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read,  message_account, message_folder, contact_id) VALUES ('Some more content', '2019-02-13 09:50:00', 'Matematika 2', true, 4, 4, 3);
 
-INSERT INTO tags (tag_name) VALUES ('#urgent');
-INSERT INTO tags (tag_name) VALUES ('#important');
-INSERT INTO tags (tag_name) VALUES ('#reminder');
-INSERT INTO tags (tag_name) VALUES ('#dofast');
+INSERT INTO tags (tag_name, tag_user) VALUES ('#urgent', 2);
+INSERT INTO tags (tag_name, tag_user) VALUES ('#important', 3);
+INSERT INTO tags (tag_name, tag_user) VALUES ('#reminder', 1);
+INSERT INTO tags (tag_name, tag_user) VALUES ('#dofast', 1);
 
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_USER');
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_ADMIN');

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.postDo.entity.Folder;
+import com.example.postDo.entity.Message;
+import com.example.postDo.entity.Rule;
 
 
 public class FolderDTO implements Serializable{
@@ -41,10 +43,52 @@ public FolderDTO(Long id, String name, FolderDTO parent, ArrayList<FolderDTO> fo
 //		this.account = account;
 //	}
 	public FolderDTO(Folder folder){
+//		super();
+//		this.id = folder.getId();
+//		this.name = folder.getName();
+//		
+//		Folder parentFolder = folder.getParent();
+//    	if (parentFolder != null) {
+//    		this.parent = new FolderDTO();
+//        	this.parent.setId(parentFolder.getId());
+//        	this.parent.setName(parentFolder.getName());
+//        	this.parent.setRules(new ArrayList<RuleDTO>());
+//        	this.parent.setFolders(new ArrayList<FolderDTO>());
+//    	}
+//    	
+//    	if(folders != null ) {
+//    	for (Folder subFolder : folder.getFolders()) {
+//    		FolderDTO subFolderDTO = new FolderDTO();
+//    		subFolderDTO.setId(subFolder.getId());
+//    		subFolderDTO.setName(subFolder.getName());
+//    		subFolderDTO.setRules(new ArrayList<RuleDTO>());
+//    		subFolderDTO.setFolders(new ArrayList<FolderDTO>());
+//    		folders.add(subFolderDTO);
+//    	}
+//    	}else {
+//    		this.folders.add(parent);
+//    	}
+//    	
+//    	if(rules != null) {
+//    	
+//    	for (Rule rule : folder.getRules()) {
+//    		rules.add(new RuleDTO(rule));
+//    	}
+//    	}else {
+//    		this.rules.add(new RuleDTO());
+//    	}
+//    	
+//    	if(messages != null) {
+//    	for (Message message : folder.getMessages()) {
+//    		messages.add(new MessageDTO(message));
+//    	}
+//    	}
 		this(folder.getId(), folder.getName(), (folder.getParent() != null && folder.getParent().getId() != null)?new FolderDTO(folder.getParent()):new FolderDTO(),
 				
 				new ArrayList<FolderDTO>(), new ArrayList<MessageDTO>(), new ArrayList<RuleDTO>(), new AccountDTO(folder.getAccount()));
 	}
+	
+	
 	public FolderDTO(){
     	super();
 

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -31,9 +32,15 @@ public class Tag {
 //	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "tag")
 //	private Set<Message> messages = new HashSet<Message>();
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TAG_user", referencedColumnName = "user_id")
+    private User user;
+	
 	@ManyToOne
 	@JoinColumn(name="tag_message", referencedColumnName="message_id", nullable=true)
 	private Message message;
+	
+	
 
 //	public Tag(Long id, String name, Set<Message> messages) {
 //		super();
@@ -48,12 +55,17 @@ public class Tag {
 		super();
 	}
 
-	public Tag(Long id, String name, Message message) {
+	
+
+	public Tag(Long id, String name, User user, Message message) {
 	super();
 	this.id = id;
 	this.name = name;
+	this.user = user;
 	this.message = message;
 }
+
+
 
 	public Long getId() {
 		return id;
@@ -78,6 +90,19 @@ public class Tag {
 	public void setMessage(Message message) {
 		this.message = message;
 	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	
 

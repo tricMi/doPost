@@ -1,8 +1,9 @@
 package com.example.postDo.controller;
 
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,10 +44,21 @@ public class FolderController {
 		
 				
 		for(Folder f: folders) {
-//			List<Folder> subFolders = folderService.findByParent(f);
-//			if(f.getFolders() != null) {
-//				fo
+			List<Folder> subFolders = folderService.findByParent(f);
+			for (Folder f1 : subFolders) {
+				f.getFolders().add(f1);
+				for(Folder f2: f.getFolders()) {
+					System.out.println(f2.getName());
+					System.out.println(f.getName());
+				}
+				
+			}
+			System.out.println(f.getName());
+			
+//			if(f.getParent() != null) {
+//				f.getFolders().add(f.getParent());
 //			}
+			
 			folderDTO.add(new FolderDTO(f));
 			
 		}
@@ -96,11 +108,12 @@ public class FolderController {
 		
 		folder.setName(folderDTO.getName());
 		//folder.setRules(ruleService.findOne(folderDTO.getId()));
+		folder.setParent(new Folder());
 		
-		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
-			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
-			folder.setParent(parentFolder);
-		}
+//		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
+//			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
+//			folder.setParent(parentFolder);
+//		}
 	
 		folder = folderService.save(folder);
 		return new ResponseEntity<FolderDTO>(new FolderDTO(folder), HttpStatus.OK);	

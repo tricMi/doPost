@@ -17,28 +17,13 @@ public class UserDTO implements Serializable{
 //	private boolean enabled = true;
 //	private ArrayList<AuthorityDTO> authorities = new ArrayList<>();
 	private ArrayList<AccountDTO> accounts = new ArrayList<>();
+	private ArrayList<ContactDTO> contacts = new ArrayList<>();
+	private ArrayList<TagDTO> tags = new ArrayList<>();
 	
 	public UserDTO() {}
-	
-	
-	
-//	public UserDTO(Long id, String username, String password, String firstname, String lastname, boolean enabled,
-//			ArrayList<AuthorityDTO> authorities, ArrayList<AccountDTO> accounts) {
-//		super();
-//		this.id = id;
-//		this.username = username;
-//		this.password = password;
-//		this.firstname = firstname;
-//		this.lastname = lastname;
-//		this.enabled = enabled;
-//		this.authorities = authorities;
-//		this.accounts = accounts;
-//	}
-
-
 
 	public UserDTO(Long id, String username, String password, String firstname, String lastname,
-			ArrayList<AccountDTO> accounts) {
+			ArrayList<AccountDTO> accounts, ArrayList<ContactDTO> contacts, ArrayList<TagDTO> tags) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -46,12 +31,16 @@ public class UserDTO implements Serializable{
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.accounts = accounts;
+		this.contacts = contacts;
+		this.tags = tags;
 	}
 
 
 
+
+
 	public UserDTO(User user) {
-		this(user.getId(), user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), new ArrayList<AccountDTO>());
+		this(user.getId(), user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), new ArrayList<AccountDTO>(), new ArrayList<ContactDTO>(), new ArrayList<TagDTO>());
 	}
 	
 	
@@ -98,6 +87,23 @@ public class UserDTO implements Serializable{
 		return serialVersionUID;
 	}
 
+	public ArrayList<ContactDTO> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(ArrayList<ContactDTO> contacts) {
+		this.contacts = contacts;
+	}
+
+	public ArrayList<TagDTO> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<TagDTO> tags) {
+		this.tags = tags;
+	}
+
+	
 
 
 //	public boolean isEnabled() {

@@ -18,35 +18,39 @@ public class ContactDTO implements Serializable{
     private String email;
     private Format format;
     private PhotoDTO photo;
+    private UserDTO user;
     private ArrayList<MessageDTO> from;
     private ArrayList<MessageDTO> to;
     private ArrayList<MessageDTO> cc;
     private ArrayList<MessageDTO> bcc;
-
-
-    public ContactDTO(Long id, String firstName, String lastName, String display, String email, Format format, PhotoDTO photo, ArrayList<MessageDTO> from, ArrayList<MessageDTO> to, ArrayList<MessageDTO> cc, ArrayList<MessageDTO> bcc) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.display = display;
-        this.email = email;
-        this.format = format;
-        this.photo = photo;
-        this.from = from;
-        this.to = to;
-        this.cc = cc;
-        this.bcc = bcc;
-    }
-    
     
 
-    public ContactDTO() {
+    public ContactDTO(Long id, String firstName, String lastName, String display, String email, Format format,
+			PhotoDTO photo, UserDTO user, ArrayList<MessageDTO> from, ArrayList<MessageDTO> to,
+			ArrayList<MessageDTO> cc, ArrayList<MessageDTO> bcc) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.display = display;
+		this.email = email;
+		this.format = format;
+		this.photo = photo;
+		this.user = user;
+		this.from = from;
+		this.to = to;
+		this.cc = cc;
+		this.bcc = bcc;
+	}
+
+
+	public ContactDTO() {
 		super();
 	}
 
 
     public ContactDTO(Contact contact) {
-    	this(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getDisplay(), contact.getEmail(), contact.getFormat(), new PhotoDTO(contact.getPhoto()), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>());
+    	this(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getDisplay(), contact.getEmail(), contact.getFormat(), new PhotoDTO(contact.getPhoto()), new UserDTO(contact.getUser()), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>());
     }
 
 	public ContactDTO(String firstName){
@@ -142,4 +146,21 @@ public class ContactDTO implements Serializable{
     public void setBcc(ArrayList<MessageDTO> bcc) {
         this.bcc = bcc;
     }
+
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+    
+    
 }
