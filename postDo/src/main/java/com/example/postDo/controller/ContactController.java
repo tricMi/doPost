@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.postDo.dto.ContactDTO;
+import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Contact;
 import com.example.postDo.entity.Photo;
+import com.example.postDo.entity.User;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.PhotoServiceInterface;
+import com.example.postDo.service.UserService;
 
 
 @RestController
@@ -34,6 +37,8 @@ public class ContactController {
 	@Autowired
 	private PhotoServiceInterface photoService;
 	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping
 	public ResponseEntity<List<ContactDTO>> getContacts() {
@@ -107,8 +112,19 @@ public class ContactController {
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> deleteContact(@PathVariable("id") Long id) {
+		
 		Contact contact = contactsService.findOne(id);
 		if (contact != null){
+//			List<User> users= userService.findAll();
+//			
+//			for(User user : users) {
+//				for(Contact con: user.getContacts()) {
+//					if(con.getId() == id) {
+//						user.getContacts().remove(con);
+//					}
+//				}
+//			}
+			
 			contactsService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} 

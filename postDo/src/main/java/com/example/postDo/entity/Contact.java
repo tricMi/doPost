@@ -66,7 +66,7 @@ public class Contact implements Serializable {
 	@JoinColumn(name="message_id", referencedColumnName="message_id", nullable=true)
 	private Message message;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
     @JoinColumn(name = "contact_user", referencedColumnName = "user_id")
     private User user;
 

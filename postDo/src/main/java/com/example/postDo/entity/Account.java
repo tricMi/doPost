@@ -53,7 +53,7 @@ public class Account implements Serializable {
 	@Column(name = "acc_displayname", unique = false, nullable = false)
     private String displayname;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
     @JoinColumn(name = "acc_user", referencedColumnName = "user_id")
     private User user;
     

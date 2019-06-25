@@ -1,10 +1,12 @@
 package com.example.postDo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,49 @@ public class UserController {
 	@Autowired
 	private FolderServiceInterface folderService;
 	
+	@GetMapping
+	public ResponseEntity<List<UserDTO>> getUsers(){
+		List<User> users = userService.findAll();
+		List<Contact> contacts = contactsService.findAll();
+		List<Message> messages = messageService.findAll();
+		List<Folder> folders = folderService.findAll();
+		List<Account> accounts = accountsService.findAll();
+		
+		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		
+		for(User u: users) {
+			
+			UserDTO userDTO = new UserDTO(u);
+			
+			for(Account acc : accounts) {
+				if(userDTO.getId() == acc.getUser().getId()) {
+					AccountDTO accDTO = new AccountDTO(acc);
+					for(Folder fol : folders) {
+						if(fol.getAccount().getId() == accDTO.getId()) {
+							accDTO.addFolder(new FolderDTO(fol));
+						}
+					}
+					for(Message msg : messages) {
+						if(msg.getAccount().getId() == accDTO.getId()) {
+							accDTO.addMessage(new MessageDTO(msg));
+						}
+					}
+					userDTO.addAccount(accDTO);
+				}
+			}
+			
+			for(Contact con : contacts) {
+				if(userDTO.getId() == con.getUser().getId()) {
+					userDTO.addContact(new ContactDTO(con));
+				}
+			}
+			
+			usersDTO.add(userDTO);
+		}
+		
+		return new ResponseEntity<List<UserDTO>>(usersDTO, HttpStatus.OK);
+	}
+	
 	@PostMapping(consumes="application/json", produces="application/json")
 	public ResponseEntity<UserDTO> doLogin(@RequestBody UserDTO tempUser) {
 		
@@ -59,28 +104,33 @@ public class UserController {
 		
 		UserDTO userDTO = new UserDTO(user);
 		
-		for(Account acc : accounts) {
-			if(userDTO.getId() == acc.getUser().getId()) {
+		try {
+			for(Account acc : accounts) {
 				
-				AccountDTO accDTO = new AccountDTO(acc);
-				
-				for(Folder fol : folders) {
-					if(fol.getAccount().getId() == accDTO.getId()) {
-						accDTO.addFolder(new FolderDTO(fol));
+				if(userDTO.getId() == acc.getUser().getId()) {
+					
+					AccountDTO accDTO = new AccountDTO(acc);
+					
+					for(Folder fol : folders) {
+						if(fol.getAccount().getId() == accDTO.getId()) {
+							accDTO.addFolder(new FolderDTO(fol));
+						}
 					}
-				}
-				
-				for(Message msg : messages) {
-					System.out.println("Running messages...");
-					if(msg.getAccount().getId() == accDTO.getId()) {
-						accDTO.addMessage(new MessageDTO(msg));
-						System.out.println("Added " + new MessageDTO(msg).getContent());
+					
+					for(Message msg : messages) {
+						if(msg.getAccount().getId() == accDTO.getId()) {
+							accDTO.addMessage(new MessageDTO(msg));
+						}
 					}
+					
+					userDTO.addAccount(accDTO);
 				}
-				
-				userDTO.addAccount(accDTO);
+			
 			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 		
 		for(Contact con : contacts) {
 			if(userDTO.getId() == con.getUser().getId()) {
