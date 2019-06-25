@@ -27,6 +27,7 @@ import com.example.postDo.service.MessageServiceInterface;
 import com.example.postDo.service.UserService;
 
 
+
 @RestController
 @RequestMapping(value = "api/login")
 public class UserController {
@@ -107,6 +108,16 @@ public class UserController {
 	
 	@PostMapping(value="/register", consumes="application/json")
 	public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
+		
+		if(userDTO.getFirstname().equals("")) {
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+		}else if(userDTO.getLastname().equals("")) {
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+		}else if(userDTO.getUsername().equals("")) {
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+		}else if(userDTO.getPassword().equals("")) {
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+		}
 		
 		User u = new User();
 		

@@ -34,10 +34,10 @@ INSERT INTO users(username, password, firstname,lastname) VALUES ('user', 'user'
 INSERT INTO users(username, password, firstname,lastname) VALUES ('aco', 'a', 'aco', 'budic');
 INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu', 'p', 'pikacu', 'pika');
 
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', 'date', 'Matematika 1', true, 1, 1, 1);
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('More content', '2019-02-13 09:50:00', 'Osnove programiranja', false, 3, 2, 2);
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Stuffs...', '2019-02-13 09:50:00', 'Sistemski softver', false, 2, 3, 2);
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read,  message_account, message_folder, contact_id) VALUES ('Some more content', '2019-02-13 09:50:00', 'Matematika 2', true, 4, 4, 3);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', '2019-02-06 22:50:00', 'Matematika 1', true, 1, 1, 1);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('More content', '2019-02-13 13:00:00', 'Osnove programiranja', false, 3, 2, 2);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Stuffs...', '2019-12-23 08:50:00', 'Sistemski softver', false, 2, 3, 2);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read,  message_account, message_folder, contact_id) VALUES ('Some more content', '2019-06-33 09:50:00', 'Matematika 2', true, 4, 4, 3);
 
 INSERT INTO tags (tag_name, tag_user) VALUES ('#urgent', 2);
 INSERT INTO tags (tag_name, tag_user) VALUES ('#important', 3);
