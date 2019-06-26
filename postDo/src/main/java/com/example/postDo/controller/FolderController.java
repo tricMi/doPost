@@ -88,7 +88,7 @@ public class FolderController {
 		Folder folder = new Folder();
 		
 		folder.setName(folderDTO.getName());
-		folder.setAccount(accountService.findOne(folderDTO.getId()));
+		folder.setAccount(accountService.findOne(folderDTO.getAccount().getId()));
 		//folder.setRules(new ArrayList<RuleDTO>());
 		
 		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
@@ -109,7 +109,7 @@ public class FolderController {
 		if (folder == null) {
 			return new ResponseEntity<FolderDTO>(HttpStatus.BAD_REQUEST);
 		}	
-		
+		folder.setAccount(accountService.findOne(folderDTO.getAccount().getId()));
 		folder.setName(folderDTO.getName());
 		
 		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
