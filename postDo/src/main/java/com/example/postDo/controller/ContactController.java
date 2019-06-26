@@ -2,6 +2,7 @@ package com.example.postDo.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.postDo.dto.ContactDTO;
-import com.example.postDo.entity.Account;
+import com.example.postDo.dto.PhotoDTO;
 import com.example.postDo.entity.Contact;
-import com.example.postDo.entity.Photo;
-import com.example.postDo.entity.User;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.PhotoServiceInterface;
 import com.example.postDo.service.UserService;
@@ -71,16 +70,16 @@ public class ContactController {
 	
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<ContactDTO> saveContact(@RequestBody ContactDTO contactDTO) {
-		
+		System.out.println("tralalala");
 		Contact contact = new Contact();
 		
 		contact.setFirstName(contactDTO.getFirstName());
 		contact.setLastName(contactDTO.getLastName());
 		contact.setEmail(contactDTO.getEmail());
 		contact.setDisplay(contactDTO.getDisplay());
-	//	contact.setPhoto(photoService.findOne(2));
-		contact.setPhoto(photoService.findOne(contactDTO.getId()));
+		contact.setPhoto(photoService.findOne(contactDTO.getPhoto().getId()));
 		contact.setFormat(contactDTO.getFormat());
+		contact.setUser(userService.findById(contactDTO.getUser().getId()));
 	
 		contact = contactsService.save(contact);
 		return new ResponseEntity<ContactDTO>(new ContactDTO(contact), HttpStatus.CREATED);	
@@ -103,6 +102,7 @@ public class ContactController {
 		contact.setFormat(contactDTO.getFormat());
 		contact.setDisplay(contactDTO.getDisplay());
 		contact.setPhoto(photoService.findOne(contactDTO.getPhoto().getId()));
+		contact.setUser(userService.findById(contactDTO.getUser().getId()));
 	
 		contact = contactsService.save(contact);
 		

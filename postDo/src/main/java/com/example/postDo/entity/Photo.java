@@ -29,18 +29,12 @@ public class Photo implements Serializable{
 	@Column(name = "photo_path", unique = false, nullable = false)
     private String path;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "photo_contact", referencedColumnName = "contact_id")
-    private Contact contact;
+	
 
     public Photo() {
     }
 
-    public Photo(Long id, String path, Contact contact) {
-        this.id = id;
-        this.path = path;
-        this.contact = contact;
-    }
+   
 
     public Photo(Long id, String path) {
         this.id = id;
@@ -63,11 +57,5 @@ public class Photo implements Serializable{
         this.path = path;
     }
 
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
+   
 }
