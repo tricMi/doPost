@@ -45,6 +45,7 @@ public class UserController {
 	@Autowired
 	private AccountServiceInterface accountsService;
 	
+	
 	@Autowired
 	private ContactServiceInterface contactsService;
 	
@@ -53,6 +54,11 @@ public class UserController {
 	
 	@Autowired
 	private FolderServiceInterface folderService;
+	
+//	public List<Account> getAccounts(){
+//		List<Account> allAccounts = accountsService.findAll();
+//		return allAccounts;
+//	}
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> getUsers(){
@@ -165,9 +171,12 @@ public class UserController {
 		
 		
 		for(Contact con : contacts) {
-			if(userDTO.getId() == con.getUser().getId()) {
-				userDTO.addContact(new ContactDTO(con));
+			if(con.getUser() != null) {
+				if(userDTO.getId() == con.getUser().getId()) {
+					userDTO.addContact(new ContactDTO(con));
+				}
 			}
+			
 		}
 		
 		if(user.getPassword().equals(tempUser.getPassword())) {

@@ -1,3 +1,4 @@
+/*
 package com.example.postDo.controller;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import com.example.postDo.service.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 public class JavaMailApi {
-	 /*
+	 
     private final String TMP_PATH = Objects.requireNonNull(getClass()
             .getClassLoader()
             .getResource(""))
@@ -118,7 +119,7 @@ public class JavaMailApi {
  
             for (Attachment attachment : message.getAttachments()) {
                 MimeBodyPart mbp2 = new MimeBodyPart();
-                mbp2.setContent(attachment.getBase64(), "image/*");
+//                mbp2.setContent(attachment.getBase64(), "image/*");
                 mbp2.setFileName(attachment.getName());
                 mp.addBodyPart(mbp2);
             }
@@ -158,24 +159,24 @@ public class JavaMailApi {
             Folder emailFolder = store.getFolder("inbox");
             emailFolder.open(Folder.READ_ONLY);
             javax.mail.Message[] messages = emailFolder.getMessages();
-            Date lastDate = messageService.findLastDate();
+//            Date lastDate = messageService.findLastDate();
  
             for (javax.mail.Message message : messages) {
-                if (message.getSentDate().after(lastDate)) {
+//                if (message.getSentDate().after(lastDate)) {
                     Message temp = new Message();
-                    Contact tempContact = new Contact(message.getFrom()[0].toString());
-                    tempContact = contactService.save(tempContact);
-                    temp.setFrom(tempContact);
-                    Set<Contact> tempContatsSet = Helper.fromAddressestoContacts(message.getReplyTo());
+//                    Contact tempContact = new Contact(message.getFrom()[0].toString());
+//                    tempContact = contactService.save(tempContact);
+//                    temp.setFrom(tempContact);
+//                    Set<Contact> tempContatsSet = Helper.fromAddressestoContacts(message.getReplyTo());
                     Set<Contact> tempContacts = new HashSet<>();
-                    for (Contact c : tempContatsSet
-                    ) {
-                        tempContacts.add(contactService.save(c));
+//                    for (Contact c : tempContatsSet)
+                     {
+//                        tempContacts.add(contactService.save(c));
                     }
                     temp.setTo(tempContacts);
                     temp.setCc(new HashSet<>());
                     temp.setBcc(new HashSet<>());
-                    temp.setDateTime(message.getSentDate());
+//                    temp.setDateTime(message.getSentDate());
                     temp.setSubject(message.getSubject());
                     temp.setAttachments(new HashSet<>());
                     String result = "";
@@ -196,7 +197,7 @@ public class JavaMailApi {
                                 String sFile = Base64.encodeBase64String(bFile);
                                 Attachment attachment = new Attachment();
                                 attachment.setName(fileName);
-                                attachment.setBase64(sFile);
+//                                attachment.setBase64(sFile);
                                 attachment.setMessage(temp);
                                 attachment.setType("image/*");
                                 System.out.println(attachment.getName());
@@ -209,17 +210,18 @@ public class JavaMailApi {
                     }
                     temp.setContent(result);
                     temp.setTags(new HashSet<>());
-                    temp.setFolder(folderService.findOne(2));
+//                    temp.setFolder(folderService.findOne(2));
                     temp.setAccount(account);
-                    temp.setRead(false);
+//                    temp.setRead(false);
                     messageService.save(temp);
                 }
-            }
-            emailFolder.close(false);
-            store.close();
+//            }
+//            emailFolder.close(false);
+//            store.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    */
+   
 }
+*/

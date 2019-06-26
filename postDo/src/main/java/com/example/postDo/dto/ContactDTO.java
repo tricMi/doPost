@@ -50,7 +50,7 @@ public class ContactDTO implements Serializable{
 
 
     public ContactDTO(Contact contact) {
-    	this(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getDisplay(), contact.getEmail(), contact.getFormat(), new PhotoDTO(contact.getPhoto()), new UserDTO(contact.getUser()), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>());
+    	this(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getDisplay(), contact.getEmail(), contact.getFormat(), (contact.getPhoto() != null)? new PhotoDTO(contact.getPhoto()):new PhotoDTO(), new UserDTO(contact.getUser()), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>(), new ArrayList<MessageDTO>());
     }
 
 	public ContactDTO(String firstName){

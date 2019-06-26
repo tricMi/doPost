@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.postDo.dto.AccountDTO;
 import com.example.postDo.dto.ContactDTO;
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
@@ -248,8 +249,18 @@ public class MessageController {
 		message.setFolder(folderService.findOne(messageDTO.getFolder().getId()));
 	
 		message = messageService.save(message);
+
 		
-		return new ResponseEntity<MessageDTO>(new MessageDTO(message), HttpStatus.CREATED);	
+		return new ResponseEntity<MessageDTO>(messageDTO, HttpStatus.CREATED);	
 	}
+	
+//	@PostMapping(value = "/checkMail")
+//	public ResponseEntity<?> checkMail(@RequestBody AccountDTO account) {
+//		System.out.println("Called check");
+//		JavaMail jm = new JavaMail();
+//		jm.check(account);
+//		return new ResponseEntity(HttpStatus.OK);
+//
+//	}
 	
 }

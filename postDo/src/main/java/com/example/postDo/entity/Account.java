@@ -87,6 +87,10 @@ public class Account implements Serializable {
 		super();
 	}
 
+	public void addMessage(Message msg) {
+		messages.add(msg);
+	}
+	
 	public Long getId() {
 		return id;
 	}

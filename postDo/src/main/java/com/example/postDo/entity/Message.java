@@ -101,6 +101,16 @@ public class Message implements Serializable {
 		super();
 	}
 
+	public void addTo(Contact con) {
+		to.add(con);
+	}
+	public void addCc(Contact con) {
+		cc.add(con);
+	}
+	public void addBcc(Contact con) {
+		bcc.add(con);
+	}
+	
 	public Long getId() {
 		return id;
 	}
