@@ -111,7 +111,6 @@ public class FolderController {
 		}	
 		
 		folder.setName(folderDTO.getName());
-		//folder.setRules(ruleService.findOne(folderDTO.getId()));
 		
 		if(folderDTO.getParent() != null && folderDTO.getParent().getId() != null){
 			Folder parentFolder = folderService.findOne(folderDTO.getParent().getId()); 
