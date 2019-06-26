@@ -75,13 +75,15 @@ public class MessageController {
 	@PutMapping(value="/{id}", consumes="application/json")
 	public ResponseEntity<MessageDTO> updateMessage(@RequestBody MessageDTO messageDTO, @PathVariable("id") Long id) {
 		
+		
+		
 		Message message = messageService.findOne(id); 
 		
 		if (message == null) {
 			return new ResponseEntity<MessageDTO>(HttpStatus.BAD_REQUEST);
 		}
 		
-		message.setMessageRead(false);
+		message.setMessageRead(messageDTO.isMessageRead());
 	
 		message = messageService.save(message);
 		
