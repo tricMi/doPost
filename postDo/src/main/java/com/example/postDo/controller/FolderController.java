@@ -124,8 +124,10 @@ public class FolderController {
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> deleteFolder(@PathVariable("id") Long id) {
+		System.out.println("Called");
 		Folder folder = folderService.findOne(id);
 		if (folder != null){
+			System.out.println("Id je: " + id + " " + "Tip je: " + id.TYPE);
 			folderService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} 

@@ -50,6 +50,8 @@ public class AccountController {
 	
 	
 	
+	
+	
 	@GetMapping
 	public ResponseEntity<List<AccountDTO>> getAccounts(){
 		List<Account> accounts = accountService.findAll();
@@ -98,6 +100,7 @@ public class AccountController {
 		account.setSmtp_address(accountDTO.getSmtp_address());
 		account.setSmtp_port(accountDTO.getSmtp_port());
 		account.setFolders(createInitialFolders(account));
+		account.setUser(userService.findById(accountDTO.getUser().getId()));
 		
 		account = accountService.save(account);
 		return new ResponseEntity<AccountDTO>(new AccountDTO(account), HttpStatus.CREATED);	

@@ -48,7 +48,8 @@ public class Folder implements Serializable {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "folder")
 	private Set<Rule> rules = new HashSet<Rule>();
 	
-	@OneToOne(cascade = CascadeType.ALL)
+//	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
     @JoinColumn(name = "folder_account", referencedColumnName = "account_id")
     private Account account;
 

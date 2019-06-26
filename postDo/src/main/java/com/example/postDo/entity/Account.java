@@ -29,19 +29,19 @@ public class Account implements Serializable {
 	@Column(name = "account_id", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name = "acc_smtp_address", unique = false, nullable = false)
+	@Column(name = "acc_smtp_address", unique = false, nullable = true)
     private String smtp_address;
 	
-	@Column(name = "acc_smtp_port", unique = false, nullable = false)
+	@Column(name = "acc_smtp_port", unique = false, nullable = true)
     private Integer smtp_port;
 	
-	@Column(name = "acc_inserver_type", unique = false, nullable = false)
+	@Column(name = "acc_inserver_type", unique = false, nullable = true)
     private Short inserver_type;
 	
-	@Column(name = "acc_inserver_address", unique = false, nullable = false)
+	@Column(name = "acc_inserver_address", unique = false, nullable = true)
     private String inserver_address;
 	
-	@Column(name = "acc_inserver_port", unique = false, nullable = false)
+	@Column(name = "acc_inserver_port", unique = false, nullable = true)
     private Integer inserver_port;
     
 	@Column(name = "acc_username", unique = false, nullable = false)
