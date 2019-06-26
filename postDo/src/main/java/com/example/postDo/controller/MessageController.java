@@ -238,12 +238,12 @@ public class MessageController {
 		
 		Message message = new Message();
 		
-		message.setFrom(contactService.findOne(message.getId()));
-		message.setAccount(accountService.findOne(message.getId()));
-		message.setSubject(message.getSubject());
-		message.setDateTime(message.getDateTime());
-		message.setContent(message.getContent());
-		message.setFolder(folderService.findOne(message.getId()));
+		message.setFrom(contactService.findOne(messageDTO.getFrom().getId()));
+		message.setAccount(accountService.findOne(messageDTO.getAccount().getId()));
+		message.setSubject(messageDTO.getSubject());
+		message.setDateTime(messageDTO.getDateTime());
+		message.setContent(messageDTO.getContent());
+		message.setFolder(folderService.findOne(messageDTO.getFolder().getId()));
 	
 		message = messageService.save(message);
 		

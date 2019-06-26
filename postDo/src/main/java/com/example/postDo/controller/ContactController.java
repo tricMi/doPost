@@ -102,7 +102,7 @@ public class ContactController {
 		contact.setEmail(contactDTO.getEmail());
 		contact.setFormat(contactDTO.getFormat());
 		contact.setDisplay(contactDTO.getDisplay());
-		contact.setPhoto(photoService.findOne(contactDTO.getId()));
+		contact.setPhoto(photoService.findOne(contactDTO.getPhoto().getId()));
 	
 		contact = contactsService.save(contact);
 		
