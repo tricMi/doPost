@@ -44,10 +44,19 @@ INSERT INTO messages (message_content, message_date_time, message_subject, messa
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Stuffs...', '2019-010-26T11:33Z', 'Sistemski softver', false, 2, 3, 2);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read,  message_account, message_folder, contact_id) VALUES ('Some more content', '2019-08-26T11:33Z', 'Matematika 2', true, 4, 4, 3);
 
-INSERT INTO tags (tag_name, tag_user) VALUES ('#urgent', 2);
-INSERT INTO tags (tag_name, tag_user) VALUES ('#important', 3);
-INSERT INTO tags (tag_name, tag_user) VALUES ('#reminder', 1);
-INSERT INTO tags (tag_name, tag_user) VALUES ('#dofast',1);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#urgent', 2, 1);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#important', 3, 1);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#reminder', 1, 4);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#goTo',2, 4);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#important', 3, 2);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#reminder', 3, 2);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#saveforlater',1, 3);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#important', 3, 3);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#reminder', 2, 5);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#letUsPass',1, 5);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#important', 3, 6);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#reminder', 3, 6);
+INSERT INTO tags (tag_name, tag_user, tag_message) VALUES ('#dofast',1, 2);
 
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_USER');
 --INSERT INTO AUTHORITY (name) VALUES ('ROLE_ADMIN');
