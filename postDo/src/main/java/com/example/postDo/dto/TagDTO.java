@@ -32,7 +32,8 @@ public class TagDTO implements Serializable{
     
     
     public TagDTO(Tag tag) {
-    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()), new UserDTO(tag.getUser()));
+    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()), 
+    			tag.getUser() != null?new UserDTO(tag.getUser()):new UserDTO());
     }
 
   

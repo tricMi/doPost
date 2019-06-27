@@ -47,6 +47,7 @@ import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.MessageServiceInterface;
+import com.example.postDo.service.TagServiceInterface;
 import com.example.postDo.service.UserService;
 
 
@@ -70,6 +71,9 @@ public class JavaMail {
 	
 	@Autowired
 	private FolderServiceInterface folderService;
+	
+	@Autowired
+	private TagServiceInterface tagService;
 	
 	public Properties propvals = new Properties();
 	public Session emailSessionObj = null;
@@ -102,7 +106,7 @@ public class JavaMail {
 	@PostMapping(value = "/check")
 	public void check(@RequestBody AccountDTO account) {
 		
-		System.out.println("Start check");
+		System.out.println("Starting check");
 		
 			//Set mail properties and configure accordingly
 		      String hostval = "pop.gmail.com";
@@ -118,7 +122,7 @@ public class JavaMail {
 	      
 	    // Calling checkMail method to check received emails
 	      checkMail(hostval, mailStrProt, uname, pwd, allAccounts);
-	      System.out.println("End check");
+	      System.out.println("Check ended");
 	   }
 	
 	public static String toUTC(Date date) {
@@ -130,7 +134,7 @@ public class JavaMail {
 	
 	   public void checkMail(String hostval, String mailStrProt, String uname,String pwd, List<Account> allAccounts) 
 	   {
-		   System.out.println("Start checkMail");
+		   
 	      try {
 	      //Set property values
 	      Properties propvals = new Properties();
@@ -154,11 +158,16 @@ public class JavaMail {
 	      //Fetch messages from the folder and print in a loop
 	      Message[] messageobjs = emailFolderObj.getMessages(); 
 	      
+
+	      
+
+	      
+	      
 	      
 	      
 	      ArrayList<AccountDTO> accounts = new ArrayList<>();
 	      
-	      System.out.println("Length is " + messageobjs.length);
+//	      System.out.println("Length is " + messageobjs.length);
 	      
 	      for (int i = 0, n = messageobjs.length; i < n; i++) {
 	         Message javaMailMsg = messageobjs[i];
@@ -181,6 +190,7 @@ public class JavaMail {
 	         
 	         Set<Tag> tempTags = new HashSet<>();
 	         String tagsString = javaMailMsg.getDescription();
+	         System.out.println("Tag stringcina: " + tagsString);
 	         if(tagsString != null) {
 	        	 String[] splitTagsString = tagsString.split("\\|");
 		         for(String tagString : splitTagsString) {
@@ -309,8 +319,11 @@ public class JavaMail {
 	        		 }
 	        	 }
 	        	 
-	        	 System.out.println("Message saved");
-	        	 System.out.println(msg.getSubject());
+	        	 for(Tag tag : msg.getTags()) {
+	        		 System.out.println("Tag: " + tag.getName());
+	        		 tag.setMessage(msg);
+	        		 tagService.save(tag);
+	        	 }
 	         }
 	      }
 	      if(emailFolderObj.isOpen()) {
@@ -331,7 +344,6 @@ public class JavaMail {
 //	      finally {
 //	    	  return null;
 //	      }
-	      System.out.println("End checkMail");
 	      
 	   }
 	   
@@ -341,7 +353,7 @@ public class JavaMail {
 	   @PostMapping(value = "/send", consumes="application/json")
 		public ResponseEntity<?> send(@RequestBody MessageDTO mes){
 			
-		   System.out.println("Start send");
+		   System.out.println("Sending message");
 //			System.out.println("message " + mes.getContent());
 			
 	        try{
@@ -453,7 +465,7 @@ public class JavaMail {
 	           
 //	           System.out.println(msg.getContent() + "from send");
 	           System.out.println("messages sent successfully");
-	           System.out.println("End send");
+	           
 	           return new ResponseEntity(HttpStatus.OK);
 	        }catch(Exception ex)
 	        {
