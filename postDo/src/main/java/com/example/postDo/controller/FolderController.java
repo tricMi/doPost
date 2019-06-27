@@ -134,6 +134,7 @@ public class FolderController {
 
 	@PostMapping(value="/findSubFolders")
 	public ResponseEntity<List<FolderDTO>> findSubFolders(@RequestBody FolderDTO dir) {
+		System.out.println("Looking for sub folders");
 		ArrayList<FolderDTO> dirs = new ArrayList<>();
 		List<Folder> allFolders = folderService.findAll();
 		
@@ -141,7 +142,7 @@ public class FolderController {
 			if(f.getParent() != null) {
 				if(f.getParent().getId() == dir.getId()) {
 					dirs.add(new FolderDTO(f));
-//					System.out.println("Tag added manually");
+					System.out.println("Found sub folder");
 				}
 			}
 			

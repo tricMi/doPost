@@ -89,19 +89,21 @@ public class UserController {
 				if(userDTO.getId() == acc.getUser().getId()) {
 					AccountDTO accDTO = new AccountDTO(acc);
 					for(Folder fol : folders) {
-						if(fol.getAccount().getId() == accDTO.getId()) {
-							
-							for(Folder subf : folders) {
-								if(subf.getParent() != null) {
-									if(subf.getParent().getId() == fol.getId()) {
-										fol.addFolder(subf);
-										System.out.println("Folder added");
-									}
-								}
+						if(fol.getAccount() != null) {
+							if(fol.getAccount().getId() == accDTO.getId()) {
 								
+								for(Folder subf : folders) {
+									if(subf.getParent() != null) {
+										if(subf.getParent().getId() == fol.getId()) {
+											fol.addFolder(subf);
+										}
+									}
+									
+								}
+								accDTO.addFolder(new FolderDTO(fol));
 							}
-							accDTO.addFolder(new FolderDTO(fol));
 						}
+						
 					}
 					for(Message msg : messages) {
 						if(msg.getAccount().getId() == accDTO.getId()) {
@@ -182,20 +184,22 @@ public class UserController {
 					AccountDTO accDTO = new AccountDTO(acc);
 					
 					for(Folder fol : folders) {
-						if(fol.getAccount().getId() == accDTO.getId()) {
-							
-							for(Folder subf : folders) {
-								if(subf.getParent() != null) {
-									if(subf.getParent().getId() == fol.getId()) {
-										fol.addFolder(subf);
-										System.out.println("Folder added");
+						if(fol.getAccount() != null) {
+							if(fol.getAccount().getId() == accDTO.getId()) {
+								
+								for(Folder subf : folders) {
+									if(subf.getParent() != null) {
+										if(subf.getParent().getId() == fol.getId()) {
+											fol.addFolder(subf);
+										}
 									}
+									
 								}
 								
+								accDTO.addFolder(new FolderDTO(fol));
 							}
-							
-							accDTO.addFolder(new FolderDTO(fol));
 						}
+						
 					}
 					
 					for(Message msg : messages) {
