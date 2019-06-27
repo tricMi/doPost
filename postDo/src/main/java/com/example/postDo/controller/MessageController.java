@@ -224,16 +224,24 @@ public class MessageController {
 
 	}
 	
-//	@PutMapping(value = "/moveMessage/{id}", consumes="application/json")
-//	private ResponseEntity<MessageDTO> moveMessage(@PathVariable("id") Long id){
-//		
-//		
-//		Message message = messageService.findOne(id);
-//		
-//		
-//		
-//		
-//	}
+	@PostMapping(value = "/filterList")
+	private ResponseEntity<List<MessageDTO>> filterMessages(@RequestBody CharSequence constraint){
+		
+		List<Message> messages = messageService.findAll();
+		
+		List<MessageDTO> messageDTO = new ArrayList<MessageDTO>();
+		
+		String filteredPattern = constraint.toString().toLowerCase().trim();
+		
+		for(Message m: messages) {
+			if(m.getFrom().toString().contains(filteredPattern) || m.getSubject().contains(filteredPattern) || m.getContent().contains(filteredPattern)) {
+				messageDTO.add(new MessageDTO(m));
+			}
+		}
+		
+		return new ResponseEntity<List<MessageDTO>>(messageDTO, HttpStatus.OK);
+	}
+	
 	
 	
 	@PostMapping(consumes="application/json")
@@ -262,5 +270,7 @@ public class MessageController {
 //		return new ResponseEntity(HttpStatus.OK);
 //
 //	}
+	
+	
 	
 }
