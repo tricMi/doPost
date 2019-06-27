@@ -40,9 +40,9 @@ INSERT INTO users(username, password, firstname,lastname) VALUES ('user', 'user'
 INSERT INTO users(username, password, firstname,lastname) VALUES ('aco', 'a', 'aco', 'budic');
 INSERT INTO users(username, password, firstname,lastname) VALUES ('pikacu', 'p', 'pikacu', 'pika');
 
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', '2019-06-1T10:23Z', 'Matematika 1', true, 1, 1, 1);
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', '2019-07-1T10:23Z', 'Matematika 2', false, 1, 1, 1);
-INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content', '2019-08-1T10:23Z', 'Vi bas volite matematiku?', false, 1, 1, 1);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content 1', '2019-06-1T10:23Z', 'Matematika 1', true, 1, 1, 1);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content 2', '2019-07-1T10:23Z', 'Matematika 2', false, 1, 1, 1);
+INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Some content 3', '2019-08-1T10:23Z', 'Vi bas volite matematiku?', false, 1, 1, 1);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('More content', '2019-04-26T14:20Z', 'Osnove programiranja', false, 3, 2, 2);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read, message_account, message_folder, contact_id) VALUES ('Stuffs...', '2019-010-26T11:33Z', 'Sistemski softver', false, 2, 3, 2);
 INSERT INTO messages (message_content, message_date_time, message_subject, message_read,  message_account, message_folder, contact_id) VALUES ('Some more content', '2019-08-26T11:33Z', 'Matematika 2', true, 4, 4, 3);
