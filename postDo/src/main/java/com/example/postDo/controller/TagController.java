@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.dto.TagDTO;
+import com.example.postDo.entity.Message;
 import com.example.postDo.entity.Tag;
+import com.example.postDo.service.MessageServiceInterface;
 import com.example.postDo.service.TagServiceInterface;
+import com.example.postDo.service.UserService;
+
 
 @RestController
 @RequestMapping(value = "/api/tags")
@@ -26,6 +30,12 @@ public class TagController {
 	
 	@Autowired
 	private TagServiceInterface tagService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MessageServiceInterface messageService;
 	
 	@GetMapping
 	public ResponseEntity<List<TagDTO>> getTags() {
@@ -60,6 +70,13 @@ public class TagController {
 		Tag tag = new Tag();
 		
 		tag.setName(tagDTO.getName());
+		tag.setUser(userService.findById(tagDTO.getUser().getId()));
+		
+		//check if there is tag message
+		if(tagDTO.getMessage() != null && tagDTO.getMessage().getId() != null){
+			Message tagMessage = messageService.findOne(tagDTO.getMessage().getId()); 
+			tag.setMessage(tagMessage);
+		}
 		
 		tag = tagService.save(tag);
 		return new ResponseEntity<TagDTO>(new TagDTO(tag), HttpStatus.CREATED);	
