@@ -120,7 +120,7 @@ public class TagController {
 			if(t.getMessage() != null) {
 				if(t.getMessage().getId() == msg.getId()) {
 					tags.add(new TagDTO(t));
-					System.out.println("Tag added manually");
+//					System.out.println("Tag added manually");
 				}
 			}
 			
