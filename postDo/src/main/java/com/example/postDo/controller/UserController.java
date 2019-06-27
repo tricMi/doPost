@@ -94,6 +94,16 @@ public class UserController {
 					AccountDTO accDTO = new AccountDTO(acc);
 					for(Folder fol : folders) {
 						if(fol.getAccount().getId() == accDTO.getId()) {
+							
+							for(Folder subf : folders) {
+								if(subf.getParent() != null) {
+									if(subf.getParent().getId() == fol.getId()) {
+										fol.addFolder(subf);
+										System.out.println("Folder added");
+									}
+								}
+								
+							}
 							accDTO.addFolder(new FolderDTO(fol));
 						}
 					}
@@ -103,13 +113,13 @@ public class UserController {
 							for(Tag tag: tagService.findAll()) {
 								if(tag.getMessage() != null) {
 									if(tag.getMessage().getId() == msg.getId()) {
-										System.out.println("Tag: " + tag.getName() + " was added");
+//										System.out.println("Tag: " + tag.getName() + " was added");
 										msg.addTag(tag);
 									}
 								}
 								
 							}
-							System.out.println("Number of tags: " + msg.getTags().size());
+//							System.out.println("Number of tags: " + msg.getTags().size());
 							accDTO.addMessage(new MessageDTO(msg));
 						}
 					}
@@ -179,9 +189,13 @@ public class UserController {
 						if(fol.getAccount().getId() == accDTO.getId()) {
 							
 							for(Folder subf : folders) {
-								if(subf.getParent().getId() == fol.getId()) {
-									fol.addFolder(subf);
+								if(subf.getParent() != null) {
+									if(subf.getParent().getId() == fol.getId()) {
+										fol.addFolder(subf);
+										System.out.println("Folder added");
+									}
 								}
+								
 							}
 							
 							accDTO.addFolder(new FolderDTO(fol));

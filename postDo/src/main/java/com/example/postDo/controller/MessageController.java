@@ -21,6 +21,7 @@ import com.example.postDo.dto.ContactDTO;
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.entity.Contact;
+import com.example.postDo.entity.Folder;
 import com.example.postDo.entity.Message;
 import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
@@ -254,13 +255,21 @@ public class MessageController {
 		return new ResponseEntity<MessageDTO>(messageDTO, HttpStatus.CREATED);	
 	}
 	
-//	@PostMapping(value = "/checkMail")
-//	public ResponseEntity<?> checkMail(@RequestBody AccountDTO account) {
-//		System.out.println("Called check");
-//		JavaMail jm = new JavaMail();
-//		jm.check(account);
-//		return new ResponseEntity(HttpStatus.OK);
-//
-//	}
+	@PostMapping(value="/findFolderMessages")
+	public ResponseEntity<List<MessageDTO>> findFolderMessages(@RequestBody FolderDTO dir) {
+		ArrayList<MessageDTO> msgs = new ArrayList<>();
+		List<Message> allMsgs = messageService.findAll();
+		
+		for(Message f : allMsgs) {
+			if(f.getFolder() != null) {
+				if(f.getFolder().getId() == dir.getId()) {
+					msgs.add(new MessageDTO(f));
+				}
+			}
+			
+		}
+		return new ResponseEntity<List<MessageDTO>>(msgs, HttpStatus.OK);
+		
+	}
 	
 }

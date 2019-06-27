@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.FolderDTO;
+import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.dto.RuleDTO;
+import com.example.postDo.dto.TagDTO;
 import com.example.postDo.entity.Folder;
 import com.example.postDo.entity.Rule;
+import com.example.postDo.entity.Tag;
 import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.RuleServiceInterface;
@@ -137,4 +140,22 @@ public class FolderController {
 	}
 	
 
+	@PostMapping(value="/findSubFolders")
+	public ResponseEntity<List<FolderDTO>> findSubFolders(@RequestBody FolderDTO dir) {
+		ArrayList<FolderDTO> dirs = new ArrayList<>();
+		List<Folder> allFolders = folderService.findAll();
+		
+		for(Folder f : allFolders) {
+			if(f.getParent() != null) {
+				if(f.getParent().getId() == dir.getId()) {
+					dirs.add(new FolderDTO(f));
+//					System.out.println("Tag added manually");
+				}
+			}
+			
+		}
+		return new ResponseEntity<List<FolderDTO>>(dirs, HttpStatus.OK);
+		
+	}
+	
 }
