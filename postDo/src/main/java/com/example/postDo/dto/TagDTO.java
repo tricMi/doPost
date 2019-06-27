@@ -1,8 +1,6 @@
 package com.example.postDo.dto;
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import com.example.postDo.entity.Message;
 import com.example.postDo.entity.Tag;
 
 public class TagDTO implements Serializable{
@@ -13,15 +11,7 @@ public class TagDTO implements Serializable{
     private String name;
     private MessageDTO message;
     private UserDTO user;
-  //  private ArrayList<MessageDTO> messages;
 
-//    public TagDTO(Long id, String name, ArrayList<MessageDTO> messages) {
-//        this.id = id;
-//        this.name = name;
-//        this.messages = messages;
-//    }
-    
-    
 	public TagDTO(Long id, String name, MessageDTO message, UserDTO user) {
 	super();
 	this.id = id;
@@ -32,15 +22,10 @@ public class TagDTO implements Serializable{
     
     
     public TagDTO(Tag tag) {
-    	this(tag.getId(), tag.getName(), new MessageDTO(tag.getMessage()), 
-    			tag.getUser() != null?new UserDTO(tag.getUser()):new UserDTO());
+    	this(tag.getId(), tag.getName(), 
+    			(tag.getMessage() != null && tag.getMessage().getId() != null) ? new MessageDTO(tag.getMessage()) : new MessageDTO(), 
+    					tag.getUser() != null?new UserDTO(tag.getUser()):new UserDTO());
     }
-
-  
-    
-
-
-
 
 
 
@@ -89,13 +74,5 @@ public class TagDTO implements Serializable{
 		return serialVersionUID;
 	}
     
-    
 
-//    public ArrayList<MessageDTO> getMessages() {
-//        return messages;
-//    }
-//
-//    public void setMessages(ArrayList<MessageDTO> messages) {
-//        this.messages = messages;
-//    }
 }
