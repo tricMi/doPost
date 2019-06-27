@@ -69,6 +69,10 @@ public class Folder implements Serializable {
 		super();
 	}
 
+	public void addFolder(Folder fol) {
+		folders.add(fol);
+	}
+	
 	public Long getId() {
 		return id;
 	}

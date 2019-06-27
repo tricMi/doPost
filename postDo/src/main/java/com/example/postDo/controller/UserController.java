@@ -177,6 +177,13 @@ public class UserController {
 					
 					for(Folder fol : folders) {
 						if(fol.getAccount().getId() == accDTO.getId()) {
+							
+							for(Folder subf : folders) {
+								if(subf.getParent().getId() == fol.getId()) {
+									fol.addFolder(subf);
+								}
+							}
+							
 							accDTO.addFolder(new FolderDTO(fol));
 						}
 					}
