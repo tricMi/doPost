@@ -36,9 +36,10 @@ public class FolderDTO implements Serializable{
 	public FolderDTO(Folder folder){
 		this(folder.getId(), folder.getName(), (folder.getParent() != null && folder.getParent().getId() != null)?new FolderDTO(folder.getParent()):new FolderDTO(),
 				
-				new ArrayList<FolderDTO>(), new ArrayList<MessageDTO>(), new ArrayList<RuleDTO>(), new AccountDTO(folder.getAccount()));
+				new ArrayList<FolderDTO>(), new ArrayList<MessageDTO>(), new ArrayList<RuleDTO>(), 
+				folder.getAccount() != null?new AccountDTO(folder.getAccount()):new AccountDTO());
 	}
-	
+//	new AccountDTO(folder.getAccount()));
 	
 	public FolderDTO(){
     	super();
@@ -49,6 +50,10 @@ public class FolderDTO implements Serializable{
 	    folders.add(folder);
 	}
 
+	public void addMessage(MessageDTO msg) {
+	    messages.add(msg);
+	}
+	
     public ArrayList<FolderDTO> getFolders() {
 		return folders;
 	}

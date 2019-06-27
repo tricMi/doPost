@@ -50,7 +50,7 @@ public class Folder implements Serializable {
 	
 //	@OneToOne(cascade = CascadeType.ALL)
 	@OneToOne()
-    @JoinColumn(name = "folder_account", referencedColumnName = "account_id")
+    @JoinColumn(name = "folder_account", referencedColumnName = "account_id", nullable=true)
     private Account account;
 
 	public Folder(Long id, String name, Folder folder, Set<Folder> folders, Set<Message> messages, Set<Rule> rules,
@@ -71,6 +71,10 @@ public class Folder implements Serializable {
 
 	public void addFolder(Folder fol) {
 		folders.add(fol);
+	}
+	
+	public void addMessage(Message msg) {
+		messages.add(msg);
 	}
 	
 	public Long getId() {

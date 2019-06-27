@@ -19,10 +19,10 @@ INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Drafts'
 INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Drafts', NULL, 2);
 INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Trash', NULL, 2);
 INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Promotions', NULL, 3);
-INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Electronics', 1, 1);
-INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Recent promotions', 1, 1);
-INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Electronics', 2, 2);
-INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Recent promotions', 2, 2);
+INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Electronics', 1, null);
+INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Recent promotions', 1, null);
+INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Electronics', 2, null);
+INSERT INTO folders (folder_name, subfolder_id, folder_account) VALUES ('Recent promotions', 2, null);
 
 INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8080, 3, 'pop3', 3306, 'dopost123@gmail.com', 'sfdopost2019', 'doPoster', 1);
 INSERT INTO accounts (acc_smtp_address, acc_smtp_port, acc_inserver_type, acc_inserver_address, acc_inserver_port, acc_username, acc_password, acc_displayname, acc_user) VALUES ('smpt1', 8083, 7, 'pop3', 3307, 'u', 'u', 'tarzan', 2);

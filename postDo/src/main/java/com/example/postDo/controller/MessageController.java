@@ -20,6 +20,7 @@ import com.example.postDo.dto.AccountDTO;
 import com.example.postDo.dto.ContactDTO;
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
+import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Contact;
 import com.example.postDo.entity.Folder;
 import com.example.postDo.entity.Message;
@@ -255,20 +256,50 @@ public class MessageController {
 		return new ResponseEntity<MessageDTO>(messageDTO, HttpStatus.CREATED);	
 	}
 	
-	@PostMapping(value="/findFolderMessages")
-	public ResponseEntity<List<MessageDTO>> findFolderMessages(@RequestBody FolderDTO dir) {
+	@PostMapping(value="/findFolderMessages/{accId}")
+	public ResponseEntity<List<MessageDTO>> findFolderMessages(@RequestBody FolderDTO dir, @PathVariable("accId") Long id) {
 		ArrayList<MessageDTO> msgs = new ArrayList<>();
-		List<Message> allMsgs = messageService.findAll();
 		
-		for(Message f : allMsgs) {
-			if(f.getFolder() != null) {
-				if(f.getFolder().getId() == dir.getId()) {
-					msgs.add(new MessageDTO(f));
+		Folder parent = folderService.findOne(dir.getId());
+		
+		FolderDTO fdto = new FolderDTO(parent);
+		
+		for(Account acc : accountService.findAll()) {
+			if(acc.getMessages() != null) {
+				for(Message messy : acc.getMessages()) {
+					if(messy.getFolder() != null) {
+						if(messy.getFolder().getId() == dir.getId()) {
+							msgs.add(new MessageDTO(messy));
+							fdto.addMessage(new MessageDTO(messy));
+							System.out.println("Added msg: " + messy.getFrom().getFirstName());
+						}
+					}
+					
 				}
 			}
-			
 		}
-		return new ResponseEntity<List<MessageDTO>>(msgs, HttpStatus.OK);
+		
+		
+		return new ResponseEntity<List<MessageDTO>>(fdto.getMessages(), HttpStatus.OK);
+		
+	}
+	
+	@PostMapping(value="/setFolderMessage/{accId}/{folderId}")
+	public ResponseEntity<MessageDTO> setFolderMessage(@RequestBody MessageDTO msg, @PathVariable("accId") Long id, @PathVariable("folderId") Long fid) {
+		System.out.println("setFolder called");
+		
+		Folder dir = folderService.findOne(fid);
+		Message messy = messageService.findOne(msg.getId());
+		
+		dir.addMessage(messy);
+		messy.setFolder(dir);
+		messageService.save(messy);
+		
+		System.out.println(messy.getSubject() + " added to folder " + dir.getName());
+		
+
+		System.out.println("Setting completed");
+		return new ResponseEntity<MessageDTO>(msg, HttpStatus.OK);
 		
 	}
 	
