@@ -57,9 +57,6 @@ public class Message implements Serializable {
 	@JoinColumn(name="contact_id", referencedColumnName="contact_id", nullable=true)
 	private Contact from;
 	
-//	@ManyToOne
-//	@JoinColumn(name="tag_id", referencedColumnName="tag_id", nullable=true)
-//	private Tag tag;
     
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "message")
 	private Set<Contact> to = new HashSet<Contact>();

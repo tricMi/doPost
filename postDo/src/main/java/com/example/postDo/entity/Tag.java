@@ -29,33 +29,19 @@ public class Tag {
 	@Column(name = "tag_name", unique = false, nullable = false)
     private String name;
 	
-//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "tag")
-//	private Set<Message> messages = new HashSet<Message>();
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
     @JoinColumn(name = "TAG_user", referencedColumnName = "user_id")
     private User user;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="tag_message", referencedColumnName="message_id", nullable=true)
 	private Message message;
-	
-	
-
-//	public Tag(Long id, String name, Set<Message> messages) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.messages = messages;
-//	}
-	
-	
 
 	public Tag() {
 		super();
 	}
 
-	
 
 	public Tag(Long id, String name, User user, Message message) {
 	super();
