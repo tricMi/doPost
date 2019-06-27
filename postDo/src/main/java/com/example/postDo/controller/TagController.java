@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.postDo.dto.MessageDTO;
 import com.example.postDo.dto.TagDTO;
 import com.example.postDo.entity.Tag;
 import com.example.postDo.service.TagServiceInterface;
@@ -93,5 +94,22 @@ public class TagController {
 		}
 	}
 	
+	@PostMapping(value="/findTags")
+	public ResponseEntity<List<TagDTO>> findTags(@RequestBody MessageDTO msg) {
+		ArrayList<TagDTO> tags = new ArrayList<>();
+		List<Tag> allTags = tagService.findAll();
+		
+		for(Tag t : allTags) {
+			if(t.getMessage() != null) {
+				if(t.getMessage().getId() == msg.getId()) {
+					tags.add(new TagDTO(t));
+					System.out.println("Tag added manually");
+				}
+			}
+			
+		}
+		return new ResponseEntity<List<TagDTO>>(tags, HttpStatus.OK);
+		
+	}
 
 }

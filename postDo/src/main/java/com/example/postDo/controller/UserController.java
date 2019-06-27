@@ -37,6 +37,7 @@ import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
 import com.example.postDo.service.MessageServiceInterface;
+import com.example.postDo.service.TagServiceInterface;
 import com.example.postDo.service.UserService;
 
 
@@ -62,6 +63,9 @@ public class UserController {
 	
 	@Autowired
 	private FolderServiceInterface folderService;
+	
+	@Autowired
+	private TagServiceInterface tagService;
 	
 //	public List<Account> getAccounts(){
 //		List<Account> allAccounts = accountsService.findAll();
@@ -95,6 +99,17 @@ public class UserController {
 					}
 					for(Message msg : messages) {
 						if(msg.getAccount().getId() == accDTO.getId()) {
+							
+							for(Tag tag: tagService.findAll()) {
+								if(tag.getMessage() != null) {
+									if(tag.getMessage().getId() == msg.getId()) {
+										System.out.println("Tag: " + tag.getName() + " was added");
+										msg.addTag(tag);
+									}
+								}
+								
+							}
+							System.out.println("Number of tags: " + msg.getTags().size());
 							accDTO.addMessage(new MessageDTO(msg));
 						}
 					}

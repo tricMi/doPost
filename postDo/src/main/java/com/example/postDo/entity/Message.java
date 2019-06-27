@@ -111,6 +111,10 @@ public class Message implements Serializable {
 		bcc.add(con);
 	}
 	
+	public void addTag(Tag tag) {
+		tags.add(tag);
+	}
+	
 	public Long getId() {
 		return id;
 	}
