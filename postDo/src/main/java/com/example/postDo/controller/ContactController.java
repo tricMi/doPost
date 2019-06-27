@@ -3,6 +3,7 @@ package com.example.postDo.controller;
 import java.util.ArrayList;
 
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.postDo.dto.ContactDTO;
-import com.example.postDo.dto.PhotoDTO;
 import com.example.postDo.entity.Contact;
 import com.example.postDo.service.ContactServiceInterface;
 import com.example.postDo.service.PhotoServiceInterface;
@@ -115,16 +115,7 @@ public class ContactController {
 		
 		Contact contact = contactsService.findOne(id);
 		if (contact != null){
-//			List<User> users= userService.findAll();
-//			
-//			for(User user : users) {
-//				for(Contact con: user.getContacts()) {
-//					if(con.getId() == id) {
-//						user.getContacts().remove(con);
-//					}
-//				}
-//			}
-			
+
 			contactsService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.postDo.dto.AccountDTO;
-import com.example.postDo.dto.ContactDTO;
+
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
-import com.example.postDo.entity.Contact;
-import com.example.postDo.entity.Folder;
+
 import com.example.postDo.entity.Message;
 import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.ContactServiceInterface;
@@ -32,6 +32,8 @@ import com.example.postDo.service.MessageServiceInterface;
 @RestController
 @RequestMapping(value = "api/messages")
 public class MessageController {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private MessageServiceInterface messageService;
@@ -48,6 +50,8 @@ public class MessageController {
 	@GetMapping
 	public ResponseEntity<List<MessageDTO>> getMessages() {
 		
+		logger.info("Getting all messages");
+		
 		List<Message> messages = messageService.findAll();
 		
 		List<MessageDTO> messageDTO = new ArrayList<MessageDTO>();
@@ -63,6 +67,8 @@ public class MessageController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MessageDTO> getMessage(@PathVariable("id") Long id) {
 		
+		logger.info("Getting all messages by their id");
+		
 		Message message = messageService.findOne(id);
 		
 		if(message == null){
@@ -77,7 +83,7 @@ public class MessageController {
 	@PutMapping(value="/{id}", consumes="application/json")
 	public ResponseEntity<MessageDTO> updateMessage(@RequestBody MessageDTO messageDTO, @PathVariable("id") Long id) {
 		
-		
+		logger.info("Method for updating messages, sets state of message from unread to read");
 		
 		Message message = messageService.findOne(id); 
 		
@@ -95,7 +101,11 @@ public class MessageController {
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> deleteMessage(@PathVariable("id") Long id) {
+		
+		logger.info("Deleted a message");
+		
 		Message message = messageService.findOne(id);
+		
 		if (message != null){
 			messageService.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -109,6 +119,8 @@ public class MessageController {
 	
 	@GetMapping(value = "/sortByDateAsc")
 	public ResponseEntity<List<MessageDTO>> getSortByDateAsc() {
+		
+		logger.info("Sorted messages by date ascending");
 		
 		List<Message> messages = messageService.findAll();
 		
@@ -134,6 +146,8 @@ public class MessageController {
 	@GetMapping(value = "/sortByDateDesc")
 	public ResponseEntity<List<MessageDTO>> getSortByDateDesc() {
 		
+		logger.info("Sorted messages by date descending");
+		
 		List<Message> messages = messageService.findAll();
 		
 		//Check if there are messages to sort
@@ -154,8 +168,11 @@ public class MessageController {
 
 	}
 	
+	
 	@GetMapping(value = "/sortBySubjectAsc")
 	public ResponseEntity<List<MessageDTO>> getSortBySubjectAsc() {
+		
+		logger.info("Sorted messages by subject ascending");
 		
 		List<Message> messages = messageService.findAll();
 		
@@ -178,32 +195,10 @@ public class MessageController {
 	}
 	
 	
-//	@GetMapping(value = "/sortBySenderDesc")
-//	public ResponseEntity<List<MessageDTO>> getSortBySenderDesc() {
-//		
-//		List<Message> messages = messageService.findAll();
-//		
-//		//Check if there are messages to sort
-//		if(messages == null) {
-//			return new ResponseEntity<List<MessageDTO>>(HttpStatus.NOT_FOUND);
-//		}
-//		
-//		//Sort messages by subject descending values
-//		
-//		messages.sort(Comparator.comparing(Contac ).reversed());
-//		
-//		List<MessageDTO> messageDTO = new ArrayList<MessageDTO>();
-//		
-//		for(Message m: messages) {
-//			messageDTO.add(new MessageDTO(m));
-//		}
-//		
-//		return new ResponseEntity<List<MessageDTO>>(messageDTO, HttpStatus.OK);
-//
-//	}
-	
 	@GetMapping(value = "/sortBySubjectDesc")
 	public ResponseEntity<List<MessageDTO>> getSortBySubjectDesc() {
+		
+		logger.info("Sorted messages by date descending");
 		
 		List<Message> messages = messageService.findAll();
 		
@@ -225,8 +220,10 @@ public class MessageController {
 
 	}
 	
-	@PostMapping(value = "/filterList")
-	private ResponseEntity<List<MessageDTO>> filterMessages(@RequestBody CharSequence constraint){
+	@GetMapping(value = "/filterList/{constraint}")
+	private ResponseEntity<List<MessageDTO>> filterMessages(@PathVariable("constraint") String constraint){
+		
+		logger.info("Filtering messages by sender, subject and content");
 		
 		List<Message> messages = messageService.findAll();
 		
@@ -235,8 +232,10 @@ public class MessageController {
 		String filteredPattern = constraint.toString().toLowerCase().trim();
 		
 		for(Message m: messages) {
-			if(m.getFrom().toString().contains(filteredPattern) || m.getSubject().contains(filteredPattern) || m.getContent().contains(filteredPattern)) {
-				messageDTO.add(new MessageDTO(m));
+			if(m.getFrom().getFirstName().toString().toLowerCase().trim().contains(filteredPattern) 
+					|| m.getSubject().toLowerCase().trim().contains(filteredPattern) 
+						|| m.getContent().toLowerCase().trim().contains(filteredPattern)) {
+						messageDTO.add(new MessageDTO(m));
 			}
 		}
 		

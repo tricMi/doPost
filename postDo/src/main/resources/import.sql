@@ -7,6 +7,7 @@ INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, cont
 INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Djura', 'Dobric', 'djux', 'djux@gmail.com', 1, 2, 1);
 INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Srdjan', 'Nikolic', 'srki123', 'srki123@gmail.com', 1, 3, 2);
 INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Milos', 'Dostojic', 'knjaz223', 'knjaz223@gmail.com', 0, 4, 3);
+INSERT INTO contacts (contact_firstname, contact_lastname, contact_display, contact_email, contact_format, contact_photo, contact_user) VALUES ('Miki', 'Pantic', 'mikii', 'mitra196506@gmail.com', 0, 4, 3);
 
 
 INSERT INTO rules (rule_condition, rule_operation, rule_folder) VALUES (1, 0, 3);

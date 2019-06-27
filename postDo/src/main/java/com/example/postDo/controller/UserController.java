@@ -25,7 +25,6 @@ import com.example.postDo.dto.AccountDTO;
 import com.example.postDo.dto.ContactDTO;
 import com.example.postDo.dto.FolderDTO;
 import com.example.postDo.dto.MessageDTO;
-import com.example.postDo.dto.TagDTO;
 import com.example.postDo.dto.UserDTO;
 import com.example.postDo.entity.Account;
 import com.example.postDo.entity.Contact;
@@ -46,7 +45,7 @@ import com.example.postDo.service.UserService;
 @RequestMapping(value = "api/login")
 public class UserController {
 	
-	 private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
@@ -67,10 +66,7 @@ public class UserController {
 	@Autowired
 	private TagServiceInterface tagService;
 	
-//	public List<Account> getAccounts(){
-//		List<Account> allAccounts = accountsService.findAll();
-//		return allAccounts;
-//	}
+
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> getUsers(){

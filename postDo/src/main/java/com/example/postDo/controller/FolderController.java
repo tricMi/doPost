@@ -1,9 +1,7 @@
 package com.example.postDo.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,15 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.postDo.dto.FolderDTO;
-import com.example.postDo.dto.MessageDTO;
-import com.example.postDo.dto.RuleDTO;
-import com.example.postDo.dto.TagDTO;
 import com.example.postDo.entity.Folder;
-import com.example.postDo.entity.Rule;
-import com.example.postDo.entity.Tag;
 import com.example.postDo.service.AccountServiceInterface;
 import com.example.postDo.service.FolderServiceInterface;
-import com.example.postDo.service.RuleServiceInterface;
 
 
 @RestController
